@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    <title>Login • Keralagram</title>
+{% endblock title %}
+{% block main_content %}
+    <link rel="stylesheet" href="{% static '/users/css/login.css' %}">
+    <div class="main">
+        <div class="image-section">
+            <img id="image" src="{% static '/images/tree.jpg' %}" alt="Logo">
+        </div>
+        <div class="login-section">
+            <form class="login-form" action="/profile" method="POST">
+                {% csrf_token %}
+                <h1>Keralagram</h1>
+                {{form.as_p}}
+                <button type="submit" class="login-button">Login</button>
+            </form>
+            <div>
+                {% comment %} <input class="user-name" type="text" name="user" placeholder="Phone number/user name/email">
+                <input class="password" type="text" name="password" placeholder="Password"> {% endcomment %}
+            </div>
+            <div class="signup-section">
+                <span>Don't have an account?<a href="/signup"><b style="cursor:pointer;">Sign up</b></a></span>
+            </div>
+        </div>
+    </div>
+{% endblock main_content %}

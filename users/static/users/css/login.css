@@ -1,0 +1,68 @@
+.main {
+    background-color: rgb(255, 255, 255);
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+}
+.image-section {
+    width: 50%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+}
+#image {
+    width: 100%;
+    height: 100%;
+}
+.login-section {
+    width: 50%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    border-left: 1px solid rgb(113, 113, 113);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.login-form{
+    background-color: rgb(255, 255, 255);
+    height: 60vh;
+    width: 30vw;
+    margin: 10vh 5vh 5vh 10vh;
+    border-radius: 20px;
+    border: 1px solid rgb(113, 113, 113);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.signup-section{
+    background-color: rgb(255, 255, 255);
+    height: 10vh;
+    width: 30vw;
+    margin: 0 5vh 5vh 10vh;
+    border-radius: 20px;
+    border: 1px solid rgb(113, 113, 113);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.login-button {
+    width: 16vw;
+    background-color: rgb(205, 205, 205);
+    border-radius: 5px;
+    border: none;
+    margin-top: 2vh;
+    padding: 8px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    font-family: inherit;
+}
+input {
+    width: 15vw;
+    padding: 8px;
+    border-radius: 10px;
+    border: 1px solid rgb(255, 51, 51);
+}

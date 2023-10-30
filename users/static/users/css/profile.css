@@ -1,0 +1,53 @@
+/* main */
+.profile-section {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+.header-section {
+    background: rgba(255, 255, 255, 0.228);
+    width: 100%;
+    font-size: 1.5rem;
+    display: flex;
+    position: relative;
+}
+#user-name, #add-post, #options-icon  {
+    cursor: pointer;
+    margin-left: 10px;
+}
+.header-icons {
+    margin-right: 20px   ;
+    margin-left: auto;
+}
+
+/* profile content */
+.profile-content {
+    flex: 1;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+}
+.profile-pic {
+    width: 40vw;
+    height: 40vh;
+    background-color: rgb(237, 102, 102);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.profile-followers {
+    width: 60vw;
+    height: 40vh;
+    background-color: rgb(255, 175, 175);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.options {
+    display: none;
+}
+#options-icon:hover .options{
+    display: block;
+}

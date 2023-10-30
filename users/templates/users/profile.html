@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    <title>Profile</title>
+{% endblock title %}
+{% block main_content %}
+    <link rel="stylesheet" href="{% static '/users/css/profile.css' %}">
+    <div class='profile-section'>
+        <div class='header-section'>
+            <span id="user-name">Hi, {{user.username}}</span>
+            <div class="header-icons">
+                <i id="add-post" class="fa-regular fa-heart"></i>
+                <i onclick="options()" id="options-icon" class="fa-solid fa-bars"></i>
+                <div class="options">
+                    options
+                </div>
+            </div>
+        </div>
+        <div class='profile-content'>
+            <div class='profile-pic'>pic</div>
+            <div class='profile-followers'>follow</div>
+        </div>
+    </div>
+    <script>
+    </script>
+{% endblock main_content %}

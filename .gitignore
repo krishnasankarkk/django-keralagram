@@ -1,0 +1,8 @@
+__pycache__
+.venv
+db.sqlite3
+node_modules
+media
+.my_pgpass
+pg_service.config
+migrations
