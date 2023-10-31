@@ -3,8 +3,10 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 
 from .forms import LoginForm, RegistrationForm
+from .models import UserAccount
 
 def login_view(request):
     if request.method == "POST":
@@ -35,7 +37,12 @@ def home(request):
 
 @login_required
 def profile(request):
-    return render(request, "users/profile.html")
+    messages.success(request, "Login successfull")
+    account = UserAccount.objects.filter(user_id=request.user.id)
+    context = {
+        "account_details":account,
+    }
+    return render(request, "users/profile.html", context)
 
 def create(request):
     return render(request, "base.html")

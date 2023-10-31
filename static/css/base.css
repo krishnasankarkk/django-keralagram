@@ -16,3 +16,31 @@ body {
     display: flex;
     flex-direction: column;
 }
+
+.alert{
+  height: 50px;
+  width: 300px;
+  background-color: rgb(255, 173, 173);
+  border-radius: 20px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 80vh;
+  left: 70vw;
+  animation: hideme 5s forwards;
+}
+.alert-success{
+  background-color: #63ff95;
+  color: rgb(0, 0, 0);
+}
+
+@keyframes hideme {
+  0%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+  }
+}

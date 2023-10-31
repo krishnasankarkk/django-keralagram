@@ -29,20 +29,32 @@
     flex-direction: row;
 }
 .profile-pic {
-    width: 40vw;
-    height: 40vh;
-    background-color: rgb(237, 102, 102);
+    width: 30vw;
+    height: auto;
+    background-color: rgb(255, 255, 255);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 20px;
+}
+.profile-pic img {
+    width: 50%;
+    height: 20vh;
+    border-radius: 50%;
+    border: none;
 }
 .profile-followers {
-    width: 60vw;
-    height: 40vh;
-    background-color: rgb(255, 175, 175);
+    width: 69vw;
+    margin-left: 1vw;
+    height: auto;
+    background-color: rgb(255, 255, 255);
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 20px;
 }
 
 .options {
@@ -50,4 +62,19 @@
 }
 #options-icon:hover .options{
     display: block;
+}
+.followers-section{
+    display: flex;
+    flex-direction: row;
+    border: 1px dashed black;
+    border-radius: 20px;
+}
+.posts,.followers,.following{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    align-items: center;
+    border: 1px dashed black;
+    border-radius: 20px;
+    padding: 10px;
 }

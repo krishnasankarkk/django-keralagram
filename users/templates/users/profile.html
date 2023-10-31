@@ -8,6 +8,14 @@
     <div class='profile-section'>
         <div class='header-section'>
             <span id="user-name">Hi, {{user.username}}</span>
+            {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-dismissible alert-success">
+                <strong>{{message}}</strong>&nbsp;
+                <i class="fa-regular fa-thumbs-up"></i>
+                </div>
+            {% endfor %}
+            {% endif %}
             <div class="header-icons">
                 <i id="add-post" class="fa-regular fa-heart"></i>
                 <i onclick="options()" id="options-icon" class="fa-solid fa-bars"></i>
@@ -17,8 +25,37 @@
             </div>
         </div>
         <div class='profile-content'>
-            <div class='profile-pic'>pic</div>
-            <div class='profile-followers'>follow</div>
+            <div class='profile-pic'>
+                {% if account_details %}
+                    {% for account in account_details %}
+                        <img class="profile-pic" src="/media/{{account.profile_pic}}" alt="img">
+                        <h1>{{account.full_name}}</h1>
+                        <div class="followers-section">
+                            <div class="posts">
+                                <b>{{account.posts}}</b>
+                                <span>Posts</span>
+                            </div>
+                            <div class="followers">
+                                <b>{{account.followers}}</b>
+                                <span>Followers</span>
+                            </div>
+                            <div class="following">
+                                <b>{{account.following}}</b>
+                                <span>Following</span>
+                            </div>
+                        </div>
+                        <h2>About</h2>
+                        <span>{{account.bio}}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class='profile-followers'>
+                {% if account_details %}
+                    {% for account in account_details %}
+                        <span>{{account.posts}}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
         </div>
     </div>
     <script>
