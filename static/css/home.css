@@ -1,0 +1,44 @@
+.main{
+    background-color: rgb(255, 255, 255);
+    height: inherit;
+    width: inherit;
+}
+.users {
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    border: 1px dashed black;
+    border-radius: 20px;
+    margin: 10px;
+}
+.user {
+    border: 1px dashed black;
+    border-radius: 20px;
+    padding: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+}
+#profile-pic{
+    width: 10vw;
+    height: 10vw;
+    border-radius: 20px;
+}
+a{
+    text-decoration: none;
+    color: inherit;
+}
+.loading-spinner {
+    display: inline;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: aqua;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+}

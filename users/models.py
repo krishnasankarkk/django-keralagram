@@ -15,4 +15,4 @@ class UserAccount(models.Model):
     posts = models.IntegerField(default=0)
     
     def __str__(self) -> str:
-        return self.username
+        return self.full_name

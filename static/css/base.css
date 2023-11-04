@@ -36,6 +36,22 @@ body {
   color: rgb(0, 0, 0);
 }
 
+.header-section {
+  background: rgba(255, 255, 255, 0.228);
+  width: 100%;
+  font-size: 1.5rem;
+  display: flex;
+  position: relative;
+}
+#user-name, #add-post, #options-icon  {
+  cursor: pointer;
+  margin-left: 10px;
+}
+.header-icons {
+  margin-right: 20px   ;
+  margin-left: auto;
+}
+
 @keyframes hideme {
   0%{
     opacity: 1;

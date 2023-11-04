@@ -5,21 +5,7 @@
     height: 100%;
     width: 100%;
 }
-.header-section {
-    background: rgba(255, 255, 255, 0.228);
-    width: 100%;
-    font-size: 1.5rem;
-    display: flex;
-    position: relative;
-}
-#user-name, #add-post, #options-icon  {
-    cursor: pointer;
-    margin-left: 10px;
-}
-.header-icons {
-    margin-right: 20px   ;
-    margin-left: auto;
-}
+
 
 /* profile content */
 .profile-content {
@@ -35,41 +21,37 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    border: 1px solid rgb(0, 0, 0);
+    /* justify-content: center; */
+    border: 1px dashed rgb(0, 0, 0);
     border-radius: 20px;
 }
 .profile-pic img {
-    width: 50%;
-    height: 20vh;
-    border-radius: 50%;
+    width: 90%;
+    height: auto;
+    border-radius: 20px 20px 0 0;
     border: none;
+    margin-top: 20px;
 }
-.profile-followers {
+.profile-post-section {
     width: 69vw;
     margin-left: 1vw;
     height: auto;
     background-color: rgb(255, 255, 255);
     display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgb(0, 0, 0);
+    flex-direction: column;
+    /* align-items: center; */
+    /* justify-content: center; */
+    border: 1px dashed rgb(0, 0, 0);
     border-radius: 20px;
 }
 
-.options {
-    display: none;
-}
-#options-icon:hover .options{
-    display: block;
-}
 .followers-section{
     display: flex;
     flex-direction: row;
     border: 1px dashed black;
     border-radius: 20px;
 }
-.posts,.followers,.following{
+.post-count,.followers,.following{
     display: flex;
     flex-direction: column;
     margin: 10px;
@@ -77,4 +59,42 @@
     border: 1px dashed black;
     border-radius: 20px;
     padding: 10px;
+    font-weight: 900;
+}
+.about-section {
+    font-weight: 900;
+}
+.follow-button {
+    background-color: aqua;
+    border-radius: 20px;
+    padding: 2%;
+    margin-bottom: 2vh;
+    font-weight: bold;
+    cursor: pointer;
+}
+.create-post-section {
+    display: flex;
+    justify-content: end;
+}
+.create-post-button {
+    cursor: pointer;
+    margin: 2vh;
+    /* border: 2px dashed black; */
+    border-radius: 10px;
+    padding: 10px;
+    font-weight: bold;
+    background-color: aqua;
+}
+.posts {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    flex-wrap: wrap;
+}
+.post {
+    width: 20vw;
+    height: auto;
+    cursor: pointer;
+    margin: 1vw;
+    border-radius: 10px;
 }

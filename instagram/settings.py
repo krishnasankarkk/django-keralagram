@@ -94,7 +94,7 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': '1234',
         'HOST': 'localhost',  # Set to the hostname where your database is running, typically 'localhost'.
-        'PORT': '5432',  # Leave empty to use the default PostgreSQL port (5432).
+        'PORT': '5433',  # Leave empty to use the default PostgreSQL port (5432).
     }
 }
 
