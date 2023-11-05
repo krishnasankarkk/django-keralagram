@@ -20,28 +20,31 @@ body {
 .alert{
   height: 50px;
   width: 300px;
-  background-color: rgb(255, 173, 173);
   border-radius: 20px;
   padding: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
-  top: 80vh;
-  left: 70vw;
-  animation: hideme 5s forwards;
+  position: relative;
+  top: 10px;
+  animation: hideme 2s forwards;
 }
 .alert-success{
   background-color: #63ff95;
   color: rgb(0, 0, 0);
 }
+.alert-warning{
+  background-color: #ff6d63;
+  color: rgb(0, 0, 0);
+}
 
 .header-section {
-  background: rgba(255, 255, 255, 0.228);
+  background: aqua;
   width: 100%;
   font-size: 1.5rem;
   display: flex;
   position: relative;
+  box-shadow: 0 5px 50px rgba(212, 212, 212, 0.938);
 }
 #user-name, #add-post, #options-icon  {
   cursor: pointer;
@@ -59,4 +62,9 @@ body {
   100%{
     opacity: 0;
   }
+}
+
+a{
+  text-decoration: none;
+  color: black;
 }

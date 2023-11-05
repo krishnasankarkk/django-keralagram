@@ -27,10 +27,6 @@
     height: 10vw;
     border-radius: 20px;
 }
-a{
-    text-decoration: none;
-    color: inherit;
-}
 .loading-spinner {
     display: inline;
     position: absolute;

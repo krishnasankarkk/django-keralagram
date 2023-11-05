@@ -5,15 +5,29 @@
 {% endblock title %}
 {% block main_content %}
     <link rel="stylesheet" href="{% static '/users/css/login.css' %}">
+    {% comment %} {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-warning">
+            <strong>{{message}}</strong>&nbsp;
+            <i class="fa-regular fa-bs-up"></i>
+            </div>
+        {% endfor %}
+    {% endif %} {% endcomment %}
     <div class="main">
         <div class="image-section">
             <img id="image" src="{% static '/images/tree.jpg' %}" alt="Logo">
         </div>
         <div class="login-section">
-            <form class="login-form" action="/profile" method="POST">
+            <form class="login-form" action="/login/" method="POST">
                 {% csrf_token %}
                 <h1>Keralagram</h1>
-                {{form.as_p}}
+                {% comment %} {{form.as_p}} {% endcomment %}
+                <input class="user-name" type="text" name="user_name" placeholder="Phone number/user name/email">
+                <div class="password-section">
+                    <input id="password" class="password" type="password" name="password" placeholder="Password">
+                    <i id="opened-eye" class="fa fa-eye" aria-hidden="true"></i>
+                    <i id="closed-eye" class="fa fa-eye-slash" aria-hidden="true"></i>
+                </div>
                 <button type="submit" class="login-button">Login</button>
             </form>
             <div>
@@ -21,8 +35,24 @@
                 <input class="password" type="text" name="password" placeholder="Password"> {% endcomment %}
             </div>
             <div class="signup-section">
-                <span>Don't have an account?<a href="/signup"><b style="cursor:pointer;">Sign up</b></a></span>
+                <span>Don't have an account?<a href="/signup"><b style="cursor:pointer;color:rgb(0, 100, 200);font-size:larger;">Sign up</b></a></span>
             </div>
         </div>
     </div>
+    <script>
+        const openedEye = document.getElementById("opened-eye");
+        const closedEye = document.getElementById("closed-eye");
+        const password = document.getElementById("password");
+
+        openedEye.addEventListener("click", function () {
+            closedEye.style.display = "block";
+            password.type = "text";
+            openedEye.style.display = "none";
+        })
+        closedEye.addEventListener("click", function () {
+            openedEye.style.display = "block";
+            password.type = "password";
+            closedEye.style.display = "none";
+        })
+    </script>
 {% endblock main_content %}

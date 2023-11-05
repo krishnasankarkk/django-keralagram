@@ -33,6 +33,7 @@
     border: 1px solid rgb(113, 113, 113);
     display: flex;
     flex-direction: column;
+    gap: 10px;
     align-items: center;
     justify-content: center;
 }
@@ -44,17 +45,21 @@
     border-radius: 20px;
     border: 1px solid rgb(113, 113, 113);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    font-weight: bold;
+    font-size: large;
 }
 .login-button {
     width: 16vw;
-    background-color: rgb(205, 205, 205);
-    border-radius: 5px;
+    background-color: aqua;
+    border-radius: 50px;
     border: none;
     margin-top: 2vh;
     padding: 8px;
-    font-weight: bold;
+    font-weight: bolder;
+    font-size: large;
     display: flex;
     justify-content: center;
     cursor: pointer;
@@ -64,5 +69,37 @@ input {
     width: 15vw;
     padding: 8px;
     border-radius: 10px;
-    border: 1px solid rgb(255, 51, 51);
+    border: 1px solid rgb(105, 105, 105);
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 500;
+    border: none;
+    background-color: rgb(218, 218, 218);
 }
+input:focus {
+    background-color: rgb(162, 241, 252);
+    border: 1px dashed aqua;
+}
+.password-section {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    align-items: center;
+}
+#opened-eye {
+    display: block;
+    position: absolute;
+    right: 8px;
+    cursor: pointer;
+}
+#closed-eye {
+    display: none;
+    position: absolute;
+    right: 8px;
+    cursor: pointer;
+}
+#wrong {
+    color: rgb(250, 67, 67);
+    display: block;
+}
+  

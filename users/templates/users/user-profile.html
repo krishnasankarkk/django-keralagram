@@ -14,6 +14,7 @@
                         <img class="profile-pic" src="/media/{{account.profile_pic}}" alt="img">
                         <div class="full-name-section">
                             <h1>{{account.full_name}}</h1>
+                            <span class='follow-button'>Follow</span>
                         </div>
                         <div class="followers-section">
                             <div class="post-count">
@@ -37,7 +38,7 @@
                 {% endif %}
             </div>
             <div class='profile-post-section'>
-                <div class="create-post-section">
+                {% comment %} <div class="create-post-section">
                     <span class='create-post-button' id='create-post-button'>Create post<i class="fa fa-plus" aria-hidden="true"></i></span>
                     <div class="create-post-popup" id="create-post-popup">
                         <form id="form" action="{% url 'posts:create-post' %}" method="POST" enctype="multipart/form-data">
@@ -61,7 +62,7 @@
                             </div>
                         </form>
                     </div>
-                </div>
+                </div> {% endcomment %}
                 <div class="posts">
                     {% if posts %}
                         {% for post in posts %}

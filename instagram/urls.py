@@ -19,10 +19,12 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
-from .views import home
+from .views import home, login
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', home, name="home"),
+    path('login/', login, name="login"),
     path('user/', include('users.urls'), name="users"),
+    path('posts/', include('posts.urls'), name="posts"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

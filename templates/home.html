@@ -6,13 +6,8 @@
 {% block main_content %}
         <link rel="stylesheet" href="{% static '/css/home.css' %}">
         <div class="main">
-            <div class="loading-spinner">
-                Loading...
-            </div>
             <div class="users">
-                
                 {% if users %}
-                    
                     {% for user in users %}
                     <a href="{% url 'users:user-profile' user_id=user.id %}">
                         <div class="user">
@@ -21,11 +16,17 @@
                         </div>
                     </a>
                     {% endfor %}
-                        
                 {% endif %}
-                    
             </div>
         </div>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-dismissible alert-success">
+                <strong>{{message}}</strong>&nbsp;
+                <i class="fa-regular fa-bs-up"></i>
+                </div>
+            {% endfor %}
+        {% endif %}
         {% comment %} <script>
             document.getElementById("go-to-profile").addEventListener("click", function (){
                 window.location.href = "{% url 'profile' %}"

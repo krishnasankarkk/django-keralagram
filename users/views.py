@@ -10,22 +10,22 @@ from .models import UserAccount
 from posts.models import Post
 
 def login_view(request):
-    if request.method == "POST":
-       form = LoginForm(request, data=request.POST)
+    # if request.method == "POST":
+    #    form = LoginForm(request, data=request.POST)
        
-       if form.is_valid():
-           username = request.POST["username"]
-           password = request.POST["password"]
-           user = authenticate(request, username=username, password=password)
-           if user is not None:
-               login(request, user)
-           else:
-               form.add_error(None, 'Invalid username or passwprd!')
-    else:
-        form = LoginForm()
+    #    if form.is_valid():
+    #        username = request.POST["username"]
+    #        password = request.POST["password"]
+    #        user = authenticate(request, username=username, password=password)
+    #        if user is not None:
+    #            login(request, user)
+    #        else:
+    #            form.add_error(None, 'Invalid username or passwprd!')
+    # else:
+    #     form = LoginForm()
         
-    context = {"form":form}
-    return render(request, "users/login.html", context)
+    # context = {"form":form}
+    return render(request, "users/login.html")
 
 def signup(request):
     form = RegistrationForm()
@@ -38,9 +38,9 @@ def signup(request):
 
 @login_required
 def profile(request):
-    messages.success(request, "Login successfull")
-    account = UserAccount.objects.filter(user_id=request.user.id)
-    posts = Post.objects.filter(user_id=request.user.id)
+    login_user = request.user.id
+    account = UserAccount.objects.filter(user_id=login_user)
+    posts = Post.objects.filter(user_id=login_user)
     context = {
         "account_details":account,
         "posts":posts,
@@ -54,7 +54,7 @@ def user_profile(request, user_id):
         "account_details":user_account,
         "posts":posts,
     }
-    return render(request, "users/profile.html", context)
+    return render(request, "users/user-profile.html", context)
 
 def create(request):
     return render(request, "base.html")

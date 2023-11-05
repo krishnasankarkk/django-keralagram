@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block main_content %}
+    <link rel="stylesheet" href="{% static 'posts/css/create_post.css' %}">
+    <form action="{% url 'posts:save-post' %}" method="post">
+        {% csrf_token %}
+        <div class="post-section">
+            <div class="post-pic">
+                <h2>Create new post</h2>
+                <img src="{{ image_url }}" alt="post pic" name="image">
+                <input type="file" name="image" id="image" value="{{ image_url }}">
+            </div>
+            <div class="post-caption">
+                    <h3>Write caption</h3>
+                    <textarea class="caption" type="text" name="caption" id="caption" placeholder="Write caption..."></textarea>
+                    <div>
+                        <button class="post-button" type="submit">Post</button>
+                    </div>
+            </div>
+        </div>
+    </form> 
+{% endblock main_content %}
+    
