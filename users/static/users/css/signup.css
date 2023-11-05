@@ -5,16 +5,19 @@
     align-items: center;
     justify-content: center;
 }
-.signup{
+.signup-section{
     height: auto;
     width: 30vw;
     border: 1px solid rgb(145, 145, 145);
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    gap: 10px;
     border-radius: 20px;
+    padding: 10px;
 }
-.login {
+.login-section {
     height: 10vh;
     margin-top: 2vh;
     width: 30vw;
@@ -24,11 +27,12 @@
     justify-content: center;
     align-items: center;
     border-radius: 20px;
+    font-weight: bold;
 }
 .signup-button {
     width: 16vw;
-    background-color: rgb(205, 205, 205);
-    border-radius: 5px;
+    background-color: aqua;
+    border-radius: 20px;
     border: none;
     margin-top: 2vh;
     padding: 8px;
@@ -37,14 +41,26 @@
     justify-content: center;
     cursor: pointer;
     font-family: inherit;
+    font-weight: bold;
+    font-size: large;
 }
 input {
     width: 15vw;
     padding: 8px;
     border-radius: 10px;
-    border: 1px solid rgb(255, 51, 51);
+    border: none;
+    background-color: rgb(230, 229, 229);
+    font-family: inherit;
 }
 p {
     padding-left: 20px;
     padding-right: 20px;
+}
+#warning{
+    color: rgb(255, 57, 57);
+    font-weight: 900;
+}
+#user-warning{
+    color: rgb(255, 57, 57);
+    font-weight: 900;
 }

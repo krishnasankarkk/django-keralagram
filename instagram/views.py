@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login as login_user
 from users.models import UserAccount
 from django.contrib import messages
 from django.http import HttpResponse, Http404, HttpResponseRedirect
@@ -21,6 +21,7 @@ def login(request):
         user = authenticate(username=user_name, password=password)
         messages.warning(request, "Wrong credentials!")
         if user is not None:
+            login_user(request, user)
             return redirect("home")
         else:
             return render(request, "users/login.html", {'success':False})

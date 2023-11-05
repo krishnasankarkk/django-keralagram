@@ -7,21 +7,75 @@
     <link rel="stylesheet" href="{% static '/users/css/signup.css' %}">
     <div class="main">
         <h1>Keralagram</h1>
-        <div class="signup">
-            
-            <form action="/" method="post">
+        {% if messages %}
+            {% for message in messages %}
+                <span id="user-warning">{{message}}</span>
+            {% endfor %}
+        {% endif %}
+        <div>
+            <form id="form" class="signup-section" action="/user/register-user/" method="post">
                 {% csrf_token %}
-                {{form.as_p}}
-                {% comment %} <input type="text" name="user" placeholder="Phone number or email">
-                <input type="text" name="fullname" placeholder="Full name">
-                <input type="text" name="username" placeholder="User name">
-                <input type="text" name="password" placeholder="Password"> {% endcomment %}
-                <p>By signing up, you agree to our Terms , <a href="">Privacy Policy and Cookies Policy</a> .</p>
-                <button class="signup-button" type="submit">Sign up</button>
+                {% comment %} {{form.as_p}} {% endcomment %}
+                <input id="username" type="text" name="username" placeholder="User name">
+                <input id="email" type="email" name="email" placeholder="Email">
+                <input id="fullname" type="text" name="fullname" placeholder="Full name">
+                <input id="password1" type="password" name="password" placeholder="Password">
+                <input id="password2" type="password" name="password" placeholder="Confirm Password">
+                <span id="warning"></span>
+                <p>By signing up, you agree to our Terms , <a style="cursor:pointer;font-size:larger;color:rgb(0, 100, 200);" href="">Privacy Policy and Cookies Policy</a> .</p>
+                <span id="signup-button" class="signup-button">Sign up</span>
             </form>
         </div>
-        <div class="login">
-            <span>Already have an account?<a href="/login"><b style="cursor:pointer;">Login</b></a></span>
+        <div class="login-section">
+            <span>Already have an account?<a href="/user/login"><b style="cursor:pointer;font-size:larger;color:rgb(0, 100, 200);">Login</b></a></span>
         </div>
     </div>
+    <script>
+        const username = document.getElementById("username");
+        const email = document.getElementById("email");
+        const fullname = document.getElementById("fullname");
+        const password1 = document.getElementById("password1");
+        const password2 = document.getElementById("password2");
+        const form = document.getElementById("form");
+        const submitButton = document.getElementById("signup-button");
+        const warning = document.getElementById("warning");
+        warning.textContent = "";
+        var submit = false;
+
+        password2.addEventListener("change", function(){
+            if(password2.value==password1.value){
+                submit = true;
+            }else{
+                warning.textContent = "Password doesnt match!";
+                submit = false;
+            }
+            console.log(password1.value,'=',password2.value)
+        })
+        submitButton.addEventListener("click", function(){
+            if(!username.value){
+                warning.textContent = "Enter user name!";
+            }
+            else if(!email.value){
+                warning.textContent = "Enter your email ID!";
+            }
+            else if(!fullname.value){
+                warning.textContent = "Enter your full name!";
+            }
+            else if(!password1.value){
+                warning.textContent = "Enter your password!";
+            }
+            if(submit){
+                form.submit();   
+                warning.style.display = "none";
+            }else{
+                warning.style.display = "block";
+            }
+        })
+        function go(){
+            if(submit){
+                {% comment %} form.submit(); {% endcomment %}
+            }
+        }
+
+    </script>
 {% endblock main_content %}

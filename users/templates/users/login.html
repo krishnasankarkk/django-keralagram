@@ -21,7 +21,6 @@
             <form class="login-form" action="/login/" method="POST">
                 {% csrf_token %}
                 <h1>Keralagram</h1>
-                {% comment %} {{form.as_p}} {% endcomment %}
                 <input class="user-name" type="text" name="user_name" placeholder="Phone number/user name/email">
                 <div class="password-section">
                     <input id="password" class="password" type="password" name="password" placeholder="Password">
@@ -35,7 +34,7 @@
                 <input class="password" type="text" name="password" placeholder="Password"> {% endcomment %}
             </div>
             <div class="signup-section">
-                <span>Don't have an account?<a href="/signup"><b style="cursor:pointer;color:rgb(0, 100, 200);font-size:larger;">Sign up</b></a></span>
+                <span>Don't have an account?<a href="/user/signup/"><b style="cursor:pointer;color:rgb(0, 100, 200);font-size:larger;">Sign up</b></a></span>
             </div>
         </div>
     </div>

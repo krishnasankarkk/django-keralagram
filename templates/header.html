@@ -2,9 +2,15 @@
 {% block header %}
     <div class='header-section'>
         {% if user.is_authenticated %}
-            <span id="user-name">Hi, {{user.username}}</span>
+        <a href="{% url 'users:profile' %}"><span id="user-name">Hi, {{user.username}}</span></a>
         {% endif %}
+        <a href="{% url 'home' %}">
+            <i class="fa fa-home" aria-hidden="true"></i>
+        </a>
         <div class="header-icons">
+            {% if user.id %}
+                <a href="{% url 'users:logout' %}">Logout</a>
+            {% endif %}
             <i id="add-post" class="fa-regular fa-heart"></i>
             <i onclick="options()" id="options-icon" class="fa-solid fa-bars"></i>
         </div>

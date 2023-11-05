@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout as logout_user
 from django.contrib import messages
 
 from .forms import LoginForm, RegistrationForm
@@ -31,7 +31,29 @@ def signup(request):
     form = RegistrationForm()
     context = {"form":form}
     return render(request, "users/signup.html", context)
-
+def register(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        fullname = request.POST.get('fullname')
+        password = request.POST.get('password')
+        try:
+            user = User.objects.get(username=username)
+            messages.warning(request,"User already exists!")
+            return redirect("users:signup")
+        except:    
+            new_user = User()
+            new_user.username = username
+            new_user.email = email
+            new_user.set_password(password)
+            new_user.save()
+            new_user_account = UserAccount()
+            new_user_account.user = new_user
+            new_user_account.save()
+            return redirect("users:login")
+            
+    
+    
 # @login_required
 # def home(request):
 #     return render(request, "home.html")
@@ -58,3 +80,7 @@ def user_profile(request, user_id):
 
 def create(request):
     return render(request, "base.html")
+
+def logout(request):
+    logout_user(request)
+    return redirect("users:login")

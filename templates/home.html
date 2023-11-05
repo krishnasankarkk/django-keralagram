@@ -9,7 +9,7 @@
             <div class="users">
                 {% if users %}
                     {% for user in users %}
-                    <a href="{% url 'users:user-profile' user_id=user.id %}">
+                    <a href="{% url 'users:user-profile' user_id=user.user_id %}">
                         <div class="user">
                             <img id="profile-pic" src="/media/{{user.profile_pic}}" alt="profile pic">
                             <span>{{user.full_name}}</span>
