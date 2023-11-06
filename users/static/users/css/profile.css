@@ -66,13 +66,25 @@
 }
 .follow-button {
     height: auto;
-    width: auto;
+    width: 100%;
     background-color: aqua;
     border-radius: 20px;
-    padding: 2%;
+    padding: 10px;
     margin-bottom: 2vh;
     font-weight: bold;
+    font-size: large;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform .2s;
+}
+#un-follow-button {
+    display: none;
+    background-color: rgb(207, 99, 99);
+}
+.follow-button:hover {
+    transform: scale(1.1);
 }
 .create-post-section {
     display: flex;
@@ -119,12 +131,34 @@
 .post:hover {
     transform: scale(1.1);
 }
-
-.full-name-section {
+#fullname {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 10px;
     align-items: center ;
+    justify-content: center;
+    cursor: pointer;
+}
+#fullname-input{
+    margin: 10px;
+    border-radius: 10px;
+    height: 20px;
+    width: auto;
+    border: none;
+    padding: 10px;
+}
+#full-name-input-section {
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+#full-name-input-section span {
+    color: aqua;
+}
+#full-name-input-section input {
+    font-family: inherit;
+    font-weight: bold;
+    font-size: large;
 }
 
 ::-webkit-scrollbar {

@@ -6,63 +6,55 @@
 {% block main_content %}
     <link rel="stylesheet" href="{% static '/users/css/profile.css' %}">
     <div class='profile-section'>
-        
         <div class='profile-content'>
             <div class='profile-pic'>
                 {% if account_details %}
-                    {% for account in account_details %}
-                        <img class="profile-pic" src="/media/{{account.profile_pic}}" alt="img">
+                        {% if account_details.profile_pic %}
+                            <img class="profile-pic" src="/media/{{account_details.profile_pic}}" alt="profile pic">
+                        {% else %}
+                            <img class="profile-pic" src="{% static '/images/profile.png' %}" alt="profile pic">
+                        {% endif %}
                         <div class="full-name-section">
-                            <h1>{{account.full_name}}</h1>
-                            <span class='follow-button'>Follow</span>
+                            <span>{{account_details.user.username}}</span>
+                            <h1>{{account_details.full_name}}</h1>
+                            <a href="{% url 'users:follow' user_id=account_details.user_id %}">
+                                <span id="follow-button" class='follow-button'>
+                                    Follow
+                                    <span class="material-symbols-outlined">
+                                        handshake
+                                    </span>
+                                </span>
+                            </a>
+                            <a href="{% url 'users:unfollow' user_id=account_details.user_id %}">
+                                <span id="un-follow-button" class='follow-button'>
+                                    Unfollow
+                                    <span class="material-symbols-outlined">
+                                        cancel
+                                    </span>
+                                </span>
+                            </a>
                         </div>
                         <div class="followers-section">
                             <div class="post-count">
-                                <b>{{account.posts}}</b>
+                                <b>{{account_details.posts}}</b>
                                 <span>Posts</span>
                             </div>
                             <div class="followers">
-                                <b>{{account.followers}}</b>
+                                <b>{{followers}}</b>
                                 <span>Followers</span>
                             </div>
                             <div class="following">
-                                <b>{{account.following}}</b>
+                                <b>{{following}}</b>
                                 <span>Following</span>
                             </div>
                         </div>
                         <div class='about-section'>
                             <h2>About</h2>
-                            <span>{{account.bio}}</span>
+                            <span>{{account_details.bio}}</span>
                         </div>
-                    {% endfor %}
                 {% endif %}
             </div>
             <div class='profile-post-section'>
-                {% comment %} <div class="create-post-section">
-                    <span class='create-post-button' id='create-post-button'>Create post<i class="fa fa-plus" aria-hidden="true"></i></span>
-                    <div class="create-post-popup" id="create-post-popup">
-                        <form id="form" action="{% url 'posts:create-post' %}" method="POST" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <span id="close-button"><i class="fa fa-times" aria-hidden="true"></i></span>
-                            <h2>Create new post</h2>
-                            <div class="image-section">
-                                <span id="clear-image-button"><i class="fa fa-times" aria-hidden="true"></i></span>
-                                <img id="uploaded-image" src="" alt="">
-                            </div>
-                            <div id="upload-button">
-                                <input type="file" id="upload-input" name="uploaded_image" value="">
-                                <label for="upload-input" class='upload-button'>Upload image<i class="fa fa-arrow-up" aria-hidden="true"></i></label>
-                            </div>
-                            <div class="post-caption">
-                                <h3>Write caption</h3>
-                                <textarea class="caption" type="text" name="caption" id="caption" placeholder="Write caption..."></textarea>
-                            </div>
-                            <div>
-                                <span id="post-button">Post<i class="fa fa-upload" aria-hidden="true"></i></span>
-                            </div>
-                        </form>
-                    </div>
-                </div> {% endcomment %}
                 <div class="posts">
                     {% if posts %}
                         {% for post in posts %}
@@ -84,58 +76,25 @@
         const postButton = document.getElementById('post-button');
         const form = document.getElementById("form");
         const caption = document.getElementById("caption");
-
-        postButton.addEventListener("click", function () {
-            form.submit();
-            {% comment %} if(imageDisplay.src){
-                const data = {
-                    'image_url':imageDisplay.src,
-                    'caption':caption.value,
-                }
-                const options = {
-                    method:'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': '{{ csrf_token }}',
-                    },
-                    body:JSON.stringify(data),
-                }
-                fetch('{% url 'posts:create-post' %}', options)
-                .then(res=>console.log(res))
-            } {% endcomment %}
-            
-        })
-        createPostButton.addEventListener("click", function () {
-            createPostPopup.style.display = "block";
-        })
-        popupCloseButton.addEventListener("click", function () {
-            createPostPopup.style.display = "none";
-        })
-        imageClearButton.addEventListener("click", function () {
-            imageDisplay.style.display = "none";
-            imageClearButton.style.display = "none";
-            uploadButton.style.display = 'block';
-        })
-        fileInput.addEventListener('change', (event) => {
-        const selectedFile = event.target.files[0];
-
-        if (selectedFile && selectedFile.type.startsWith('image/')) {
-            const reader = new FileReader();
-
-            reader.onload = function (e) {
-            imageDisplay.src = e.target.result;
-            imageDisplay.style.display = 'block';
-            imageClearButton.style.display = 'block';
-            uploadButton.style.display = 'none';
-            };
-
-            reader.readAsDataURL(selectedFile);
-        } else {
-            imageDisplay.style.display = 'none';
-            imageClearButton.style.display = 'none';
-            uploadButton.style.display = 'block';
+        const followButton = document.getElementById("follow-button");
+        const unFollowButton = document.getElementById("un-follow-button");
+        const followed = '{{ followed }}';
+        
+        console.log(followed)
+        if(followed=='True'){
+            unFollowButton.style.display = "flex";
+            followButton.style.display = "none";
+        }else{
+            unFollowButton.style.display = "none";
+            followButton.style.display = "flex";
         }
-        });
-
+        followButton.addEventListener("click", function(){
+            unFollowButton.style.display = "flex";
+            followButton.style.display = "none";
+        })
+        unFollowButton.addEventListener("click", function(){
+            unFollowButton.style.display = "none";
+            followButton.style.display = "flex";
+        })
     </script>
 {% endblock main_content %}

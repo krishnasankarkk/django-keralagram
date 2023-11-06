@@ -10,30 +10,36 @@
         <div class='profile-content'>
             <div class='profile-pic'>
                 {% if account_details %}
-                    {% for account in account_details %}
-                        <img class="profile-pic" src="/media/{{account.profile_pic}}" alt="img">
-                        <div class="full-name-section">
-                            <h1>{{account.full_name}}</h1>
-                        </div>
-                        <div class="followers-section">
-                            <div class="post-count">
-                                <b>{{account.posts}}</b>
-                                <span>Posts</span>
-                            </div>
-                            <div class="followers">
-                                <b>{{account.followers}}</b>
-                                <span>Followers</span>
-                            </div>
-                            <div class="following">
-                                <b>{{account.following}}</b>
-                                <span>Following</span>
-                            </div>
-                        </div>
-                        <div class='about-section'>
-                            <h2>About</h2>
-                            <span>{{account.bio}}</span>
-                        </div>
-                    {% endfor %}
+                <img class="profile-pic" src="/media/{{account_details.profile_pic}}" alt="img">
+                <div class="full-name-section">
+                    <div id="fullname">
+                        <h1>{{account_details.full_name}}</h1>
+                    </div>
+                    <div id="full-name-input-section">
+                        <input id="fullname-input" type="text">
+                        <span id="fullname-input-save" class="material-symbols-outlined">
+                            task_alt
+                        </span>
+                    </div>
+                </div>
+                <div class="followers-section">
+                    <div class="post-count">
+                        <b>{{account_details.posts}}</b>
+                        <span>Posts</span>
+                    </div>
+                    <div class="followers">
+                        <b>{{followers}}</b>
+                        <span>Followers</span>
+                    </div>
+                    <div class="following">
+                        <b>{{following}}</b>
+                        <span>Following</span>
+                    </div>
+                </div>
+                <div class='about-section'>
+                    <h2>About</h2>
+                    <span>{{account_details.bio}}</span>
+                </div>
                 {% endif %}
             </div>
             <div class='profile-post-section'>
@@ -83,7 +89,20 @@
         const postButton = document.getElementById('post-button');
         const form = document.getElementById("form");
         const caption = document.getElementById("caption");
+        const fullname = document.getElementById("fullname");
+        const fullnameInputSection = document.getElementById("full-name-input-section");
+        const fullnameSaveIcon = document.getElementById("fullname-input-save");
+        const fullnameInput = document.getElementById("fullname-input");
 
+        fullname.addEventListener("click", function(){
+            fullname.style.display = "none";
+            fullnameInputSection.style.display = "flex";
+            fullnameInput.focus();
+        })
+        fullnameSaveIcon.addEventListener("click", function(){
+            fullname.style.display = "block";
+            fullnameInputSection.style.display = "none";
+        })
         postButton.addEventListener("click", function () {
             form.submit();
             {% comment %} if(imageDisplay.src){

@@ -49,9 +49,20 @@ body {
   position: relative;
   box-shadow: 0 5px 50px rgba(212, 212, 212, 0.938);
 }
-.header-section i{
+.header-section span{
   cursor: pointer;
+  margin: 10px;
 }
+
+.material-symbols-outlined {
+  font-weight: 500;
+  font-size: larger;
+  transition: transform .2s;
+}
+.material-symbols-outlined:hover {
+  transform: scale(1.1);
+}
+
 #user-name, #add-post, #options-icon  {
   cursor: pointer;
   margin-left: 10px;

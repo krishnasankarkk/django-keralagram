@@ -5,14 +5,24 @@
         <a href="{% url 'users:profile' %}"><span id="user-name">Hi, {{user.username}}</span></a>
         {% endif %}
         <a href="{% url 'home' %}">
-            <i class="fa fa-home" aria-hidden="true"></i>
+            <span class="material-symbols-outlined">
+                home_app_logo
+            </span>
         </a>
         <div class="header-icons">
             {% if user.id %}
-                <a href="{% url 'users:logout' %}">Logout</a>
+                <a href="{% url 'users:logout' %}">
+                    <span class="material-symbols-outlined">
+                        logout
+                    </span>
+                </a>
             {% endif %}
-            <i id="add-post" class="fa-regular fa-heart"></i>
-            <i onclick="options()" id="options-icon" class="fa-solid fa-bars"></i>
+            <span class="material-symbols-outlined">
+                notifications
+            </span>
+            <span class="material-symbols-outlined">
+                menu
+            </span>
         </div>
     </div>    
 {% endblock header %}
