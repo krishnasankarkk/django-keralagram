@@ -6,6 +6,7 @@
 .users {
     display: flex;
     flex-direction: row;
+    overflow-x: scroll;
     padding: 20px;
     border: 1px dashed black;
     border-radius: 20px;
