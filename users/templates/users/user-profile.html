@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="{% static '/users/css/profile.css' %}">
     <div class='profile-section'>
         <div class='profile-content'>
-            <div class='profile-pic'>
+            <div class='profile-pic-section'>
                 {% if account_details %}
                         {% if account_details.profile_pic %}
-                            <img id="profile-pic" class="profile-pic" src="/media/{{account_details.profile_pic}}" alt="profile pic">
+                            <img id="profile-pic" src="/media/{{account_details.profile_pic}}" alt="profile pic">
                         {% else %}
-                            <img id="profile-pic" class="profile-pic" src="{% static '/images/profile.png' %}" alt="profile pic">
+                            <img id="profile-pic" src="{% static '/images/profile.png' %}" alt="profile pic">
                         {% endif %}
                         <div class="full-name-section">
                             <h1>{{account_details.full_name}}</h1>
