@@ -23,14 +23,14 @@
                 {% endif %}
             </div>
         </div>
-        {% if messages %}
+        {% comment %} {% if messages %}
             {% for message in messages %}
                 <div class="alert alert-dismissible alert-success">
                 <strong>{{message}}</strong>&nbsp;
                 <i class="fa-regular fa-bs-up"></i>
                 </div>
             {% endfor %}
-        {% endif %}
+        {% endif %} {% endcomment %}
         {% comment %} <script>
             document.getElementById("go-to-profile").addEventListener("click", function (){
                 window.location.href = "{% url 'profile' %}"

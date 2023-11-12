@@ -37,6 +37,7 @@ def register(request):
         email = request.POST.get('email')
         fullname = request.POST.get('fullname')
         password = request.POST.get('password')
+        phone = request.POST.get('phone')
         try:
             user = User.objects.get(username=username)
             messages.warning(request,"User already exists!")
@@ -49,6 +50,7 @@ def register(request):
             new_user.save()
             new_user_account = UserAccount()
             new_user_account.user = new_user
+            new_user_account.phone = phone
             new_user_account.save()
             return redirect("users:login")
             
