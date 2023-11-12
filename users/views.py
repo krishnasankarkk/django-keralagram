@@ -50,6 +50,7 @@ def register(request):
             new_user.save()
             new_user_account = UserAccount()
             new_user_account.user = new_user
+            new_user_account.full_name = fullname
             new_user_account.phone = phone
             new_user_account.save()
             return redirect("users:login")
