@@ -8,11 +8,13 @@
 {% block main_content %}
     <link rel="stylesheet" href="{% static '/users/css/signup.css' %}">
     <div class="main">
-        {% comment %} {% if messages %}
+        {% if messages %}
             {% for message in messages %}
-                <span id="user-warning">{{message}}</span>
+            <div class="alert alert-{{message.tags}}">
+                <strong>{{message}}</strong>&nbsp;
+            </div>
             {% endfor %}
-        {% endif %} {% endcomment %}
+        {% endif %}
         <div>
             <form id="form" class="signup-section" action="/user/register-user/" method="post">
                 <img id="logo" src="{% static 'images/logo.png' %}" alt="">

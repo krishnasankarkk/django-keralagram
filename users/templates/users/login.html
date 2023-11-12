@@ -7,14 +7,13 @@
 {% endblock header %}
 {% block main_content %}
     <link rel="stylesheet" href="{% static '/users/css/login.css' %}">
-    {% comment %} {% if messages %}
+    {% if messages %}
         {% for message in messages %}
-            <div class="alert alert-warning">
-            <strong>{{message}}</strong>&nbsp;
-            <i class="fa-regular fa-bs-up"></i>
+            <div class="alert alert-{{message.tags}}">
+                <strong>{{message}}</strong>&nbsp;
             </div>
         {% endfor %}
-    {% endif %} {% endcomment %}
+    {% endif %}
     <div class="main">
         {% comment %} <div class="image-section">
             <img id="image" src="{% static '/images/image.png' %}" alt="Logo">
@@ -24,9 +23,9 @@
                 {% csrf_token %}
                 <img id="logo" src="{% static 'images/logo.png' %}" alt="">
                 <h1>Keralagram</h1>
-                <input class="user-name" type="text" name="user_name" placeholder="Phone number/user name/email">
+                <input class="user-name" type="text" name="user_name" placeholder="Phone number/user name/email" required>
                 <div class="password-section">
-                    <input id="password" class="password" type="password" name="password" placeholder="Password">
+                    <input id="password" class="password" type="password" name="password" placeholder="Password" required>
                     <i id="opened-eye" class="fa fa-eye" aria-hidden="true"></i>
                     <i id="closed-eye" class="fa fa-eye-slash" aria-hidden="true"></i>
                 </div>

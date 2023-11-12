@@ -18,10 +18,16 @@ def login(request):
     if request.method == 'POST':
         user_name = request.POST.get('user_name')
         password = request.POST.get('password')
-        user = authenticate(username=user_name, password=password)
-        messages.warning(request, "Wrong credentials!")
-        if user is not None:
-            login_user(request, user)
-            return redirect("home")
-        else:
+        try:
+            user = User.objects.get(username=user_name)
+            user = authenticate(username=user_name, password=password)
+            if user is not None:
+                login_user(request, user)
+                messages.success(request, "Login successfull :)")
+                return redirect("home")
+            else:
+                messages.warning(request, "Wrong password!")
+                return render(request, "users/login.html", {'success':False})
+        except:
+            messages.warning(request, "Invalid username!")
             return render(request, "users/login.html", {'success':False})

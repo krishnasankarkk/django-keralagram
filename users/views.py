@@ -53,6 +53,7 @@ def register(request):
             new_user_account.full_name = fullname
             new_user_account.phone = phone
             new_user_account.save()
+            messages.success(request,"User successfully created :)")
             return redirect("users:login")
             
     
@@ -95,9 +96,6 @@ def user_profile(request, user_id):
         "following":following,
     }
     return render(request, "users/user-profile.html", context)
-
-def create(request):
-    return render(request, "base.html")
 
 def logout(request):
     logout_user(request)
