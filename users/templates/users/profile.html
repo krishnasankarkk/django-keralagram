@@ -8,13 +8,12 @@
     <div class='profile-section'>
         
         <div class='profile-content'>
-            <div class='profile-pic'>
+            <div class='profile-pic-section'>
                 {% if account_details %}
                     {% if account_details.profile_pic %}
-                        <img class="profile-pic" src="/media/{{account_details.profile_pic}}" alt="profile pic">
-                    {% else %}
-                        <img id="profile-pic" class="profile-pic" src="{% static '/images/profile.png' %}" alt="profile pic">
-                        <div id="profile-pic-edit-popup">
+                        <img id="profile-pic" src="/media/{{account_details.profile_pic}}" alt="profile pic">
+                        <form id="profile-pic-edit-popup" action="{% url 'users:update-profilepic' %}" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
                             <span id="close-profile-pic-edit-popup"><i class="fa fa-times" aria-hidden="true"></i></span>
                             <h2>Edit profile pic</h2>
                             <div class="edit-profile-image-section">
@@ -23,7 +22,7 @@
                                 </span>
                                 <img id="edit-profile-image" src="" alt="Profile image">
                             </div>
-                            <input type="file" id="upload-profile-pic-input" name="uploaded-profile-pic" value="">
+                            <input type="file" id="upload-profile-pic-input" name="uploaded_profile_pic" value="">
                             <label id="upload-profile-pic" for="upload-profile-pic-input">
                                 Upload image
                                 <i class="fa fa-arrow-up" aria-hidden="true"></i>
@@ -31,7 +30,28 @@
                             <span id="save-profile-pic">
                                 Save
                             </span>
-                        </div>
+                        </form>
+                    {% else %}
+                        <img id="profile-pic" src="{% static '/images/profile.png' %}" alt="profile pic">
+                        <form id="profile-pic-edit-popup" action="{% url 'users:update-profilepic' %}" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <span id="close-profile-pic-edit-popup"><i class="fa fa-times" aria-hidden="true"></i></span>
+                            <h2>Edit profile pic</h2>
+                            <div class="edit-profile-image-section">
+                                <span id="delete-profile-pic" class="material-symbols-outlined">
+                                    delete
+                                </span>
+                                <img id="edit-profile-image" src="" alt="Profile image">
+                            </div>
+                            <input type="file" id="upload-profile-pic-input" name="uploaded_profile_pic" value="">
+                            <label id="upload-profile-pic" for="upload-profile-pic-input">
+                                Upload image
+                                <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                            </label>
+                            <span id="save-profile-pic">
+                                Save
+                            </span>
+                        </form>
                     {% endif %}
                 <div class="full-name-section">
                     <div id="fullname">
@@ -39,7 +59,7 @@
                     </div>
                     <div id="full-name-input-section">
                         <input id="fullname-input" type="text" value="">
-                        <a id="edit-fullname-url" href="{% url 'users:edit-fullname' fullname='Nthaada ninak perille?' %}">
+                        <a id="edit-fullname-url" href="{% url 'users:update-fullname' fullname='Nthaada ninak perille?' %}">
                             <span id="fullname-input-save" class="material-symbols-outlined">
                                 task_alt
                             </span>
@@ -131,13 +151,13 @@
         const profilePicEditPopupClose = document.getElementById("close-profile-pic-edit-popup");
         var fullnameValue = "Nthaada ninak perille?";
 
-        {% comment %} profilePicEditPopupClose.addEventListener("click", function(){
+        profilePicEditPopupClose.addEventListener("click", function(){
             profilePicEditPopup.style.display = "none";
-        }) {% endcomment %}
-        {% comment %} profilePic.addEventListener("click", function(){
+        })
+        profilePic.addEventListener("click", function(){
             profilePicEditPopup.style.display = "flex";
             createPostPopup.style.display = "none";
-        }) {% endcomment %}
+        })
         fullname.addEventListener("click", function(){
             fullname.style.display = "none";
             fullnameInputSection.style.display = "flex";
@@ -193,7 +213,7 @@
                 uploadButton.style.display = 'flex';
             }
         });
-        {% comment %} uploadProfilePicfileInput.addEventListener('change', (event) => {
+        uploadProfilePicfileInput.addEventListener('change', (event) => {
             const selectedFile = event.target.files[0];
 
             if (selectedFile && selectedFile.type.startsWith('image/')) {
@@ -211,10 +231,22 @@
             } else {
                 editProfileImageDisplay.style.display = 'none';
                 deleteProfilePicButton.style.display = 'none';
-                uploadProfilePic.style.display = 'block';
+                uploadProfilePic.style.display = 'flex';
                 saveProfilePic.style.display = 'none';
             }
-        }); {% endcomment %}
+        });
+        deleteProfilePicButton.addEventListener("click", function () {
+            uploadProfilePic.style.display = 'flex';
+            editProfileImageDisplay.src = '';
+            editProfileImageDisplay.style.display = 'none';
+            saveProfilePic.style.display = 'none';
+            deleteProfilePicButton.style.display = 'none';
+        });
+        saveProfilePic.addEventListener("click", function () {
+            profilePicEditPopup.submit();
+            editProfileImageDisplay.src = '';
+            profilePicEditPopup.style.display = "none";
+        });
 
     </script>
 {% endblock main_content %}
