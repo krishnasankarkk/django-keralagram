@@ -58,7 +58,7 @@ def register(request):
 # def home(request):
 #     return render(request, "home.html")
 
-@login_required
+@login_required(login_url='/user/login')
 def profile(request):
     login_user = request.user.id
     account = UserAccount.objects.get(user_id=login_user)
@@ -86,6 +86,7 @@ def user_profile(request, user_id):
     context = {
         "account_details":user_account,
         "posts":posts,
+        "posts_count":posts.count(),
         "followed":followed,
         "followers":followers,
         "following":following,
@@ -99,7 +100,7 @@ def logout(request):
     logout_user(request)
     return redirect("users:login")
 
-@login_required
+@login_required(login_url='/user/login')
 def follow_user(request, user_id):
     user_to_follow = UserAccount.objects.get(user_id=user_id)
     current_user = UserAccount.objects.get(user_id=request.user.id)
@@ -113,7 +114,7 @@ def follow_user(request, user_id):
         previous_url = request.META.get('HTTP_REFERER', None)
         return HttpResponseRedirect(previous_url)
 
-@login_required
+@login_required(login_url='/user/login')
 def unfollow_user(request, user_id):
     user_to_unfollow = UserAccount.objects.get(user_id=user_id)
     current_user = UserAccount.objects.get(user_id=request.user.id)

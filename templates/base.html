@@ -14,7 +14,9 @@
     <link rel="stylesheet" href="{% static '/css/base.css' %}">
 </head>
 <body>
-    {% include 'header.html' %}
+    {% block header %}
+        {% include 'header.html' %}
+    {% endblock header %}  
     {% block main_content %}{% endblock main_content %}
 </body>
 </html>

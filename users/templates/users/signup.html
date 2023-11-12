@@ -3,10 +3,11 @@
 {% block title %}
     <title>Sign up • Keralagram</title>
 {% endblock title %}
+{% block header %}
+{% endblock header %}    
 {% block main_content %}
     <link rel="stylesheet" href="{% static '/users/css/signup.css' %}">
     <div class="main">
-        <h1>Keralagram</h1>
         {% if messages %}
             {% for message in messages %}
                 <span id="user-warning">{{message}}</span>
@@ -14,6 +15,8 @@
         {% endif %}
         <div>
             <form id="form" class="signup-section" action="/user/register-user/" method="post">
+                <img id="logo" src="{% static 'images/logo.png' %}" alt="">
+                <h1>Keralagram</h1>
                 {% csrf_token %}
                 {% comment %} {{form.as_p}} {% endcomment %}
                 <input id="username" type="text" name="username" placeholder="User name">

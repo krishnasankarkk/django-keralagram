@@ -1,14 +1,22 @@
 .main {
-    background-color: rgb(255, 255, 255);
+    height: 100%;
+    width: 100%;
+    background-image: url('/static/images/bg.jpg');
+    background-size: 100% 100%;
+    background-position: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
+#logo {
+    border-radius: 50%;
+    height: 15vh;
+}
 .signup-section{
     height: auto;
     width: 30vw;
-    border: 1px solid rgb(145, 145, 145);
+    border: none;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,18 +24,37 @@
     gap: 10px;
     border-radius: 20px;
     padding: 10px;
+    background-color: rgba(255, 255, 255, 0.427);
+    font-weight: bold;
 }
 .login-section {
     height: 10vh;
     margin-top: 2vh;
     width: 30vw;
-    border: 1px solid rgb(145, 145, 145);
+    border: none;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: 20px;
     font-weight: bold;
+    background-color: rgba(255, 255, 255, 0.427);
+}
+input {
+    width: 15vw;
+    padding: 8px;
+    border: none;
+    border-bottom: 1px dashed black;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 500;
+    background-color: rgba(175, 60, 60, 0);
+}
+input:focus {
+    background-color: rgba(162, 241, 252, 0);
+    outline: none;
+    border: none;
+    border-bottom: 1px dashed black;
 }
 .signup-button {
     width: 16vw;
@@ -43,14 +70,6 @@
     font-family: inherit;
     font-weight: bold;
     font-size: large;
-}
-input {
-    width: 15vw;
-    padding: 8px;
-    border-radius: 10px;
-    border: none;
-    background-color: rgb(230, 229, 229);
-    font-family: inherit;
 }
 p {
     padding-left: 20px;

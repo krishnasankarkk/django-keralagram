@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-lv%9ja!e7+z#alt1sdd#12*zp-z=!4a+43apx=-01df25ef8hg
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1','vercel.app']
 
 
 # Application definition
@@ -75,11 +75,23 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'instagram.wsgi.application'
+WSGI_APPLICATION = 'instagram.wsgi.app'
 
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': '8thmGiEv9t1mhPlcbBOZ',
+        'HOST': 'containers-us-west-90.railway.app',  # Set to the hostname where your database is running, typically 'localhost'.
+        'PORT': '6943',  # Leave empty to use the default PostgreSQL port (5432).
+    }
+}
+
 
 # DATABASES = {
 #     'default': {
@@ -88,16 +100,16 @@ WSGI_APPLICATION = 'instagram.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-   'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'instagram',
-        'USER': 'postgres',
-        'PASSWORD': '1234',
-        'HOST': 'localhost',  # Set to the hostname where your database is running, typically 'localhost'.
-        'PORT': '5433',  # Leave empty to use the default PostgreSQL port (5432).
-    }
-}
+# DATABASES = {
+#    'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'instagram',
+#         'USER': 'postgres',
+#         'PASSWORD': '1234',
+#         'HOST': 'localhost',  # Set to the hostname where your database is running, typically 'localhost'.
+#         'PORT': '5433',  # Leave empty to use the default PostgreSQL port (5432).
+#     }
+# }
 
 # DATABASES = {
 #    'default': {
