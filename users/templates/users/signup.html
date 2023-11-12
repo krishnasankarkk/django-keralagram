@@ -49,20 +49,31 @@
                 warning.textContent = "Password doesnt match!";
                 submit = false;
             }
-            console.log(password1.value,'=',password2.value)
         })
         submitButton.addEventListener("click", function(){
             if(!username.value){
                 warning.textContent = "Enter user name!";
+                submit = false;
             }
             else if(!email.value){
                 warning.textContent = "Enter your email ID!";
+                submit = false;
             }
             else if(!fullname.value){
                 warning.textContent = "Enter your full name!";
+                submit = false;
             }
             else if(!password1.value){
                 warning.textContent = "Enter your password!";
+                submit = false;
+            }
+            else if(!password2.value){
+                warning.textContent = "Confirm your password!";
+                submit = false;
+            }
+            else{
+                warning.textContent = "";
+                submit = true;
             }
             if(submit){
                 form.submit();   

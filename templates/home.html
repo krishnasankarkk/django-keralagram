@@ -11,8 +11,12 @@
                     {% for user in users %}
                     <a href="{% url 'users:user-profile' user_id=user.user_id %}">
                         <div class="user">
-                            <img id="profile-pic" src="/media/{{user.profile_pic}}" alt="profile pic">
-                            <span>{{user.full_name}}</span>
+                            {% if user.profile_pic %}
+                                <img id="profile-pic" src="/media/{{user.profile_pic}}" alt="profile pic">
+                            {% else %}
+                                <img id="profile-pic" src="{% static '/images/profile.png' %}" alt="profile pic">
+                            {% endif %}
+                            <span>{{user.user.username}}</span>
                         </div>
                     </a>
                     {% endfor %}

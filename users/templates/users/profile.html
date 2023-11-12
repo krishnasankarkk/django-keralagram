@@ -10,21 +10,45 @@
         <div class='profile-content'>
             <div class='profile-pic'>
                 {% if account_details %}
-                <img class="profile-pic" src="/media/{{account_details.profile_pic}}" alt="img">
+                    {% if account_details.profile_pic %}
+                        <img class="profile-pic" src="/media/{{account_details.profile_pic}}" alt="profile pic">
+                    {% else %}
+                        <img id="profile-pic" class="profile-pic" src="{% static '/images/profile.png' %}" alt="profile pic">
+                        <div id="profile-pic-edit-popup">
+                            <span id="close-profile-pic-edit-popup"><i class="fa fa-times" aria-hidden="true"></i></span>
+                            <h2>Edit profile pic</h2>
+                            <div class="edit-profile-image-section">
+                                <span id="delete-profile-pic" class="material-symbols-outlined">
+                                    delete
+                                </span>
+                                <img id="edit-profile-image" src="" alt="Profile image">
+                            </div>
+                            <input type="file" id="upload-profile-pic-input" name="uploaded-profile-pic" value="">
+                            <label id="upload-profile-pic" for="upload-profile-pic-input">
+                                Upload image
+                                <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                            </label>
+                            <span id="save-profile-pic">
+                                Save
+                            </span>
+                        </div>
+                    {% endif %}
                 <div class="full-name-section">
                     <div id="fullname">
                         <h1>{{account_details.full_name}}</h1>
                     </div>
                     <div id="full-name-input-section">
-                        <input id="fullname-input" type="text">
-                        <span id="fullname-input-save" class="material-symbols-outlined">
-                            task_alt
-                        </span>
+                        <input id="fullname-input" type="text" value="">
+                        <a id="edit-fullname-url" href="{% url 'users:edit-fullname' fullname='Nthaada ninak perille?' %}">
+                            <span id="fullname-input-save" class="material-symbols-outlined">
+                                task_alt
+                            </span>
+                        </a>
                     </div>
                 </div>
                 <div class="followers-section">
                     <div class="post-count">
-                        <b>{{account_details.posts}}</b>
+                        <b>{{posts_count}}</b>
                         <span>Posts</span>
                     </div>
                     <div class="followers">
@@ -71,8 +95,11 @@
                 <div class="posts">
                     {% if posts %}
                         {% for post in posts %}
-                            <img class="post" src="/media/{{post.post_img}}" alt="post">
+                            <img class="post" src="/media/{{post.post_img}}" alt="post" data-post-id="{{post.id}}" onclick=handleImageClick(this)>
                         {% endfor %}
+                        <div id="post-detail-popup">
+
+                        </div>
                     {% endif %}
                 </div>
             </div>
@@ -83,8 +110,13 @@
         const createPostButton = document.getElementById("create-post-button");
         const popupCloseButton = document.getElementById("close-button");
         const fileInput = document.getElementById('upload-input');
+        const uploadProfilePic = document.getElementById('upload-profile-pic');
+        const saveProfilePic = document.getElementById('save-profile-pic');
+        const uploadProfilePicfileInput = document.getElementById('upload-profile-pic-input');
         const imageDisplay = document.getElementById('uploaded-image');
+        const editProfileImageDisplay = document.getElementById('edit-profile-image');
         const imageClearButton = document.getElementById('clear-image-button');
+        const deleteProfilePicButton = document.getElementById('delete-profile-pic');
         const uploadButton = document.getElementById('upload-button');
         const postButton = document.getElementById('post-button');
         const form = document.getElementById("form");
@@ -93,38 +125,45 @@
         const fullnameInputSection = document.getElementById("full-name-input-section");
         const fullnameSaveIcon = document.getElementById("fullname-input-save");
         const fullnameInput = document.getElementById("fullname-input");
+        const editFullnameUrl = document.getElementById("edit-fullname-url");
+        const profilePic = document.getElementById("profile-pic");
+        const profilePicEditPopup = document.getElementById("profile-pic-edit-popup");
+        const profilePicEditPopupClose = document.getElementById("close-profile-pic-edit-popup");
+        var fullnameValue = "Nthaada ninak perille?";
 
+        {% comment %} profilePicEditPopupClose.addEventListener("click", function(){
+            profilePicEditPopup.style.display = "none";
+        }) {% endcomment %}
+        {% comment %} profilePic.addEventListener("click", function(){
+            profilePicEditPopup.style.display = "flex";
+            createPostPopup.style.display = "none";
+        }) {% endcomment %}
         fullname.addEventListener("click", function(){
             fullname.style.display = "none";
             fullnameInputSection.style.display = "flex";
             fullnameInput.focus();
+        })
+        fullnameInput.addEventListener("input", function(){
+            var fullnameValue = fullnameInput.value;
+            var new_url = `/user/edit-fullname/${fullnameValue}/`;
+            editFullnameUrl.href = new_url;
         })
         fullnameSaveIcon.addEventListener("click", function(){
             fullname.style.display = "block";
             fullnameInputSection.style.display = "none";
         })
         postButton.addEventListener("click", function () {
+            createPostPopup.style.display = "none";
             form.submit();
-            {% comment %} if(imageDisplay.src){
-                const data = {
-                    'image_url':imageDisplay.src,
-                    'caption':caption.value,
-                }
-                const options = {
-                    method:'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': '{{ csrf_token }}',
-                    },
-                    body:JSON.stringify(data),
-                }
-                fetch('{% url 'posts:create-post' %}', options)
-                .then(res=>console.log(res))
-            } {% endcomment %}
-            
         })
+        
+        function handleImageClick(img){
+            var postId = img.getAttribute('data-post-id');
+            
+        }
         createPostButton.addEventListener("click", function () {
             createPostPopup.style.display = "block";
+            profilePicEditPopup.style.display = "none";
         })
         popupCloseButton.addEventListener("click", function () {
             createPostPopup.style.display = "none";
@@ -135,25 +174,47 @@
             uploadButton.style.display = 'block';
         })
         fileInput.addEventListener('change', (event) => {
-        const selectedFile = event.target.files[0];
+            const selectedFile = event.target.files[0];
 
-        if (selectedFile && selectedFile.type.startsWith('image/')) {
-            const reader = new FileReader();
+            if (selectedFile && selectedFile.type.startsWith('image/')) {
+                const reader = new FileReader();
 
-            reader.onload = function (e) {
-            imageDisplay.src = e.target.result;
-            imageDisplay.style.display = 'block';
-            imageClearButton.style.display = 'block';
-            uploadButton.style.display = 'none';
-            };
+                reader.onload = function (e) {
+                imageDisplay.src = e.target.result;
+                imageDisplay.style.display = 'block';
+                imageClearButton.style.display = 'block';
+                uploadButton.style.display = 'none';
+                };
 
-            reader.readAsDataURL(selectedFile);
-        } else {
-            imageDisplay.style.display = 'none';
-            imageClearButton.style.display = 'none';
-            uploadButton.style.display = 'block';
-        }
+                reader.readAsDataURL(selectedFile);
+            } else {
+                imageDisplay.style.display = 'none';
+                imageClearButton.style.display = 'none';
+                uploadButton.style.display = 'flex';
+            }
         });
+        {% comment %} uploadProfilePicfileInput.addEventListener('change', (event) => {
+            const selectedFile = event.target.files[0];
+
+            if (selectedFile && selectedFile.type.startsWith('image/')) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                editProfileImageDisplay.src = e.target.result;
+                editProfileImageDisplay.style.display = 'block';
+                deleteProfilePicButton.style.display = 'block';
+                uploadProfilePic.style.display = 'none';
+                saveProfilePic.style.display = 'flex';
+                };
+
+                reader.readAsDataURL(selectedFile);
+            } else {
+                editProfileImageDisplay.style.display = 'none';
+                deleteProfilePicButton.style.display = 'none';
+                uploadProfilePic.style.display = 'block';
+                saveProfilePic.style.display = 'none';
+            }
+        }); {% endcomment %}
 
     </script>
 {% endblock main_content %}

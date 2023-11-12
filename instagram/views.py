@@ -6,7 +6,7 @@ from users.models import UserAccount
 from django.contrib import messages
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 
-@login_required
+@login_required(login_url='/user/login')
 def home(request):
     users = UserAccount.objects.exclude(user_id=request.user.id)
     context = {

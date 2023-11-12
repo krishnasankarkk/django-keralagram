@@ -68,6 +68,7 @@ def profile(request):
     context = {
         "account_details":account,
         "posts":posts,
+        "posts_count":posts.count(),
         "followers":followers,
         "following":following,
     }
@@ -125,3 +126,10 @@ def unfollow_user(request, user_id):
         return HttpResponseRedirect(previous_url)
     else:
         return JsonResponse({'status': 'fail'}) 
+
+def edit_fullname(request, fullname):
+    user = UserAccount.objects.get(user_id=request.user.id)
+    user.full_name = fullname
+    user.save()
+    previous_url = request.META.get('HTTP_REFERER', None)
+    return HttpResponseRedirect(previous_url) 

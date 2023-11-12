@@ -55,3 +55,10 @@ img{
     padding: 10px;
     resize: none;
 }
+#post-detail-popup {
+    height: 50vh;
+    width: 50vw;
+    background-color: rgb(0, 0, 0);
+    position: absolute;
+    z-index: 1;
+}

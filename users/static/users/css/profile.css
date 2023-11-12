@@ -24,6 +24,7 @@
     /* justify-content: center; */
     border: 1px dashed rgb(0, 0, 0);
     border-radius: 20px;
+    cursor: pointer;
 }
 .profile-pic img {
     width: 90%;
@@ -154,6 +155,8 @@
 }
 #full-name-input-section span {
     color: aqua;
+    cursor: pointer;
+    font-size: larger;
 }
 #full-name-input-section input {
     font-family: inherit;
@@ -164,7 +167,70 @@
 ::-webkit-scrollbar {
     width: 0;
 }
-
+#profile-pic-edit-popup {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.644);
+    height: auto;
+    width: 500px;
+    border-radius: 20px;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed black;
+    z-index: 1;
+    cursor: default;
+}
+#close-profile-pic-edit-popup{
+    background-color: rgb(204, 204, 204);
+    padding: 5px;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform .2s;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+#close-profile-pic-edit-popup:hover {
+    transform: scale(1.5);
+    background-color: rgb(255, 87, 87);
+}
+#upload-profile-pic {
+    background-color: rgb(204, 204, 204);
+    padding: 10px;
+    border-radius: 20px;
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+#upload-profile-pic:hover {
+    background-color: aqua;
+    cursor: pointer;
+}
+#save-profile-pic {
+    background-color: rgb(204, 204, 204);
+    padding: 10px;
+    border-radius: 20px;
+    width: 60%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+#save-profile-pic:hover {
+    background-color: aqua;
+    cursor: pointer;
+}
 .create-post-popup {
     display: none;
     position: fixed;
@@ -225,9 +291,9 @@
     color: rgb(255, 84, 84);
 }
 #close-button {
-    background-color: rgb(255, 255, 255);
-    /* padding: 5px; */
-    border-radius: 50px;
+    background-color: rgb(201, 201, 201);
+    padding: 5px;
+    border-radius: 50%;
     width: 20px;
     height: 20px;
     font-weight: bold;
@@ -242,7 +308,7 @@
 }
 #close-button:hover {
     transform: scale(1.5);
-    color: rgb(255, 44, 44);
+    background-color: rgb(255, 87, 87);
 }
 .caption {
     border: 1px dashed black;
@@ -267,4 +333,48 @@
     cursor: pointer;
     align-items: center;
     gap: 10px;
+}
+#upload-profile-pic-input {
+    display: none;
+}
+
+.edit-profile-image-section {
+    width: auto;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.edit-profile-image-section img {
+    display: none;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    contain: content;
+    position: relative;
+    transition: filter .2s;
+}
+.edit-profile-image:hover {
+    filter: blur(2px);
+    cursor: pointer;
+}
+#delete-profile-pic {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    transition: transform .2s;
+    display: none;
+    background-color: rgba(211, 211, 211, 0);
+    border-radius: 50%;
+    padding: 5px;
+    border: 1px dashed black;
+}
+#delete-profile-pic:hover + #edit-profile-image {
+    filter: blur(2px);
+}
+#delete-profile-pic:hover{
+    transform: scale(1.5);
 }

@@ -17,6 +17,7 @@ def create_post(request):
         post = Post()
         post.user = user
         post.post_img = request.FILES['uploaded_image']
+        post.caption = request.POST['caption']
         post.like = 0
         post.save()
         previous_url = request.META.get('HTTP_REFERER', None)

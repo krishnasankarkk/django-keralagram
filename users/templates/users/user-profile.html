@@ -15,7 +15,6 @@
                             <img class="profile-pic" src="{% static '/images/profile.png' %}" alt="profile pic">
                         {% endif %}
                         <div class="full-name-section">
-                            <span>{{account_details.user.username}}</span>
                             <h1>{{account_details.full_name}}</h1>
                             <a href="{% url 'users:follow' user_id=account_details.user_id %}">
                                 <span id="follow-button" class='follow-button'>

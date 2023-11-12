@@ -2,25 +2,23 @@
 {% block header %}
     <div class='header-section'>
         {% if user.is_authenticated %}
-        <a href="{% url 'users:profile' %}"><span id="user-name">Hi, {{user.username}}</span></a>
+        <a title="View profile" href="{% url 'users:profile' %}"><span id="user-name">Hi, {{user.username}}</span></a>
+        <a href="{% url 'users:logout' %}">
+            <span title="Logout" class="material-symbols-outlined">
+                logout
+            </span>
+        </a>
         {% endif %}
-        <a href="{% url 'home' %}">
+        <a title="Home" href="{% url 'home' %}">
             <span class="material-symbols-outlined">
                 home_app_logo
             </span>
         </a>
         <div class="header-icons">
-            {% if user.id %}
-                <a href="{% url 'users:logout' %}">
-                    <span class="material-symbols-outlined">
-                        logout
-                    </span>
-                </a>
-            {% endif %}
-            <span class="material-symbols-outlined">
+            <span title="Notifications" class="material-symbols-outlined">
                 notifications
             </span>
-            <span class="material-symbols-outlined">
+            <span title="Options" class="material-symbols-outlined">
                 menu
             </span>
         </div>

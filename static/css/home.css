@@ -21,11 +21,13 @@
     flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
+    font-weight: bold;
 }
 #profile-pic{
     width: 10vw;
     height: 10vw;
-    border-radius: 20px;
+    border-radius: 50%;
 }
 .loading-spinner {
     display: inline;
