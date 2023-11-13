@@ -16,7 +16,7 @@ def create_post(request):
             raise Http404("User doesnt exists!")
         post = Post()
         post.user = user
-        post.post_img = request.FILES['uploaded_image']
+        # post.post_img = request.FILES['uploaded_image']
         post.caption = request.POST['caption']
         post.like = 0
         post.save()

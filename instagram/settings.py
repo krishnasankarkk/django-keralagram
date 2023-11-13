@@ -12,16 +12,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
-import cloudinary
-          
-cloudinary.config( 
-  cloud_name = "dk4my1xob", 
-  api_key = "716136354125312", 
-  api_secret = "NKTZUv7FrLZYN95-Tby3whFPQdk" ,
-  secure = True
-)
-
-CLOUDINARY_URL='cloudinary://716136354125312:NKTZUv7FrLZYN95-Tby3whFPQdk@dk4my1xob'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -56,9 +46,7 @@ INSTALLED_APPS = [
     'messenger',
     'followers',
     'explore',
-    
-    'cloudinary',
-]
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

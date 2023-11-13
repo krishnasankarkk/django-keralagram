@@ -4,28 +4,12 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout as logout_user
 from django.contrib import messages
-import cloudinary, cloudinary.uploader as cloud_uploader, cloudinary.api as cloud_api
 
 from .forms import LoginForm, RegistrationForm
 from .models import UserAccount
 from posts.models import Post
 
 def login_view(request):
-    # if request.method == "POST":
-    #    form = LoginForm(request, data=request.POST)
-       
-    #    if form.is_valid():
-    #        username = request.POST["username"]
-    #        password = request.POST["password"]
-    #        user = authenticate(request, username=username, password=password)
-    #        if user is not None:
-    #            login(request, user)
-    #        else:
-    #            form.add_error(None, 'Invalid username or passwprd!')
-    # else:
-    #     form = LoginForm()
-        
-    # context = {"form":form}
     return render(request, "users/login.html")
 
 def signup(request):

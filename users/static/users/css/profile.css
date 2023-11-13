@@ -122,22 +122,29 @@
 }
 .posts {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     padding: 10px;
     flex-wrap: wrap;
-    overflow-y: scroll;
+    overflow-x: scroll;
 }
 .post {
-    width: 20vw;
-    height: 25vh;
+    width: auto;
+    height: auto;
     cursor: pointer;
     object-fit: cover;
     margin: 1vw;
+    padding: 1vh;
+    border: 1px dashed black;
     border-radius: 10px;
+    background-color: rgb(255, 255, 255);
     transition: transform .2s;
 }
+#cant-post{
+    color: red;
+    display: none;
+}
 .post:hover {
-    transform: scale(1.1);
+    transform: scale(1.02);
 }
 #fullname {
     display: flex;
