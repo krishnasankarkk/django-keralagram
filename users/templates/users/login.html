@@ -6,7 +6,7 @@
 {% block header %}
 {% endblock header %}
 {% block main_content %}
-    <link rel="stylesheet" href="{% static '/users/css/login.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/users/css/login.css' %}">
     {% if messages %}
         {% for message in messages %}
             <div class="alert alert-{{message.tags}}">

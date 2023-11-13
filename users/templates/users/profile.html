@@ -119,7 +119,8 @@
                             {% comment %} <img class="post" src="/media/{{post.post_img}}" alt="post" data-post-id="{{post.id}}" onclick=handleImageClick(this)> {% endcomment %}
                             <div class="post">
                                 <h2>{{post.caption}}</h2>
-                                <span></span>
+                                <i class="fa fa-upload" aria-hidden="true"></i>
+                                <span style="font-weight:bold;">{{post.created_at}}</span>
                             </div>
                         {% endfor %}
                         <div id="post-detail-popup">

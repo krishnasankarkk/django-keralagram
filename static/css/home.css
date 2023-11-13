@@ -1,16 +1,18 @@
-.main{
+.users-section {
     background-color: rgb(255, 255, 255);
-    height: inherit;
-    width: inherit;
+    height: auto;
+    width: auto;
+    border: 1px dashed black;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 20px;
+    margin: 10px;
 }
 .users {
     display: flex;
     flex-direction: row;
     overflow-x: scroll;
-    padding: 20px;
-    border: 1px dashed black;
-    border-radius: 20px;
-    margin: 10px;
 }
 .user {
     border: 1px dashed black;
@@ -24,6 +26,22 @@
     align-items: center;
     justify-content: center;
     font-weight: bold;
+}
+.posts-section {
+    background-color: rgb(255, 255, 255);
+    height: auto;
+    width: auto;
+    border: 1px dashed black;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 20px;
+    margin: 10px;
+}
+.post {
+    border: 1px dashed black;
+    padding: 10px;
+    border-radius: 20px;
 }
 #profile-pic{
     width: 10vw;

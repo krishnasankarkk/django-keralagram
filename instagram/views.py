@@ -2,15 +2,23 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as login_user
-from users.models import UserAccount
 from django.contrib import messages
 from django.http import HttpResponse, Http404, HttpResponseRedirect
+
+from users.models import UserAccount
+from posts.models import Post
 
 @login_required(login_url='/user/login')
 def home(request):
     users = UserAccount.objects.exclude(user_id=request.user.id)
+    user = UserAccount.objects.get(user_id=request.user.id)
+    following = user.following
+    following_posts = Post.objects.filter(user__id__in=users)
+    posts = Post.objects.all()
     context = {
         "users":users,
+        "all_posts":posts,
+        "following_posts":following_posts,
     }
     return render(request, "home.html", context)
 

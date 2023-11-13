@@ -14,6 +14,8 @@ class UserAccount(models.Model):
     followers = ArrayField(models.IntegerField(blank=True),blank=True,null=True,default=list)
     following = ArrayField(models.IntegerField(blank=True),blank=True,null=True,default=list)
     posts = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+
     
     def __str__(self) -> str:
         return self.user.username

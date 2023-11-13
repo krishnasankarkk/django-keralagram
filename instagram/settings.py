@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-lv%9ja!e7+z#alt1sdd#12*zp-z=!4a+43apx=-01df25ef8hg'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['keralagram.vercel.app', '127.0.0.1','.vercel.app', '.now.sh ']
 

@@ -4,8 +4,9 @@
     <title>Home</title>
 {% endblock title %}
 {% block main_content %}
-        <link rel="stylesheet" href="{% static '/css/home.css' %}">
-        <div class="main">
+        <link rel="stylesheet" type="text/css" href="{% static '/css/home.css' %}">
+        <div class="users-section">
+            <h1>Users</h1>
             <div class="users">
                 {% if users %}
                     {% for user in users %}
@@ -20,6 +21,38 @@
                         </div>
                     </a>
                     {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="posts-section">
+            <h1>Following posts</h1>
+            <div class="posts">
+                {% if following_posts %}
+                    {% for post in following_posts %}
+                        <div class="post">
+                            <h2>{{post.user.username}}</h2>
+                            <h3>{{post.caption}}</h3>
+                            <h4>{{post.created_at}}</h4>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <h2>No posts</h2>
+                {% endif %}
+            </div>
+        </div>
+        <div class="posts-section">
+            <h1>All posts</h1>
+            <div class="posts">
+                {% if all_posts %}
+                    {% for post in all_posts %}
+                        <div class="post">
+                            <h2>{{post.user.username}}</h2>
+                            <h3>{{post.caption}}</h3>
+                            <h4>{{post.created_at}}</h4>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <h2>No posts</h2>
                 {% endif %}
             </div>
         </div>
