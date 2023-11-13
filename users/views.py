@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout as logout_user
 from django.contrib import messages
+import cloudinary, cloudinary.uploader as cloud_uploader, cloudinary.api as cloud_api
 
 from .forms import LoginForm, RegistrationForm
 from .models import UserAccount
