@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import ArrayField
-from cloudinary.models import CloudinaryField
+# from cloudinary.models import CloudinaryField
 
 # Create your models here.
 class UserAccount(models.Model):
