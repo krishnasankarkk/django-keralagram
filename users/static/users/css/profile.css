@@ -140,6 +140,13 @@
     transition: transform .2s;
     position: relative;
 }
+.joined {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: aqua;
+    border-radius: 20px;
+}
 .delete-post {
     color: rgb(255, 83, 83);
     position: absolute;

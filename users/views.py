@@ -53,7 +53,7 @@ def profile(request):
     account = UserAccount.objects.get(user_id=login_user)
     followers = len(account.followers) if account.followers is not None else 0
     following = len(account.following) if account.following is not None else 0
-    posts = Post.objects.filter(user_id=login_user)
+    posts = Post.objects.filter(user_id=login_user).order_by('-created_at')
     context = {
         "account_details":account,
         "posts":posts,
@@ -71,7 +71,7 @@ def user_profile(request, user_id):
         followed = True
     else:
         followed = False
-    posts = Post.objects.filter(user_id=user_id)
+    posts = Post.objects.filter(user_id=user_id).order_by('-created_at')
     context = {
         "account_details":user_account,
         "posts":posts,

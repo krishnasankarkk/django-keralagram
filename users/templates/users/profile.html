@@ -114,6 +114,9 @@
                     </div>
                 </div>
                 <div class="posts">
+                    <div class="joined">
+                        <h3>Joined on {{user.date_joined}}</h3>
+                    </div>
                     {% if posts %}
                         {% for post in posts %}
                             {% comment %} <img class="post" src="/media/{{post.post_img}}" alt="post" data-post-id="{{post.id}}" onclick=handleImageClick(this)> {% endcomment %}

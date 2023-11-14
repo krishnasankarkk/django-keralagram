@@ -55,9 +55,17 @@
             </div>
             <div class='profile-post-section'>
                 <div class="posts">
+                    <div class="joined">
+                        <h3>Joined on {{user.date_joined}}</h3>
+                    </div>
                     {% if posts %}
                         {% for post in posts %}
-                            <img class="post" src="/media/{{post.post_img}}" alt="post">
+                            {% comment %} <img class="post" src="/media/{{post.post_img}}" alt="post"> {% endcomment %}
+                            <div class="post">
+                                <h2>{{post.caption}}</h2>
+                                <i class="fa fa-upload" aria-hidden="true"></i>
+                                <span style="font-weight:bold;">{{post.created_at}}</span>
+                            </div>
                         {% endfor %}
                     {% endif %}
                 </div>
