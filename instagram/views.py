@@ -13,8 +13,8 @@ def home(request):
     users = UserAccount.objects.exclude(user_id=request.user.id)
     user = UserAccount.objects.get(user_id=request.user.id)
     following = user.following
-    following_posts = Post.objects.filter(user__id__in=users)
-    posts = Post.objects.all()
+    following_posts = Post.objects.filter(user__id__in=users).order_by('-created_at')
+    posts = Post.objects.all().order_by('-created_at')
     context = {
         "users":users,
         "all_posts":posts,
