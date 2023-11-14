@@ -15,6 +15,11 @@ def home(request):
     following = user.following
     following_posts = Post.objects.filter(user__id__in=following).order_by('-created_at')
     posts = Post.objects.all().order_by('-created_at')
+    # for obj in posts:
+    #     print(f"Object ID: {obj.id}")
+    #     for field, value in obj.__dict__.items():
+    #         print(f"    {field}: {value}")
+    #     print("\n")
     context = {
         "users":users,
         "all_posts":posts,

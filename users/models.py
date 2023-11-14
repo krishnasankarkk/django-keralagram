@@ -5,7 +5,7 @@ from django.contrib.postgres.fields import ArrayField
 
 # Create your models here.
 class UserAccount(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=50, blank=True,null=True)
     bio = models.TextField(blank=True,null=True)
     phone = models.CharField(max_length=10,blank=True,null=True)
