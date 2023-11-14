@@ -23,3 +23,14 @@ def create_post(request):
         previous_url = request.META.get('HTTP_REFERER', None)
 
         return HttpResponseRedirect(previous_url)
+    
+def delete_post(request, post_id):
+    try:
+        user = User.objects.get(id=request.user.id)
+    except user.DoesNotExist:
+       raise Http404("User doesnt exists!")
+    post = Post.objects.get(id=post_id)
+    post.delete()
+    previous_url = request.META.get('HTTP_REFERER', None)
+
+    return HttpResponseRedirect(previous_url)

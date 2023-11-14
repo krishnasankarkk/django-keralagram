@@ -138,6 +138,18 @@
     border-radius: 10px;
     background-color: rgb(255, 255, 255);
     transition: transform .2s;
+    position: relative;
+}
+.delete-post {
+    color: rgb(255, 83, 83);
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    transition: transform .2s;
+}
+.delete-post:hover {
+    color: red;
+    transform:scale(1.5);
 }
 #cant-post{
     color: red;

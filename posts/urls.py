@@ -4,5 +4,5 @@ from . import views
 app_name = "posts"
 urlpatterns = [
     path('create-post', views.create_post, name='create-post'),
-    # path('save-post', views.save_post, name='save-post'),
+    path('delete-post/<int:post_id>', views.delete_post, name='delete-post'),
 ]

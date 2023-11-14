@@ -46,9 +46,16 @@
                 {% if all_posts %}
                     {% for post in all_posts %}
                         <div class="post">
-                            <h2>{{post.user.username}}</h2>
+                            {% if post.user.id == user.id %}
+                                <h2>You</h2>
+                            {% else %}
+                                <h2>{{post.user.username}}</h2>
+                            {% endif %}
                             <h3>{{post.caption}}</h3>
-                            <h4>{{post.created_at}}</h4>
+                            <div style="display:flex;flex-direction:row;align-items:center;gap:10px;">
+                                <i class="fa fa-upload" aria-hidden="true"></i>
+                                <h4>{{post.created_at}}</h4>
+                            </div>
                         </div>
                     {% endfor %}
                 {% else %}

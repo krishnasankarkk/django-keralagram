@@ -121,6 +121,9 @@
                                 <h2>{{post.caption}}</h2>
                                 <i class="fa fa-upload" aria-hidden="true"></i>
                                 <span style="font-weight:bold;">{{post.created_at}}</span>
+                                <span class="delete-post material-symbols-outlined" data-post-id="{{post.id}}" onclick="deletePost(this)">
+                                    delete
+                                </span>
                             </div>
                         {% endfor %}
                         <div id="post-detail-popup">
@@ -194,6 +197,23 @@
         function handleImageClick(img){
             var postId = img.getAttribute('data-post-id');
             
+        }
+        function deletePost(post){
+            var postId = post.getAttribute('data-post-id');
+            $.ajax({
+                url: '/posts/delete-post/' + postId,
+                method: 'GET',
+                success: function(response) {
+                  // Handle the response
+                  this.posts = this.posts.filter(function(post) {
+                    return post.id != postId;
+                });
+                },
+                error: function(xhr, status, error) {
+                  // Handle errors
+                  console.error(error);
+                }
+              });          
         }
         createPostButton.addEventListener("click", function () {
             createPostPopup.style.display = "block";
