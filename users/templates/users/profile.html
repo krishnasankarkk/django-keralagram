@@ -5,6 +5,11 @@
 {% endblock title %}
 {% block main_content %}
     <link rel="stylesheet" href="{% static '/users/css/profile.css' %}">
+    {% for message in messages %}
+            <div class="alert alert-{{message.tags}}">
+                <strong>{{message}}</strong>&nbsp;
+            </div>
+        {% endfor %}
     <div class='profile-section'>
         
         <div class='profile-content'>
@@ -208,9 +213,7 @@
                 method: 'GET',
                 success: function(response) {
                   // Handle the response
-                  this.posts = this.posts.filter(function(post) {
-                    return post.id != postId;
-                });
+                  location.reload();
                 },
                 error: function(xhr, status, error) {
                   // Handle errors
