@@ -14,6 +14,14 @@ class UserAccount(models.Model):
     followers = ArrayField(models.IntegerField(blank=True),blank=True,null=True,default=list)
     following = ArrayField(models.IntegerField(blank=True),blank=True,null=True,default=list)
     posts = models.IntegerField(default=0)
+    GENDER_CHOICES = [
+        ('M', 'Male'),
+        ('F', 'Female'),
+        ('O', 'Other'),
+    ]
+
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default='M', blank=True,null=True)
+
     created_at = models.DateTimeField(auto_now_add=True)
 
     

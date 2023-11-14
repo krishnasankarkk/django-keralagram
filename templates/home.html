@@ -30,11 +30,17 @@
                 {% if following_posts %}
                     {% for post in following_posts %}
                         <div class="post">
-                            <h2>{{post.user.username}}</h2>
-                            <h3>{{post.caption}}</h3>
-                            <div style="display:flex;flex-direction:row;align-items:center;gap:10px;">
-                                <i class="fa fa-upload" aria-hidden="true"></i>
-                                <h4>{{post.created_at}}</h4>
+                            <div class="post-user">
+                                <img src="{% static 'images/avatars/avatar.png' %}" alt="Avatar">
+                                <h2>{{post.user.username}}</h2>
+                            </div>
+                            <div class="post-content">
+                                <h3>{{post.caption}}</h3>
+                                <div style="display:flex;flex-direction:row;align-items:center;gap:10px;">
+                                    <i class="fa fa-upload" aria-hidden="true"></i>
+                                    <h4>{{post.created_at}}</h4>
+                                </div>
+                                <div class="corner"></div>
                             </div>
                         </div>
                     {% endfor %}
@@ -48,18 +54,24 @@
             <div class="posts">
                 {% if all_posts %}
                     {% for post in all_posts %}
-                        <div class="post">
+                    <div class="post">
+                        <div class="post-user">
+                            <img src="{% static 'images/avatars/avatar.png' %}" alt="Avatar">
                             {% if post.user.id == user.id %}
                                 <h2>You</h2>
                             {% else %}
                                 <h2>{{post.user.username}}</h2>
                             {% endif %}
+                        </div>
+                        <div class="post-content">
                             <h3>{{post.caption}}</h3>
                             <div style="display:flex;flex-direction:row;align-items:center;gap:10px;">
                                 <i class="fa fa-upload" aria-hidden="true"></i>
                                 <h4>{{post.created_at}}</h4>
                             </div>
+                            <div class="corner"></div>
                         </div>
+                    </div>
                     {% endfor %}
                 {% else %}
                     <h2>No posts</h2>

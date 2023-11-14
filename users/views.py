@@ -14,7 +14,14 @@ def login_view(request):
 
 def signup(request):
     form = RegistrationForm()
-    context = {"form":form}
+    context = {
+        "form":form,
+        "gender_choices":{
+            "M": "Male",
+            "F": "Female",
+            "O": "Other",
+        }
+    }
     return render(request, "users/signup.html", context)
 def register(request):
     if request.method == 'POST':
@@ -23,6 +30,7 @@ def register(request):
         fullname = request.POST.get('fullname')
         password = request.POST.get('password')
         phone = request.POST.get('phone')
+        gender = request.POST.get('gender')
         try:
             user = User.objects.get(username=username)
             messages.warning(request,"User already exists!")
@@ -37,6 +45,7 @@ def register(request):
             new_user_account.user = new_user
             new_user_account.full_name = fullname
             new_user_account.phone = phone
+            new_user_account.gender = gender
             new_user_account.save()
             messages.success(request,"User successfully created :)")
             return redirect("users:login")
