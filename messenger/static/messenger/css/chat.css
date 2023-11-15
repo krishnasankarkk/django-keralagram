@@ -37,7 +37,7 @@ img {
     border-radius: 20px;
 }
 .messages-sent{
-    background-color: rgb(102, 237, 237);
+    background-color: #00DDFF;
     border: 1px dashed rgb(0, 0, 0);
     border-radius: 20px;
     padding: 10px;
@@ -48,7 +48,7 @@ img {
     font-weight: bold;
 }
 .messages-recieve{
-    background-color: rgb(0, 255, 150);
+    background-color: #00FFA1;
     border: 1px dashed rgb(0, 0, 0);
     border-radius: 20px;
     padding: 10px;

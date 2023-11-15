@@ -24,13 +24,15 @@
                         <div class="message">
                             {% if message.from_user == user %}
                                 <div class="messages-sent">
-                                    <h2>You</h2>
-                                    <span>{{message.message}}</span>
+                                    <h2 style="color:#00724c;">You</h2>
+                                    <h3>{{message.message}}</h3>
+                                    <span style="color:rgb(55, 55, 55);">{{message.created_at}}</span>
                                 </div>
                             {% else %}
                                 <div class="messages-recieve">
-                                    <h2>{{message.from_user}}</h2>
-                                    <span>{{message.message}}</span>
+                                    <h2 style="color:#0067b5;">{{message.from_user}}</h2>
+                                    <h3>{{message.message}}</h3>
+                                    <span style="color:rgb(55, 55, 55);">{{message.created_at}}</span>
                                 </div>
                             {% endif %}
                         </div>

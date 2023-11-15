@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
+from django.db.models import Q
+
 
 from users.models import UserAccount 
 from .models import Message 
@@ -8,7 +10,7 @@ from .models import Message
 # Create your views here.
 def chat_user(request, user_id):
     user = UserAccount.objects.get(user_id=user_id)
-    messages = Message.objects.all().order_by('created_at')
+    messages = Message.objects.filter(Q(from_user=request.user.id) & Q(to_user=user_id) | Q(from_user=user_id) & Q(to_user=request.user.id)).order_by('created_at')
 
     context = {
         "chat_user": user,
