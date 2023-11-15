@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'messenger',
     'followers',
     'explore',
-    'frontend',
     ]
 
 MIDDLEWARE = [
