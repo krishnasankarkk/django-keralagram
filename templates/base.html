@@ -13,8 +13,10 @@
     <link rel="icon" type="image/x-icon" href="{% static '/images/favicon.ico' %}">
     <link rel="stylesheet" type="text/css" href="{% static '/css/base.css' %}">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    {% comment %} <script type="module" src="{% static 'js/main.5c557d0d.js' %}"></script> {% endcomment %}
 </head>
 <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
     {% block header %}
         {% include 'header.html' %}
     {% endblock header %}  

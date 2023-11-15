@@ -26,6 +26,29 @@
     border-radius: 20px;
     cursor: pointer;
 }
+.full-name-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+.chat-button {
+    height: auto;
+    width: 100%;
+    background-color: aqua;
+    border-radius: 20px;
+    padding: 10px;
+    margin-bottom: 2vh;
+    margin-left: 2vh;
+    font-weight: bold;
+    font-size: large;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform .2s;
+}
 #profile-pic{
     width: 200px;
     height: 200px;

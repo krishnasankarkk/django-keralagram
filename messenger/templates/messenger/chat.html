@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Messenger</title>    
+{% endblock title %}
+
+{% block main_content %}
+    <link rel="stylesheet" href="{% static 'messenger/css/chat.css' %}">
+    <div class="chat-section">
+        {% if chat_user %}
+            {% if chat_user.user.useraccount.gender == 'M' %}
+                <img src="{% static 'images/avatars/avatar.png' %}" alt="avatar">
+            {% else %}
+                <img src="{% static 'images/avatars/avatar-girl.png' %}" alt="avatar">
+            {% endif %}
+            <h1>{{chat_user.user.username}}</h1>
+            <span class="view-profile">
+                View Profile
+            </span>
+            <div class="messages-section">
+                {% if all_messages %}
+                    {% for message in all_messages %}
+                        <div class="message">
+                            {% if message.from_user == user %}
+                                <div class="messages-sent">
+                                    <h2>You</h2>
+                                    <span>{{message.message}}</span>
+                                </div>
+                            {% else %}
+                                <div class="messages-recieve">
+                                    <h2>{{message.from_user}}</h2>
+                                    <span>{{message.message}}</span>
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <form class="sent-message" action="{% url 'messenger:sent-message' user_id=chat_user.user_id %}" method="POST">
+                    {% csrf_token %}
+                    <input type="text" name="message-input" id="message-input" placeholder="Type here . . ." value="">
+                    <img id="send-message-button" src="{% static 'messenger/images/message.png' %}" alt="sent" title="Send" onclick="submit()">
+                </form>
+            </div>
+        {% endif %}
+            
+    </div>
+    <script>
+        const messageInput = document.getElementById("message-input");
+        const sendMessageButton = document.getElementById("send-message-button");
+        
+        
+        window.scrollTo(0, document.body.scrollHeight);
+    </script>
+{% endblock main_content %}
+    
+    

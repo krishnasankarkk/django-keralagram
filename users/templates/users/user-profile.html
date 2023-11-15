@@ -15,23 +15,33 @@
                             <img id="profile-pic" src="{% static '/images/profile.png' %}" alt="profile pic">
                         {% comment %} {% endif %} {% endcomment %}
                         <div class="full-name-section">
-                            <h1>{{account_details.full_name}}</h1>
-                            <a href="{% url 'users:follow' user_id=account_details.user_id %}">
-                                <span id="follow-button" class='follow-button'>
-                                    Follow
-                                    <span class="material-symbols-outlined">
-                                        handshake
+                            <h1 style="display:flex;align-items:center;justify-content:center;">{{account_details.full_name}}</h1>
+                            <div class="full-name-buttons">
+                                <a href="{% url 'users:follow' user_id=account_details.user_id %}">
+                                    <span id="follow-button" class='follow-button'>
+                                        Follow
+                                        <span class="material-symbols-outlined">
+                                            handshake
+                                        </span>
                                     </span>
-                                </span>
-                            </a>
-                            <a href="{% url 'users:unfollow' user_id=account_details.user_id %}">
-                                <span id="un-follow-button" class='follow-button'>
-                                    Unfollow
-                                    <span class="material-symbols-outlined">
-                                        cancel
+                                </a>
+                                <a href="{% url 'users:unfollow' user_id=account_details.user_id %}">
+                                    <span id="un-follow-button" class='follow-button'>
+                                        Unfollow
+                                        <span class="material-symbols-outlined">
+                                            cancel
+                                        </span>
                                     </span>
-                                </span>
-                            </a>
+                                </a>
+                                <a href="{% url 'messenger:chat' user_id=account_details.user_id %}">
+                                    <span id="chat-button" class='chat-button'>
+                                        Chat
+                                        <span class="material-symbols-outlined">
+                                            forum
+                                            </span>
+                                    </span>
+                                </a>
+                            </div>
                         </div>
                         <div class="followers-section">
                             <div class="post-count">

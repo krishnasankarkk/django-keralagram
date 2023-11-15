@@ -28,6 +28,7 @@ urlpatterns = [
     path('login/', login, name="login"),
     path('user/', include('users.urls'), name="users"),
     path('posts/', include('posts.urls'), name="posts"),
+    path('messenger/', include('messenger.urls'), name="messenger"),
 ] 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
