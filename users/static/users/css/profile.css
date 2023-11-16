@@ -17,30 +17,31 @@
 .profile-pic-section {
     width: 30vw;
     height: auto;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(50, 50, 50);
     display: flex;
     flex-direction: column;
     align-items: center;
     /* justify-content: center; */
-    border: 1px dashed rgb(0, 0, 0);
+    border: none;
     border-radius: 20px;
     cursor: pointer;
 }
 .full-name-buttons {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 10px;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 .chat-button {
     height: auto;
     width: 100%;
-    background-color: aqua;
+    background-color: rgb(100,100,100);
     border-radius: 20px;
     padding: 10px;
     margin-bottom: 2vh;
-    margin-left: 2vh;
+    /* margin-left: 2vh; */
     font-weight: bold;
     font-size: large;
     cursor: pointer;
@@ -66,33 +67,48 @@
     width: 69vw;
     margin-left: 1vw;
     height: auto;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(50,50,50);
     display: flex;
     flex-direction: column;
     /* align-items: center; */
     /* justify-content: center; */
-    border: 1px dashed rgb(0, 0, 0);
+    border: none;
     border-radius: 20px;
 }
 
 .followers-section{
     display: flex;
+    align-items: center;
+    justify-content: space-between;
     flex-direction: row;
-    border: 1px dashed black;
+    border: none;
     border-radius: 20px;
+    background-color: rgb(16, 16, 16);
+    color: rgb(180, 180, 180);
+    width: auto;
 }
 .post-count,.followers,.following{
     display: flex;
     flex-direction: column;
     margin: 10px;
     align-items: center;
-    border: 1px dashed black;
+    border: none;
     border-radius: 20px;
     padding: 10px;
     font-weight: 900;
 }
 .about-section {
     font-weight: 900;
+    background-color: rgb(16, 16, 16);
+    color: rgb(180, 180, 180);
+    margin: 10px;
+    padding: 10px;
+    border-radius: 20px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 .follow-button {
     height: auto;
@@ -111,10 +127,10 @@
 }
 #un-follow-button {
     display: none;
-    background-color: rgb(207, 99, 99);
+    background-color: rgb(187, 124, 124);
 }
 .follow-button:hover {
-    transform: scale(1.1);
+    /* transform: scale(1.1); */
 }
 .create-post-section {
     display: flex;
@@ -128,7 +144,8 @@
     border-radius: 10px;
     padding: 10px;
     font-weight: bold;
-    background-color: aqua;
+    background-color: rgb(180, 180, 180);
+    color: rgb(16, 16, 16);
     position: fixed;
     bottom: 0;
     right: 0;
@@ -140,7 +157,7 @@
 }
 .create-post-button i {
     margin-left: 10px;
-    border: 2px solid black;
+    /* border: 2px solid black; */
     padding: 2px;
     border-radius: 5px;
 }
@@ -158,9 +175,10 @@
     object-fit: cover;
     margin: 1vw;
     padding: 1vh;
-    border: 1px dashed black;
+    /* border: 1px dashed black; */
     border-radius: 10px;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(16, 16, 16);
+    color: rgb(180, 180, 180);
     transition: transform .2s;
     position: relative;
 }
@@ -168,7 +186,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: aqua;
+    background-color: rgb(20, 20, 20);
+    color: rgb(180, 180, 180);
     border-radius: 20px;
 }
 .delete-post {
@@ -196,6 +215,7 @@
     align-items: center ;
     justify-content: center;
     cursor: pointer;
+    color: rgb(180, 180, 180);
 }
 #fullname-input{
     margin: 10px;
@@ -238,7 +258,7 @@
     padding: 10px;
     align-items: center;
     justify-content: center;
-    border: 1px dashed black;
+    /* border: 1px dashed black; */
     z-index: 1;
     cursor: default;
 }
@@ -301,7 +321,7 @@
     padding: 10px;
     align-items: center;
     justify-content: center;
-    border: 1px dashed black;
+    /* border: 1px dashed black; */
     z-index: 1;
 }
 .create-post-popup input {
@@ -369,7 +389,7 @@
     background-color: rgb(255, 87, 87);
 }
 .caption {
-    border: 1px dashed black;
+    /* border: 1px dashed black; */
     border-radius: 10px;
     margin: 10px;
     height: auto;
@@ -428,7 +448,7 @@
     background-color: rgba(211, 211, 211, 0);
     border-radius: 50%;
     padding: 5px;
-    border: 1px dashed black;
+    /* border: 1px dashed black; */
 }
 #delete-profile-pic:hover + #edit-profile-image {
     filter: blur(2px);

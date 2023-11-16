@@ -1,8 +1,9 @@
 .users-section {
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
+    color: white;
     height: auto;
     width: auto;
-    border: 1px dashed black;
+    border: none;
     display: flex;
     flex-direction: column;
     padding: 20px;
@@ -13,11 +14,54 @@
     display: flex;
     flex-direction: row;
     overflow-x: scroll;
+    scroll-behavior: smooth;
     padding: 10px;
+    align-items: center;
+    position: relative;
+}
+.scroll-buttons {
+    /* position: sticky;
+    top: 50%;
+    z-index: 2; */
+}
+#scroll-users-left{
+    width: 0;
+    height: 0;
+    border-top: 25px solid transparent; /* Half of the desired height */
+    border-bottom: 25px solid transparent; /* Half of the desired height */
+    border-right: 40px solid #555555; /* Width of the button, adjust color as needed */
+    border-left: none;
+    margin: 10px;
+    cursor: pointer;
+    background-color: #00000000;
+    position: sticky;
+    left: 0;
+    z-index: 1;
+}
+#scroll-users-right {
+    width: 0;
+    height: 0;
+    border-top: 25px solid transparent; /* Half of the desired height */
+    border-bottom: 25px solid transparent; /* Half of the desired height */
+    border-right: none; /* Width of the button, adjust color as needed */
+    border-left: 40px solid #555555;
+    margin: 10px;
+    cursor: pointer;
+    background-color: #00000000;
+    position: sticky;
+    right: 0;
+    z-index: 1;
+}
+#scroll-users-right:hover{
+    border-left: 40px solid #909090;
+}
+#scroll-users-left:hover{
+    border-right: 40px solid #909090;
 }
 .user {
-    border: 1px dashed black;
-    border-radius: 20px;
+    border: none;
+    color: white;
+    border-radius: 30px;
     padding: 10px;
     margin-right: 10px;
     cursor: pointer;
@@ -28,16 +72,19 @@
     justify-content: center;
     font-weight: bold;
     transition: transform .2s;
+    background-color: rgb(16, 16, 16);
 }
 .user:hover {
     transform: scale(1.05);
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(50, 50, 50);
+    color: white;
 }
 .posts-section {
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
+    color: white;
     height: auto;
     width: auto;
-    border: 1px dashed black;
+    border: none;
     display: flex;
     flex-direction: column;
     padding: 20px;
@@ -45,7 +92,7 @@
     margin: 10px;
 }
 .post {
-    border: 1px dashed black;
+    border: none;
     padding: 10px;
     border-radius: 20px;
     margin: 10px;
@@ -69,35 +116,38 @@
     height: 150px;
     width: auto;
 }
+img {
+    border-radius: 50%;
+}
 .post-content {
-    background-color: rgb(0, 255, 100);
+    background-color: rgb(16, 16, 16);
     padding: 20px;
-    border: 1px dashed rgb(0, 0, 0);
-    border-radius: 0 50px 50px 50px;
+    border: none;
+    border-radius: 20px 50px 50px 50px;
     position: relative;
     height: 50%;
     width: auto;
     transition: transform .2s ease;
 }
 .post-content .corner {
-    background-color: rgb(0, 255, 100);
+    background-color: rgb(16, 16, 16);
     height: 20px;
     width: 50px;
     position: absolute;
-    top: -1px;
-    left: -50px;
-    border: 1px dashed black;
+    top: 20px;
+    left: -40px;
+    border: none;
     border-right: none;
     border-radius: 10% 0 0 100%;
     z-index: 0;
 }
-.post-content:hover {
+.post-content:hover{
     transform: scale(1.1) translateX(20px) translateY(10px);
-    background-color: rgb(0, 255, 100);
+    background-color: rgb(16, 16, 16);
 }
 #profile-pic{
-    width: 10vw;
-    height: 10vw;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
 }
 .loading-spinner {

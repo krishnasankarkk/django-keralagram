@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}
-    <title>Login • Keralagram</title>
+    <title>Login • Gotham City</title>
 {% endblock title %}
 {% block header %}
 {% endblock header %}
@@ -21,8 +21,8 @@
         <div class="login-section">
             <form class="login-form" action="/login/" method="POST">
                 {% csrf_token %}
-                <img id="logo" src="{% static 'images/logo.png' %}" alt="">
-                <h1>Keralagram</h1>
+                <img id="logo" src="{% static 'images/lgo.png' %}" alt="">
+                <h1>Gotham City</h1>
                 <input class="user-name" type="text" name="user_name" placeholder="Phone number/user name/email" required>
                 <div class="password-section">
                     <input id="password" class="password" type="password" name="password" placeholder="Password" required>
@@ -36,7 +36,7 @@
                 <input class="password" type="text" name="password" placeholder="Password"> {% endcomment %}
             </div>
             <div class="signup-section">
-                <span>Don't have an account?<a href="/user/signup/"><b style="cursor:pointer;color:rgb(0, 100, 200);font-size:larger;">Sign up</b></a></span>
+                <span>Don't have an account?<a href="/user/signup/"><b style="cursor:pointer;color:rgb(255, 53, 53);font-size:larger;">Sign up</b></a></span>
             </div>
         </div>
     </div>

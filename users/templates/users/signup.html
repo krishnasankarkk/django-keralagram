@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}
-    <title>Sign up • Keralagram</title>
+    <title>Sign up • Gotham City</title>
 {% endblock title %}
 {% block header %}
 {% endblock header %}    
@@ -17,8 +17,8 @@
         {% endif %}
         <div>
             <form id="form" class="signup-section" action="/user/register-user/" method="post">
-                <img id="logo" src="{% static 'images/logo.png' %}" alt="">
-                <h1>Keralagram</h1>
+                <img id="logo" src="{% static 'images/lgo.png' %}" alt="">
+                <h1>Gotham City</h1>
                 {% csrf_token %}
                 {% comment %} {{form.as_p}} {% endcomment %}
                 <input id="username" type="text" name="username" placeholder="User name">

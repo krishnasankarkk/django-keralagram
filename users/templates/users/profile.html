@@ -37,7 +37,11 @@
                             </span>
                         </form>
                     {% else %} {% endcomment %}
-                        <img id="profile-pic" src="{% static '/images/profile.png' %}" alt="profile pic">
+                    {% if account_details.gender == 'M' %}
+                        <img id="profile-pic" src="{% static '/images/avatars/batman2.jpg' %}" alt="profile pic">
+                    {% else %}
+                        <img id="profile-pic" src="{% static '/images/avatars/catwomen.jpg' %}" alt="profile pic">
+                    {% endif %}
                         <form id="profile-pic-edit-popup" action="{% url 'users:update-profilepic' %}" method="POST" enctype="multipart/form-data">
                             {% csrf_token %}
                             <span id="close-profile-pic-edit-popup"><i class="fa fa-times" aria-hidden="true"></i></span>

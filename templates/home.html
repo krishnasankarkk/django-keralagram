@@ -9,18 +9,20 @@
             <h1>Users</h1>
             <div class="users">
                 {% if users %}
+                    <button id="scroll-users-left" onmousedown="startScroll('left')" onmouseup="stopScroll()"></button>
                     {% for user in users %}
                     <a href="{% url 'users:user-profile' user_id=user.user_id %}">
                         <div class="user">
-                            {% comment %} {% if user.profile_pic %}
-                                <img id="profile-pic" src="/media/{{user.profile_pic}}" alt="profile pic">
-                            {% else %} {% endcomment %}
-                                <img id="profile-pic" src="{% static '/images/profile.png' %}" alt="profile pic">
-                            {% comment %} {% endif %} {% endcomment %}
+                            {% if user.gender == 'M' %}
+                                <img id="profile-pic" src="{% static '/images/avatars/batman2.jpg' %}" alt="profile pic">
+                            {% else %}
+                                <img id="profile-pic" src="{% static '/images/avatars/catwomen.jpg' %}" alt="profile pic">
+                            {% endif %}
                             <span>{{user.user.username}}</span>
                         </div>
                     </a>
                     {% endfor %}
+                    <button id="scroll-users-right" onmousedown="startScroll('right')" onmouseup="stopScroll()"></button>
                 {% endif %}
             </div>
         </div>
@@ -32,9 +34,9 @@
                         <div class="post">
                             <div class="post-user">
                                 {% if post.user.useraccount.gender == 'M' %}
-                                    <img src="{% static 'images/avatars/avatar.png' %}" alt="Avatar">
+                                    <img src="{% static 'images/avatars/batman2.jpg' %}" alt="Avatar">
                                 {% else %}
-                                    <img src="{% static 'images/avatars/avatar-girl.png' %}" alt="Avatar">
+                                    <img src="{% static 'images/avatars/catwomen.jpg' %}" alt="Avatar">
                                 {% endif %}
                                 <h2>{{post.user.username}}</h2>
                             </div>
@@ -61,9 +63,9 @@
                     <div class="post">
                         <div class="post-user">
                             {% if post.user.useraccount.gender == 'M' %}
-                                <img src="{% static 'images/avatars/avatar.png' %}" alt="Avatar">
+                                <img src="{% static 'images/avatars/batman2.jpg' %}" alt="Avatar">
                             {% else %}
-                                <img src="{% static 'images/avatars/avatar-girl.png' %}" alt="Avatar">
+                                <img src="{% static 'images/avatars/catwomen.jpg' %}" alt="Avatar">
                             {% endif %}
                             {% if post.user.id == user.id %}
                                 <h2>You</h2>
@@ -93,9 +95,31 @@
                 </div>
             {% endfor %}
         {% endif %}
-        {% comment %} <script>
-            document.getElementById("go-to-profile").addEventListener("click", function (){
-                window.location.href = "{% url 'profile' %}"
-            })
-        </script> {% endcomment %}
+        <script>
+            const users = document.querySelector('.users');
+            const scrollLeft = document.getElementById('scroll-users-left');
+            const scrollRight = document.getElementById('scroll-users-right');
+
+            function scrollUsers(direction){
+                if(direction=='left'){
+                    users.scrollLeft -= 60; 
+                    console.log(direction);
+                }else{
+                    console.log(direction);
+                    users.scrollLeft += 60;
+                }
+            }
+            function startScroll(direction) {
+                scrollUsers(direction);
+                scrollInterval = setInterval(() => {
+                  scrollUsers(direction);
+                }, 100); // Adjust speed here (100ms interval)
+              }
+              
+              function stopScroll() {
+                clearInterval(scrollInterval);
+              }
+              
+            {% comment %} scrollLeft.addEventListener("on") {% endcomment %}
+        </script>
 {% endblock main_content %}

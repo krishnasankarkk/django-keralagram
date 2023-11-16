@@ -6,9 +6,9 @@
        url('/static/fonts/Sofia-Regular.ttf') format("truetype");
 }
 body {
-    background: #ffffff;
+    background: #0e0e0e;
     font-family: 'Sofia-Regular', sans-serif;
-    color: rgb(0, 0, 0);
+    color: rgb(16, 16, 16);
     margin: 0;
     padding: 0;
     height: 100vh;
@@ -16,6 +16,7 @@ body {
     display: flex;
     flex-direction: column;
     position: relative;
+    overflow: auto;
 }
 
 .alert{
@@ -41,7 +42,7 @@ body {
 }
 
 .header-section {
-  background: aqua;
+  background: rgb(16, 200, 200);
   width: 100%;
   font-size: 1.5rem;
   display: flex;
@@ -49,7 +50,7 @@ body {
   justify-content: center;
   gap: 10px;
   position: relative;
-  box-shadow: 0 5px 50px rgba(212, 212, 212, 0.938);
+  /* box-shadow: 0 5px 50px rgba(0, 200, 255, 0.938); */
 }
 .header-section span{
   cursor: pointer;
@@ -86,4 +87,45 @@ body {
 a{
   text-decoration: none;
   color: black;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+  border-radius: 20px;
+  display: none;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #232323; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #3effdf; 
+  border-radius: 50px;
+  margin: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #3effdf; 
+  cursor: pointer;
+}
+#scrollTop {
+  position: fixed;
+  z-index: 2;
+  right: 50px;
+  bottom: 50px;
+  background-color: #3effdf;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  padding: 10px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-weight: bolder;
+  font-size: xx-large;
+  cursor: pointer;
 }

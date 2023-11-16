@@ -1,8 +1,8 @@
 .main {
     height: 100%;
     width: 100%;
-    background-image: url('/static/images/bg.jpg');
-    background-size: 100% 100%;
+    background-image: url('/static/images/gotham.jpg');
+    /* background-size: 100% 100%; */
     background-position: center;
     display: flex;
     flex-direction: column;
@@ -21,6 +21,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 10px;
     border-radius: 20px;
     padding: 10px;
