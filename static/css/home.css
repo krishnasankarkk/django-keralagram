@@ -19,11 +19,6 @@
     align-items: center;
     position: relative;
 }
-.scroll-buttons {
-    /* position: sticky;
-    top: 50%;
-    z-index: 2; */
-}
 #scroll-users-left{
     width: 0;
     height: 0;

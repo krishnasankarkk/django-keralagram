@@ -10,9 +10,9 @@
     <div class="chat-section">
         {% if chat_user %}
             {% if chat_user.user.useraccount.gender == 'M' %}
-                <img src="{% static 'images/avatars/avatar.png' %}" alt="avatar">
+                <img src="{% static 'images/avatars/batman2.jpg' %}" alt="avatar">
             {% else %}
-                <img src="{% static 'images/avatars/avatar-girl.png' %}" alt="avatar">
+                <img src="{% static 'images/avatars/catwomen.jpg' %}" alt="avatar">
             {% endif %}
             <h1>{{chat_user.user.username}}</h1>
             <span class="view-profile">
@@ -24,15 +24,32 @@
                         <div class="message">
                             {% if message.from_user == user %}
                                 <div class="messages-sent">
-                                    <h2 style="color:#00724c;">You</h2>
-                                    <h3>{{message.message}}</h3>
-                                    <span style="color:rgb(55, 55, 55);">{{message.created_at}}</span>
+                                    <div class="message-content-sent">
+                                        <h2>You</h2>
+                                        <h3>{{message.message}}</h3>
+                                        <span style="color:rgb(55, 55, 55);">{{message.created_at}}</span>
+                                        <div class="corner"></div>
+                                    </div>
+                                    {% if message.from_user.useraccount.gender == 'M' %}
+                                        <img id="chat-pic" src="{% static 'images/avatars/batman2.jpg' %}" alt="avatar">
+                                    {% else %}
+                                        <img id="chat-pic" src="{% static 'images/avatars/catwomen.jpg' %}" alt="avatar">
+                                    {% endif %}
                                 </div>
+                                
                             {% else %}
                                 <div class="messages-recieve">
-                                    <h2 style="color:#0067b5;">{{message.from_user}}</h2>
-                                    <h3>{{message.message}}</h3>
-                                    <span style="color:rgb(55, 55, 55);">{{message.created_at}}</span>
+                                    {% if message.from_user.useraccount.gender == 'M' %}
+                                        <img id="chat-pic" src="{% static 'images/avatars/batman2.jpg' %}" alt="avatar">
+                                    {% else %}
+                                        <img id="chat-pic" src="{% static 'images/avatars/catwomen.jpg' %}" alt="avatar">
+                                    {% endif %}
+                                    <div class="message-content-recieve">
+                                        <h2 style="color:#0067b5;">{{message.from_user}}</h2>
+                                        <h3>{{message.message}}</h3>
+                                        <span style="color:rgb(55, 55, 55);">{{message.created_at}}</span>
+                                        <div class="corner"></div>
+                                    </div>
                                 </div>
                             {% endif %}
                         </div>
@@ -40,8 +57,13 @@
                 {% endif %}
                 <form class="sent-message" action="{% url 'messenger:sent-message' user_id=chat_user.user_id %}" method="POST">
                     {% csrf_token %}
-                    <input type="text" name="message-input" id="message-input" placeholder="Type here . . ." value="">
-                    <img id="send-message-button" src="{% static 'messenger/images/message.png' %}" alt="sent" title="Send" onclick="submit()">
+                    <div class="message-input-section">
+                        <input type="text" name="message-input" id="message-input" placeholder="Type here . . ." value="">
+                        {% comment %} <img id="send-message-button" src="{% static 'messenger/images/message.png' %}" alt="sent" title="Send" onclick="submit()"> {% endcomment %}
+                        <span class="sent-icon material-symbols-outlined">
+                            send
+                        </span>
+                    </div>
                 </form>
             </div>
         {% endif %}

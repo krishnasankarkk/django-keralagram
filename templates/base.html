@@ -21,24 +21,5 @@
         {% include 'header.html' %}
     {% endblock header %}  
     {% block main_content %}{% endblock main_content %}
-    <span id="scrollTop" class="material-symbols-outlined" title="Scroll to top">
-        keyboard_double_arrow_up
-    </span>
 </body>
-<script>
-    const scrollTop = document.getElementById("scrollTop");
-    window.onscroll = function () {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            scrollTop.style.display = 'flex';
-          } else {
-            scrollTop.style.display = 'none';
-          }
-        
-    }
-
-    scrollTop.addEventListener("click", function(){
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0; 
-    })
-</script>
 </html>

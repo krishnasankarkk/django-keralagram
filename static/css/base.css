@@ -42,7 +42,7 @@ body {
 }
 
 .header-section {
-  background: rgb(16, 200, 200);
+  background: rgb(100, 100, 100);
   width: 100%;
   font-size: 1.5rem;
   display: flex;
@@ -90,34 +90,15 @@ a{
 }
 /* width */
 ::-webkit-scrollbar {
-  width: 10px;
-  border-radius: 20px;
   display: none;
 }
 
-/* Track */
-::-webkit-scrollbar-track {
-  background: #232323; 
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #3effdf; 
-  border-radius: 50px;
-  margin: 10px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #3effdf; 
-  cursor: pointer;
-}
 #scrollTop {
   position: fixed;
   z-index: 2;
   right: 50px;
   bottom: 50px;
-  background-color: #3effdf;
+  background-color: rgb(100, 100, 100);
   border-radius: 50%;
   height: 50px;
   width: 50px;
