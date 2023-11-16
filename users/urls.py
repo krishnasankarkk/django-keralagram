@@ -12,6 +12,6 @@ urlpatterns = [
     path('profile/<int:user_id>/', views.user_profile, name='user-profile'),
     path('follow/<int:user_id>/', views.follow_user, name='follow'),
     path('unfollow/<int:user_id>/', views.unfollow_user, name='unfollow'),
-    path('update-fullname/<str:fullname>/', views.update_fullname, name='update-fullname'),
+    path('update-fullname/', views.update_fullname, name='update-fullname'),
     path('update-profilepic/', views.update_profilepic, name='update-profilepic'),
 ]

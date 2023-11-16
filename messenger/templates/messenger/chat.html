@@ -15,9 +15,11 @@
                 <img src="{% static 'images/avatars/catwomen.jpg' %}" alt="avatar">
             {% endif %}
             <h1>{{chat_user.user.username}}</h1>
-            <span class="view-profile">
-                View Profile
-            </span>
+            <a href="{% url 'users:user-profile' user_id=chat_user.user_id %}">
+                <span class="view-profile">
+                    View Profile
+                </span>
+            </a>
             <div class="messages-section">
                 {% if all_messages %}
                     {% for message in all_messages %}
@@ -78,6 +80,7 @@
             messageForm.submit();
         });
         window.scrollTo(0, document.body.scrollHeight);
+        window.scrollTo(0, document.documentElement.scrollHeight);
     </script>
 {% endblock main_content %}
     

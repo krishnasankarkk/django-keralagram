@@ -1,5 +1,5 @@
 h1{
-    color: #a9a9a9;
+    color: rgb(219, 219, 219);
 }
 .chat-section {
     height: auto;
@@ -18,7 +18,7 @@ img {
     border-radius: 50%;
 }
 .view-profile {
-    background-color: rgb(117, 117, 117);
+    background-color: rgb(219, 219, 219);
     padding: 10px;
     border-radius: 20px;
     font-weight: bold;
@@ -143,7 +143,7 @@ img {
     font-size: large;
     margin: 20px;
     margin-top: 50px;
-    color: rgb(156, 156, 156);
+    color: rgb(219, 219, 219);
     background-color: rgb(16, 16, 16);
     position: relative;
 }

@@ -29,7 +29,6 @@
 .full-name-buttons {
     display: flex;
     flex-direction: column;
-    gap: 10px;
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -37,7 +36,7 @@
 .chat-button {
     height: auto;
     width: 100%;
-    background-color: rgb(100,100,100);
+    background-color: rgb(219, 219, 219);
     border-radius: 20px;
     padding: 10px;
     margin-bottom: 2vh;
@@ -113,7 +112,7 @@
 .follow-button {
     height: auto;
     width: 100%;
-    background-color: aqua;
+    background-color: rgb(219, 219, 219);
     border-radius: 20px;
     padding: 10px;
     margin-bottom: 2vh;
@@ -130,7 +129,7 @@
     background-color: rgb(187, 124, 124);
 }
 .follow-button:hover {
-    /* transform: scale(1.1); */
+    transform: scale(1.1);
 }
 .create-post-section {
     display: flex;
@@ -231,7 +230,7 @@
     justify-content: center;
 }
 #full-name-input-section span {
-    color: aqua;
+    color: rgb(193, 193, 193);
     cursor: pointer;
     font-size: larger;
 }
@@ -400,7 +399,7 @@
     font-weight: 800;
 }
 #post-button {
-    background-color: aqua;
+    background-color: rgb(119, 119, 119);
     width: auto;
     font-weight: bold;
     display: flex;

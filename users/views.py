@@ -123,20 +123,22 @@ def unfollow_user(request, user_id):
     else:
         return JsonResponse({'status': 'fail'}) 
 
-def update_fullname(request, fullname):
-    user = UserAccount.objects.get(user_id=request.user.id)
-    user.full_name = fullname
-    user.save()
-    previous_url = request.META.get('HTTP_REFERER', None)
-    return HttpResponseRedirect(previous_url) 
-
-def update_profilepic(request):
+def update_fullname(request):
     if request.method == 'POST':
         user = UserAccount.objects.get(user_id=request.user.id)
-        user.profile_pic = request.FILES['uploaded_profile_pic']
-        print(request.FILES)
+        user.full_name = request.POST.get('fullname')
         user.save()
         previous_url = request.META.get('HTTP_REFERER', None)
         return HttpResponseRedirect(previous_url)
     else:
-        raise Http404("Failed to update profile!") 
+        raise Http404("Failed to update Full name !") 
+    
+def update_profilepic(request):
+    if request.method == 'POST':
+        user = UserAccount.objects.get(user_id=request.user.id)
+        user.profile_pic = request.FILES['uploaded_profile_pic']
+        user.save()
+        previous_url = request.META.get('HTTP_REFERER', None)
+        return HttpResponseRedirect(previous_url)
+    else:
+        raise Http404("Failed to update profile !") 
