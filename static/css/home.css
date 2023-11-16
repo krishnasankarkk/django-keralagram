@@ -1,6 +1,15 @@
+h2 {
+    color: rgb(2, 166, 111);
+}
+h3 {
+    color: rgb(158, 158, 158);
+}
+h4 {
+    color: rgb(113, 113, 113);
+}
 .users-section {
     background-color: rgb(0, 0, 0);
-    color: white;
+    color: rgb(200, 200, 200);
     height: auto;
     width: auto;
     border: none;
@@ -55,7 +64,7 @@
 }
 .user {
     border: none;
-    color: white;
+    color: rgb(200, 200, 200);
     border-radius: 30px;
     padding: 10px;
     margin-right: 10px;
@@ -72,11 +81,11 @@
 .user:hover {
     transform: scale(1.05);
     background-color: rgb(50, 50, 50);
-    color: white;
+    color: rgb(0, 0, 0);
 }
 .posts-section {
     background-color: rgb(0, 0, 0);
-    color: white;
+    color: rgb(200, 200, 200);
     height: auto;
     width: auto;
     border: none;

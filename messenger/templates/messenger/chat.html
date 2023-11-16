@@ -71,9 +71,12 @@
     </div>
     <script>
         const messageInput = document.getElementById("message-input");
-        const sendMessageButton = document.getElementById("send-message-button");
-        
-        
+        const sendMessageButton = document.querySelector(".sent-icon");
+        const messageForm = document.querySelector(".sent-message");
+
+        sendMessageButton.addEventListener("click", function () {
+            messageForm.submit();
+        });
         window.scrollTo(0, document.body.scrollHeight);
     </script>
 {% endblock main_content %}

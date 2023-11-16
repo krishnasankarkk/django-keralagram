@@ -153,12 +153,9 @@ img {
     position: absolute;
     right: 20px;
     cursor: pointer;
-    transition: transform .2s;
     color: #00965f;
     font-size: xx-large;
     font-weight: bolder;
     transform: translateY(50%);
 }
-.sent-message img:hover {
-    transform: scale(1.2);
-}
+

@@ -38,12 +38,12 @@
                                 {% else %}
                                     <img src="{% static 'images/avatars/catwomen.jpg' %}" alt="Avatar">
                                 {% endif %}
-                                <h2>{{post.user.username}}</h2>
                             </div>
                             <div class="post-content">
+                                <h2>{{post.user.username}}</h2>
                                 <h3>{{post.caption}}</h3>
                                 <div style="display:flex;flex-direction:row;align-items:center;gap:10px;">
-                                    <i class="fa fa-upload" aria-hidden="true"></i>
+                                    <i style="color:rgb(113, 113, 113);" class="fa fa-upload" aria-hidden="true"></i>
                                     <h4>{{post.created_at}}</h4>
                                 </div>
                                 <div class="corner"></div>
@@ -67,13 +67,13 @@
                             {% else %}
                                 <img src="{% static 'images/avatars/catwomen.jpg' %}" alt="Avatar">
                             {% endif %}
+                        </div>
+                        <div class="post-content">
                             {% if post.user.id == user.id %}
-                                <h2>You</h2>
+                                <h2 style="color:rgb(2, 155, 166);">You</h2>
                             {% else %}
                                 <h2>{{post.user.username}}</h2>
                             {% endif %}
-                        </div>
-                        <div class="post-content">
                             <h3>{{post.caption}}</h3>
                             <div style="display:flex;flex-direction:row;align-items:center;gap:10px;">
                                 <i class="fa fa-upload" aria-hidden="true"></i>
