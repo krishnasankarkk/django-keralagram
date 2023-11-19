@@ -94,7 +94,7 @@
         const messageForm = document.querySelector(".sent-message");
 
         {% comment %} sendMessageButton.addEventListener("click", function () {
-            {% comment %} messageForm.submit(); {% endcomment %}
+            //messageForm.submit();
             console.log(WebSocket.OPEN)
             chatSocket.onopen = function(event) {
                 // Send form data when WebSocket connection is established
