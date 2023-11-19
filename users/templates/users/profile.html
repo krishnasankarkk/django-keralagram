@@ -16,17 +16,21 @@
             <div class='profile-pic-section'>
                 {% if account_details %}
                     {% if account_details.gender == 'M' %}
-                        <img id="profile-pic" src="{% static '/images/avatars/batman2.jpg' %}" alt="profile pic">
+                        <img id="profile-pic" src="{% static '/images/profile2.png' %}" alt="profile pic">
                     {% else %}
-                        <img id="profile-pic" src="{% static '/images/avatars/catwomen.jpg' %}" alt="profile pic">
+                        <img id="profile-pic" src="{% static '/images/girl.png' %}" alt="profile pic">
                     {% endif %}
                 <div class="full-name-section">
                     <div id="fullname">
-                        <h1>{{account_details.full_name}}</h1>
+                        {% if account_details.full_name %}
+                            <h1>{{account_details.full_name}}</h1>    
+                        {% else %}
+                            <h1>Add name</h1>
+                        {% endif %}
                     </div>
                     <form id="full-name-input-section" action="{% url 'users:update-fullname' %}" method='POST'>
                         {% csrf_token %}
-                        <input id="fullname-input" name="fullname" type="text" value="">
+                        <input id="fullname-input" name="fullname" type="text" value="{{account_details.full_name}}">
                         <span id="fullname-input-save" class="material-symbols-outlined">
                             task_alt
                         </span>
@@ -128,7 +132,6 @@
         const profilePicEditPopup = document.getElementById("profile-pic-edit-popup");
         const profilePicEditPopupClose = document.getElementById("close-profile-pic-edit-popup");
         const cantPostWarning = document.getElementById("cant-post");
-        var fullnameValue = "Nthaada ninak perille?";
 
         fullname.addEventListener("click", function(){
             fullname.style.display = "none";

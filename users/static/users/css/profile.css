@@ -17,7 +17,7 @@
 .profile-pic-section {
     width: 30vw;
     height: auto;
-    background-color: rgb(50, 50, 50);
+    background-color: rgb(255, 255, 255);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -36,7 +36,7 @@
 .chat-button {
     height: auto;
     width: 100%;
-    background-color: rgb(219, 219, 219);
+    background-color: rgb(4, 191, 175);
     border-radius: 20px;
     padding: 10px;
     margin-bottom: 2vh;
@@ -66,7 +66,7 @@
     width: 69vw;
     margin-left: 1vw;
     height: auto;
-    background-color: rgb(50,50,50);
+    background-color: rgb(255, 255, 255);
     display: flex;
     flex-direction: column;
     /* align-items: center; */
@@ -82,11 +82,12 @@
     flex-direction: row;
     border: none;
     border-radius: 20px;
-    background-color: rgb(16, 16, 16);
-    color: rgb(180, 180, 180);
+    background-color: rgb(6, 252, 129);
+    color: rgb(0, 0, 0);
     width: auto;
 }
 .post-count,.followers,.following{
+    background-color: rgb(152, 250, 201);
     display: flex;
     flex-direction: column;
     margin: 10px;
@@ -98,8 +99,8 @@
 }
 .about-section {
     font-weight: 900;
-    background-color: rgb(16, 16, 16);
-    color: rgb(180, 180, 180);
+    background-color: rgb(0, 255, 128);
+    color: rgb(0, 0, 0);
     margin: 10px;
     padding: 10px;
     border-radius: 20px;
@@ -112,7 +113,7 @@
 .follow-button {
     height: auto;
     width: 100%;
-    background-color: rgb(219, 219, 219);
+    background-color: rgb(9, 165, 255);
     border-radius: 20px;
     padding: 10px;
     margin-bottom: 2vh;
@@ -126,7 +127,7 @@
 }
 #un-follow-button {
     display: none;
-    background-color: rgb(187, 124, 124);
+    background-color: rgb(255, 98, 98);
 }
 .follow-button:hover {
     transform: scale(1.1);
@@ -143,7 +144,7 @@
     border-radius: 10px;
     padding: 10px;
     font-weight: bold;
-    background-color: rgb(180, 180, 180);
+    background-color: rgb(0, 255, 128);
     color: rgb(16, 16, 16);
     position: fixed;
     bottom: 0;
@@ -176,8 +177,8 @@
     padding: 1vh;
     /* border: 1px dashed black; */
     border-radius: 10px;
-    background-color: rgb(16, 16, 16);
-    color: rgb(180, 180, 180);
+    background-color: rgb(0, 255, 128);
+    color: rgb(0, 0, 0);
     transition: transform .2s;
     position: relative;
 }
@@ -185,8 +186,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgb(20, 20, 20);
-    color: rgb(180, 180, 180);
+    background-color: rgb(82, 255, 169);
+    color: rgb(0, 0, 0);
     border-radius: 20px;
 }
 .delete-post {
@@ -214,7 +215,7 @@
     align-items: center ;
     justify-content: center;
     cursor: pointer;
-    color: rgb(180, 180, 180);
+    color: rgb(0, 0, 0);
 }
 #fullname-input{
     margin: 10px;
@@ -230,7 +231,7 @@
     justify-content: center;
 }
 #full-name-input-section span {
-    color: rgb(193, 193, 193);
+    color: rgb(4, 182, 93);
     cursor: pointer;
     font-size: larger;
 }
@@ -313,7 +314,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgba(255, 255, 255, 0.644);
+    background-color: rgb(152, 250, 201);
     height: auto;
     width: 500px;
     border-radius: 20px;
@@ -399,7 +400,7 @@
     font-weight: 800;
 }
 #post-button {
-    background-color: rgb(119, 119, 119);
+    background-color: rgb(0, 255, 128);
     width: auto;
     font-weight: bold;
     display: flex;
@@ -422,7 +423,7 @@
     align-items: center;
     justify-content: center;
 }
-.edit-profile-image-section img {
+/* .edit-profile-image-section img {
     display: none;
     width: 400px;
     height: 400px;
@@ -431,7 +432,7 @@
     contain: content;
     position: relative;
     transition: filter .2s;
-}
+} */
 .edit-profile-image:hover {
     filter: blur(2px);
     cursor: pointer;

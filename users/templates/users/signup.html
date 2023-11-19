@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}
-    <title>Sign up • Gotham City</title>
+    <title>Sign up • Keralagram</title>
 {% endblock title %}
 {% block header %}
 {% endblock header %}    
@@ -17,8 +17,8 @@
         {% endif %}
         <div>
             <form id="form" class="signup-section" action="/user/register-user/" method="post">
-                <img id="logo" src="{% static 'images/lgo.png' %}" alt="">
-                <h1>Gotham City</h1>
+                <img id="logo" src="{% static 'images/logo.png' %}" alt="">
+                <h1>Keralagram</h1>
                 {% csrf_token %}
                 {% comment %} {{form.as_p}} {% endcomment %}
                 <input id="username" type="text" name="username" placeholder="User name">
@@ -34,13 +34,13 @@
                 <input id="password1" type="password" name="password" placeholder="Password">
                 <input id="password2" type="password" name="password" placeholder="Confirm Password">
                 <span id="warning"></span>
-                <p>By signing up, you agree to our Terms , <a style="cursor:pointer;font-size:larger;color:rgb(0, 100, 200);" href="">Privacy Policy and Cookies Policy</a> .</p>
+                <p>By signing up, you agree to our Terms , <a style="cursor:pointer;font-size:larger;color:rgb(0, 200, 100);" href="">Privacy Policy and Cookies Policy</a> .</p>
                 <span id="signup-button" class="signup-button">Sign up</span>
             </form>
         </div>
-        <div class="login-section">
-            <span>Already have an account?<a href="/user/login"><b style="cursor:pointer;font-size:larger;color:rgb(0, 100, 200);">Login</b></a></span>
-        </div>
+        {% comment %} <div class="login-section">
+            <span>Already have an account?<a href="/user/login"><b style="cursor:pointer;font-size:larger;color:rgb(0, 200, 100);">Login</b></a></span>
+        </div> {% endcomment %}
     </div>
     <script>
         const username = document.getElementById("username");

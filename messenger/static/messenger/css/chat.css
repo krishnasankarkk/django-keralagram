@@ -1,5 +1,5 @@
 h1{
-    color: rgb(219, 219, 219);
+    color: rgb(0, 0, 0);
 }
 .chat-section {
     height: auto;
@@ -18,7 +18,7 @@ img {
     border-radius: 50%;
 }
 .view-profile {
-    background-color: rgb(219, 219, 219);
+    background-color: rgb(3, 255, 129);
     padding: 10px;
     border-radius: 20px;
     font-weight: bold;
@@ -33,7 +33,7 @@ img {
     width: 100px;
 }
 .messages-section {
-    background-color: rgb(50, 50, 50);
+    background-color: rgb(255, 255, 255);
     margin: 20px;
     padding: 10px;
     display: flex;
@@ -45,7 +45,7 @@ img {
     border-radius: 20px;
 }
 .message-content-sent {
-    background-color: #c4c4c4;
+    background-color: rgb(17, 255, 136);
     color: #9d9d9d;
     border: none;
     border-radius: 20px;
@@ -59,7 +59,7 @@ img {
     transform: translateX(-40%);
 }
 .message-content-recieve {
-    background-color: #c4c4c4;
+    background-color: rgb(35, 255, 211);
     color: #9d9d9d;
     border: none;
     border-radius: 20px;
@@ -73,7 +73,7 @@ img {
     transform: translateX(40%);
 }
 .message-content-sent .corner {
-        background-color: #c4c4c4;
+        background-color: rgb(17, 255, 136);
         height: 20px;
         width: 50px;
         position: absolute;
@@ -85,7 +85,7 @@ img {
         z-index: 2;
 }
 .message-content-recieve .corner {
-    background-color: #c4c4c4;
+    background-color: rgb(35, 255, 211);
     height: 20px;
     width: 50px;
     position: absolute;
@@ -97,7 +97,7 @@ img {
     z-index: 2;
 }
 .message-content-sent h2 {
-    color: #00965f;
+    color: #025a3a;
 }
 .message-content-sent h3 {
     color: #000000;
@@ -144,7 +144,7 @@ img {
     margin: 20px;
     margin-top: 50px;
     color: rgb(219, 219, 219);
-    background-color: rgb(16, 16, 16);
+    background-color: rgb(152, 250, 201);
     position: relative;
 }
 .sent-icon{

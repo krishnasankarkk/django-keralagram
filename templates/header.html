@@ -22,6 +22,20 @@
                 menu
             </span>
         </div>
-    </div>    
+    </div>  
+    <!-- Breadcrumbs -->
+    {% comment %} <div class="breadcrumbs">
+        {% for name, url in breadcrumbs %}
+            {% if name != 'Home' %}
+                >>
+            {% endif %}
+            
+            {% if forloop.last %}
+                <span class="breadcrumb-item active">{{ name }}</span>
+            {% else %}
+                <a href="{{ url }}"><span class="breadcrumb-item">{{ name }}</span></a>
+            {% endif %}
+        {% endfor %}
+    </div>  {% endcomment %}
 {% endblock header %}
     

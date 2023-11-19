@@ -10,9 +10,9 @@
             <div class='profile-pic-section'>
                 {% if account_details %}
                         {% if account_details.gender == 'M' %}
-                            <img id="profile-pic" src="{% static '/images/avatars/batman2.jpg' %}" alt="profile pic">
+                            <img id="profile-pic" src="{% static '/images/profile2.png' %}" alt="profile pic">
                         {% else %}
-                            <img id="profile-pic" src="{% static '/images/avatars/catwomen.jpg' %}" alt="profile pic">
+                            <img id="profile-pic" src="{% static '/images/girl.png' %}" alt="profile pic">
                         {% endif %}
                         <div class="full-name-section">
                             <h1 style="display:flex;align-items:center;justify-content:center;">{{account_details.full_name}}</h1>
@@ -97,7 +97,6 @@
         const unFollowButton = document.getElementById("un-follow-button");
         const followed = '{{ followed }}';
         
-        console.log(followed)
         if(followed=='True'){
             unFollowButton.style.display = "flex";
             followButton.style.display = "none";

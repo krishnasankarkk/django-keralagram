@@ -14,9 +14,9 @@
                     <a href="{% url 'users:user-profile' user_id=user.user_id %}">
                         <div class="user">
                             {% if user.gender == 'M' %}
-                                <img id="profile-pic" src="{% static '/images/avatars/batman2.jpg' %}" alt="profile pic">
+                                <img id="profile-pic" src="{% static '/images/profile2.png' %}" alt="profile pic">
                             {% else %}
-                                <img id="profile-pic" src="{% static '/images/avatars/catwomen.jpg' %}" alt="profile pic">
+                                <img id="profile-pic" src="{% static '/images/girl.png' %}" alt="profile pic">
                             {% endif %}
                             <span>{{user.user.username}}</span>
                         </div>
@@ -34,16 +34,16 @@
                         <div class="post">
                             <div class="post-user">
                                 {% if post.user.useraccount.gender == 'M' %}
-                                    <img src="{% static 'images/avatars/batman2.jpg' %}" alt="Avatar">
+                                    <img src="{% static 'images/profile2.png' %}" alt="Avatar">
                                 {% else %}
-                                    <img src="{% static 'images/avatars/catwomen.jpg' %}" alt="Avatar">
+                                    <img src="{% static 'images/girl.png' %}" alt="Avatar">
                                 {% endif %}
                             </div>
                             <div class="post-content">
                                 <h2>{{post.user.username}}</h2>
                                 <h3>{{post.caption}}</h3>
                                 <div style="display:flex;flex-direction:row;align-items:center;gap:10px;">
-                                    <i style="color:rgb(113, 113, 113);" class="fa fa-upload" aria-hidden="true"></i>
+                                    <i style="color:rgb(0, 80, 100);" class="fa fa-upload" aria-hidden="true"></i>
                                     <h4>{{post.created_at}}</h4>
                                 </div>
                                 <div class="corner"></div>
@@ -63,20 +63,20 @@
                     <div class="post">
                         <div class="post-user">
                             {% if post.user.useraccount.gender == 'M' %}
-                                <img src="{% static 'images/avatars/batman2.jpg' %}" alt="Avatar">
+                                <img src="{% static 'images/profile2.png' %}" alt="Avatar">
                             {% else %}
-                                <img src="{% static 'images/avatars/catwomen.jpg' %}" alt="Avatar">
+                                <img src="{% static 'images/girl.png' %}" alt="Avatar">
                             {% endif %}
                         </div>
                         <div class="post-content">
                             {% if post.user.id == user.id %}
-                                <h2 style="color:rgb(2, 155, 166);">You</h2>
+                                <h2 style="color:rgb(0, 50, 40);">You</h2>
                             {% else %}
                                 <h2>{{post.user.username}}</h2>
                             {% endif %}
                             <h3>{{post.caption}}</h3>
                             <div style="display:flex;flex-direction:row;align-items:center;gap:10px;">
-                                <i class="fa fa-upload" aria-hidden="true"></i>
+                                <i style="color:rgb(0, 80, 100);" class="fa fa-upload" aria-hidden="true"></i>
                                 <h4>{{post.created_at}}</h4>
                             </div>
                             <div class="corner"></div>

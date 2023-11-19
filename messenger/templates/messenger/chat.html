@@ -10,9 +10,9 @@
     <div class="chat-section">
         {% if chat_user %}
             {% if chat_user.user.useraccount.gender == 'M' %}
-                <img src="{% static 'images/avatars/batman2.jpg' %}" alt="avatar">
+                <img src="{% static 'images/profile2.png' %}" alt="avatar">
             {% else %}
-                <img src="{% static 'images/avatars/catwomen.jpg' %}" alt="avatar">
+                <img src="{% static 'images/girl.png' %}" alt="avatar">
             {% endif %}
             <h1>{{chat_user.user.username}}</h1>
             <a href="{% url 'users:user-profile' user_id=chat_user.user_id %}">
@@ -33,18 +33,18 @@
                                         <div class="corner"></div>
                                     </div>
                                     {% if message.from_user.useraccount.gender == 'M' %}
-                                        <img id="chat-pic" src="{% static 'images/avatars/batman2.jpg' %}" alt="avatar">
+                                        <img id="chat-pic" src="{% static 'images/profile2.png' %}" alt="avatar">
                                     {% else %}
-                                        <img id="chat-pic" src="{% static 'images/avatars/catwomen.jpg' %}" alt="avatar">
+                                        <img id="chat-pic" src="{% static 'images/girl.png' %}" alt="avatar">
                                     {% endif %}
                                 </div>
                                 
                             {% else %}
                                 <div class="messages-recieve">
                                     {% if message.from_user.useraccount.gender == 'M' %}
-                                        <img id="chat-pic" src="{% static 'images/avatars/batman2.jpg' %}" alt="avatar">
+                                        <img id="chat-pic" src="{% static 'images/profile2.png' %}" alt="avatar">
                                     {% else %}
-                                        <img id="chat-pic" src="{% static 'images/avatars/catwomen.jpg' %}" alt="avatar">
+                                        <img id="chat-pic" src="{% static 'images/girl.png' %}" alt="avatar">
                                     {% endif %}
                                     <div class="message-content-recieve">
                                         <h2 style="color:#0067b5;">{{message.from_user}}</h2>
@@ -72,13 +72,35 @@
             
     </div>
     <script>
+        {% comment %} const chatSocket = new WebSocket(
+            'ws://'
+            + window.location.host
+            + '/ws/chat/'
+            + '{{chat_user.user_id}}'
+            + '/'
+        );
+
+        chatSocket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            console.log(data.message);
+        };
+
+        chatSocket.onclose = function(e) {
+            console.error('Chat socket closed unexpectedly');
+        }; {% endcomment %}
+
         const messageInput = document.getElementById("message-input");
         const sendMessageButton = document.querySelector(".sent-icon");
         const messageForm = document.querySelector(".sent-message");
 
-        sendMessageButton.addEventListener("click", function () {
-            messageForm.submit();
-        });
+        {% comment %} sendMessageButton.addEventListener("click", function () {
+            {% comment %} messageForm.submit(); {% endcomment %}
+            console.log(WebSocket.OPEN)
+            chatSocket.onopen = function(event) {
+                // Send form data when WebSocket connection is established
+                chatSocket.send(JSON.stringify(messageInput.value));
+            };
+        }); {% endcomment %}
         window.scrollTo(0, document.body.scrollHeight);
         window.scrollTo(0, document.documentElement.scrollHeight);
     </script>

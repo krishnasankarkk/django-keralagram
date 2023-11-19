@@ -1,15 +1,15 @@
 h2 {
-    color: rgb(2, 166, 111);
+    color: rgb(0, 60, 143)
 }
 h3 {
-    color: rgb(158, 158, 158);
+    color: rgba(0, 0, 0, 0.861);
 }
 h4 {
-    color: rgb(113, 113, 113);
+    color: rgb(0, 80, 100);
 }
 .users-section {
-    background-color: rgb(0, 0, 0);
-    color: rgb(200, 200, 200);
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     height: auto;
     width: auto;
     border: none;
@@ -33,7 +33,7 @@ h4 {
     height: 0;
     border-top: 25px solid transparent; /* Half of the desired height */
     border-bottom: 25px solid transparent; /* Half of the desired height */
-    border-right: 40px solid #555555; /* Width of the button, adjust color as needed */
+    border-right: 40px solid rgb(0, 255, 128); /* Width of the button, adjust color as needed */
     border-left: none;
     margin: 10px;
     cursor: pointer;
@@ -48,7 +48,7 @@ h4 {
     border-top: 25px solid transparent; /* Half of the desired height */
     border-bottom: 25px solid transparent; /* Half of the desired height */
     border-right: none; /* Width of the button, adjust color as needed */
-    border-left: 40px solid #555555;
+    border-left: 40px solid rgb(0, 255, 128);
     margin: 10px;
     cursor: pointer;
     background-color: #00000000;
@@ -57,14 +57,14 @@ h4 {
     z-index: 1;
 }
 #scroll-users-right:hover{
-    border-left: 40px solid #909090;
+    border-left: 40px solid rgb(2, 188, 95);
 }
 #scroll-users-left:hover{
-    border-right: 40px solid #909090;
+    border-right: 40px solid rgb(2, 188, 95);
 }
 .user {
     border: none;
-    color: rgb(200, 200, 200);
+    color: rgb(0, 0, 0);
     border-radius: 30px;
     padding: 10px;
     margin-right: 10px;
@@ -76,16 +76,16 @@ h4 {
     justify-content: center;
     font-weight: bold;
     transition: transform .2s;
-    background-color: rgb(16, 16, 16);
+    background-color: rgb(3, 255, 129);
 }
 .user:hover {
     transform: scale(1.05);
-    background-color: rgb(50, 50, 50);
+    background-color: rgb(0, 135, 67);
     color: rgb(0, 0, 0);
 }
 .posts-section {
-    background-color: rgb(0, 0, 0);
-    color: rgb(200, 200, 200);
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     height: auto;
     width: auto;
     border: none;
@@ -117,28 +117,29 @@ h4 {
     width: auto;
 }
 .post-user img{
-    height: 150px;
-    width: auto;
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
 }
 img {
     border-radius: 50%;
 }
 .post-content {
-    background-color: rgb(16, 16, 16);
+    background-color: rgb(3, 255, 129);
     padding: 20px;
     border: none;
-    border-radius: 20px 50px 50px 50px;
+    border-radius: 50px;
     position: relative;
     height: 50%;
     width: auto;
     transition: transform .2s ease;
 }
 .post-content .corner {
-    background-color: rgb(16, 16, 16);
+    background-color: rgb(3, 255, 129);
     height: 20px;
     width: 50px;
     position: absolute;
-    top: 20px;
+    top: 50px;
     left: -40px;
     border: none;
     border-right: none;
@@ -147,7 +148,7 @@ img {
 }
 .post-content:hover{
     transform: scale(1.1) translateX(20px) translateY(10px);
-    background-color: rgb(16, 16, 16);
+    background-color: rgb(3, 255, 129);
 }
 #profile-pic{
     width: 200px;

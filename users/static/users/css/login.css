@@ -23,15 +23,16 @@
 .login-section {
     width: 100%;
     height: 100%;
-    background-image: url('/static/images/gotham.jpg');
-    /* background-size: 100% 100%; */
+    background-color: rgb(152, 250, 201);
+    background-image: url('/static/images/bg.jpg');
+    background-size: 100% 100%;
     background-position: center;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 .login-form{
-    background-color: rgba(255, 255, 255, 0.427);
+    background-color: rgb(255, 255, 255);
     background-blend-mode: hard-light; 
     height: 60vh;
     width: 30vw;
@@ -45,7 +46,7 @@
     justify-content: center;
 }
 .signup-section{
-    background-color: rgba(255, 255, 255, 0.427);
+    background-color: rgb(255, 255, 255);
     color: rgb(0, 0, 0);
     stroke: none;
     height: 10vh;
@@ -62,7 +63,7 @@
 }
 .login-button {
     width: 16vw;
-    background-color: rgb(255, 53, 53);
+    background-color: rgb(53, 255, 157);
     border-radius: 50px;
     border: none;
     margin-top: 2vh;
