@@ -133,6 +133,8 @@ img {
     height: 50%;
     width: auto;
     transition: transform .2s ease;
+    display: flex;
+    flex-direction: column;
 }
 .post-content .corner {
     background-color: rgb(3, 255, 129);
