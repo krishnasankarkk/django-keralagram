@@ -65,14 +65,14 @@
                             <span id="close-button"><i class="fa fa-times" aria-hidden="true"></i></span>
                             <h2>Create new post</h2>
                             <h3 id="cant-post">Write something to post idiot . . .</h3>
-                            {% comment %} <div class="image-section">
+                            <div class="image-section">
                                 <span id="clear-image-button"><i class="fa fa-times" aria-hidden="true"></i></span>
                                 <img id="uploaded-image" src="" alt="">
                             </div>
                             <div id="upload-button">
                                 <input type="file" id="upload-input" name="uploaded_image" value="">
                                 <label for="upload-input" class='upload-button'>Upload image<i class="fa fa-arrow-up" aria-hidden="true"></i></label>
-                            </div> {% endcomment %}
+                            </div>
                             <div class="post-caption">
                                 {% comment %} <h3>Write post</h3> {% endcomment %}
                                 <textarea class="caption" type="text" name="caption" id="caption" placeholder="Write something here..."></textarea>
@@ -83,14 +83,15 @@
                         </form>
                     </div>
                 </div>
+                <div class="joined">
+                    <h3>Joined on {{user.date_joined}}</h3>
+                </div>  
                 <div class="posts">
-                    <div class="joined">
-                        <h3>Joined on {{user.date_joined}}</h3>
-                    </div>
+                    
                     {% if posts %}
                         {% for post in posts %}
-                            {% comment %} <img class="post" src="/media/{{post.post_img}}" alt="post" data-post-id="{{post.id}}" onclick=handleImageClick(this)> {% endcomment %}
                             <div class="post">
+                                <img class="post-image" src="/media/{{post.post_img}}" alt="post" data-post-id="{{post.id}}" onclick=handleImageClick(this)>
                                 <h2>{{post.caption}}</h2>
                                 <i class="fa fa-upload" aria-hidden="true"></i>
                                 <span style="font-weight:bold;">{{post.created_at}}</span>
@@ -186,7 +187,7 @@
         popupCloseButton.addEventListener("click", function () {
             createPostPopup.style.display = "none";
         })
-        {% comment %} fileInput.addEventListener('change', (event) => {
+        fileInput.addEventListener('change', (event) => {
             const selectedFile = event.target.files[0];
 
             if (selectedFile && selectedFile.type.startsWith('image/')) {
@@ -205,7 +206,7 @@
                 imageClearButton.style.display = 'none';
                 uploadButton.style.display = 'flex';
             }
-        }); {% endcomment %}
+        });
         {% comment %} uploadProfilePicfileInput.addEventListener('change', (event) => {
             const selectedFile = event.target.files[0];
 

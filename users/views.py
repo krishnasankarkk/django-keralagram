@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout as logout_user
 from django.contrib import messages
+from django.db.models import Q
 
 from .forms import LoginForm, RegistrationForm
 from .models import UserAccount
@@ -32,13 +33,16 @@ def register(request):
         phone = request.POST.get('phone')
         gender = request.POST.get('gender')
         try:
-            user = User.objects.get(username=username)
+            user = User.objects.get(Q(username=username))
+            print(user)
             messages.warning(request,"User already exists!")
             return redirect("users:signup")
         except:    
             new_user = User()
             new_user.username = username
             new_user.email = email
+            new_user.first_name = fullname.split()[0]
+            new_user.last_name = fullname.split()[1]
             new_user.set_password(password)
             new_user.save()
             new_user_account = UserAccount()

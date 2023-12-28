@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as login_user
 from django.contrib import messages
 from django.http import HttpResponse, Http404, HttpResponseRedirect
+import datetime 
+from django.db.models import F, ExpressionWrapper, DurationField
 
 from users.models import UserAccount
 from posts.models import Post
@@ -14,15 +16,38 @@ def home(request):
     user = UserAccount.objects.get(user_id=request.user.id)
     following = user.following
     following_posts = Post.objects.filter(user__id__in=following).order_by('-created_at')
-    posts = Post.objects.all().order_by('-created_at')
-    # for obj in posts:
-    #     print(f"Object ID: {obj.id}")
-    #     for field, value in obj.__dict__.items():
-    #         print(f"    {field}: {value}")
-    #     print("\n")
+    current_date = datetime.datetime.now(datetime.timezone.utc)
+    posts = Post.objects.all().order_by('-created_at').annotate(
+        time_difference = ExpressionWrapper(current_date - F('created_at'), output_field=DurationField())
+    )
+    updated_posts = []
+    for post in posts:
+        time_difference = post.time_difference
+        days = time_difference.days
+        hours = time_difference.seconds // 3600
+        minutes = (time_difference.seconds // 60) % 60
+        
+        if days > 0:
+            updated_time_difference = f"{days} day{'s' if days != 1 else ''}"
+        elif hours > 0:
+            updated_time_difference = f"{hours} hour{'s' if hours != 1 else ''}"
+        elif minutes > 0:
+            updated_time_difference = f"{minutes} minute{'s' if minutes != 1 else ''}"
+        else:
+            updated_time_difference = "Few seconds"
+        updated_post = {
+            'id' : post.id,
+            'post_img' : post.post_img,
+            'like' : post.like,
+            'user' : post.user,
+            'caption' : post.caption,
+            'time_difference' : updated_time_difference,
+        }
+        updated_posts.append(updated_post)
     context = {
+        "current_user": user,
         "users":users,
-        "all_posts":posts,
+        "all_posts":updated_posts,
         "following_posts":following_posts,
     }
     return render(request, "home.html", context)

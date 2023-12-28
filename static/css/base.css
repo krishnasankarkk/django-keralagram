@@ -1,14 +1,14 @@
 /* @import url("https://fonts.googleapis.com/css?family=Sofia"); */
 
 @font-face {
-  font-family: 'Sofia-Regular';
-  src: local('Sofia-Regular'),
-       url('/static/fonts/Sofia-Regular.ttf') format("truetype");
+  font-family: 'Poppins-Regular';
+  src: local('Poppins-Regular'),
+       url('/static/fonts/Poppins-Regular.ttf') format("truetype");
 }
 body {
-    background: rgb(152, 250, 201);
-    font-family: 'Sofia-Regular', sans-serif;
-    color: rgb(16, 16, 16);
+    background: rgb(255, 255, 255);
+    font-family: 'Poppins-Regular', sans-serif;
+    /* color: rgb(0, 0, 0); */
     margin: 0;
     padding: 0;
     height: 100vh;
@@ -42,7 +42,7 @@ body {
 }
 
 .header-section {
-  background: rgb(255, 249, 249);
+  background: rgb(100, 250, 160);
   width: 100%;
   font-size: 1.5rem;
   display: flex;
@@ -89,16 +89,13 @@ a{
   color: black;
 }
 /* width */
-::-webkit-scrollbar {
-  display: none;
-}
 
 #scrollTop {
   position: fixed;
   z-index: 2;
   right: 50px;
   bottom: 50px;
-  background-color: rgb(8, 255, 132);
+  background-color: rgb(117, 117, 117);
   border-radius: 50%;
   height: 50px;
   width: 50px;
@@ -122,3 +119,4 @@ a{
   border-radius: 50px;
   margin: 10px;
 }
+

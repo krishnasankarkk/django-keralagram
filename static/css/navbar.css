@@ -1,0 +1,6 @@
+.navbar-item {
+    transition: transform .2s;
+}
+.navbar-item:hover {
+    transform: translateX(1rem);
+}

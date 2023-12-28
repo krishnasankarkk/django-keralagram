@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'channels',
-    
+    'tailwind',
+        
     'users',
     'settings',
     'posts',
@@ -49,9 +50,19 @@ INSTALLED_APPS = [
     'messenger',
     'followers',
     'explore',
+    'theme',
     ]
 
+TAILWIND_APP_NAME = 'theme'
+
+INTERNAL_IPS = [
+    "127.0.0.1"
+]
+
+NPM_BIN_PATH = "C:\\Program Files\\nodejs\\npm.cmd"
+
 MIDDLEWARE = [
+    # "django_browser_reload.middleware.BrowserReloadMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -99,13 +110,25 @@ CHANNEL_LAYERS = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': 'c5c2bB6C3FDF125D21Ce5FdbEdGCGFE4',
-        'HOST': 'viaduct.proxy.rlwy.net',  # Set to the hostname where your database is running, typically 'localhost'.
-        'PORT': '53617',  # Leave empty to use the default PostgreSQL port (5432).
+        'NAME': 'keralagram_db',
+        'USER': 'keralagram',
+        'PASSWORD': 'Kichu1234*',
+        'HOST': 'postgresql-keralagram.alwaysdata.net',  # Set to the hostname where your database is running, typically 'localhost'.
+        'PORT': '5432',  # Leave empty to use the default PostgreSQL port (5432).
     }
 }
+
+# live render server
+# DATABASES = {
+#    'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'keralagram',
+#         'USER': 'krishna',
+#         'PASSWORD': 'FvoIfuSMLEu7X0CEY7kfX87dwN6z6KS7',
+#         'HOST': 'postgres://krishna:FvoIfuSMLEu7X0CEY7kfX87dwN6z6KS7@dpg-clg85deg1b2c73a66iq0-a.oregon-postgres.render.com/keralagram',  # Set to the hostname where your database is running, typically 'localhost'.
+#         'PORT': '5432',  # Leave empty to use the default PostgreSQL port (5432).
+#     }
+# }
 
 #local sqlite
 # DATABASES = {

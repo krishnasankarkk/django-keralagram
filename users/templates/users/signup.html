@@ -17,6 +17,9 @@
         {% endif %}
         <div>
             <form id="form" class="signup-section" action="/user/register-user/" method="post">
+                <a class="go-back-section" href="{% url 'users:login' %}">
+                    <img id="go-back" src="{% static 'images/go-back.png' %}" alt="back">
+                </a>
                 <img id="logo" src="{% static 'images/logo.png' %}" alt="">
                 <h1>Keralagram</h1>
                 {% csrf_token %}
