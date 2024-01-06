@@ -17,13 +17,16 @@ def create_post(request):
             raise Http404("User doesnt exists!")
         post = Post()
         post.user = user
-        # post.post_img = request.FILES['uploaded_image']
-        post.caption = request.POST['caption']
+        if 'uploaded_image' in request.FILES and request.FILES['uploaded_image']:
+            post.post_img = request.FILES['uploaded_image']
+        else:
+            post.post_img = None
+        post.caption = request.POST['caption'] if request.POST['caption'] else None
         post.like = 0
+        print(request.POST['caption'])
         post.save()
-        # previous_url = request.META.get('HTTP_REFERER', None)
-
-        return redirect('users:profile')
+        previous_url = request.META.get('HTTP_REFERER', None)
+        return redirect(previous_url)
     
 def delete_post(request, post_id):
     try:

@@ -1,7 +1,7 @@
 {% load static %}
 {% block emoji_picker %}
 <link rel="stylesheet" type="text/css" href="{% static '/css/emoji_picker.css' %}">
-<div id="emoji-picker" class="z-50 bg-white rounded-2xl p-4 absolute top-16 right-0 w-96 h-96 hidden flex-col items-start overflow-y-scroll">
+<div id="emoji-picker" class="z-50 bg-gray-800 text-blue-green rounded-2xl p-4 absolute top-16 right-0 w-96 h-96 hidden flex-col items-start overflow-y-scroll">
     <span class="font-bold">Recent</span>
     <div class="emoji-category">
         <span class="emoji cursor-pointer text-xl">&#128512</span>
@@ -25,6 +25,9 @@
         <span class="emoji cursor-pointer text-xl">&#128518</span>
         <span class="emoji cursor-pointer text-xl">&#128519</span>
         <span class="emoji cursor-pointer text-xl">&#128520</span>
+        <span class="emoji cursor-pointer text-xl">&#128127</span>
+        <span class="emoji cursor-pointer text-xl">&#128128</span>
+        <span class="emoji cursor-pointer text-xl">&#129324</span>  
         <span class="emoji cursor-pointer text-xl">&#128521</span>
         <span class="emoji cursor-pointer text-xl">&#128522</span>
         <span class="emoji cursor-pointer text-xl">&#128523</span>
@@ -123,7 +126,62 @@
         <span class="emoji cursor-pointer text-xl">&#128585</span>
         <span class="emoji cursor-pointer text-xl">&#128586</span>
     </div>
-    
+    <span class="font-bold">Hand gestures</span>
+    <div class="emoji-category">
+        <span class="emoji cursor-pointer text-xl">&#9995</span>
+        <span class="emoji cursor-pointer text-xl">&#128075</span>
+        <span class="emoji cursor-pointer text-xl">&#128400</span>
+        <span class="emoji cursor-pointer text-xl">&#128406</span>
+        <span class="emoji cursor-pointer text-xl">&#129306</span>
+        <span class="emoji cursor-pointer text-xl">&#9757</span>
+        <span class="emoji cursor-pointer text-xl">&#128070</span>
+        <span class="emoji cursor-pointer text-xl">&#128071</span>
+        <span class="emoji cursor-pointer text-xl">&#128072</span>
+        <span class="emoji cursor-pointer text-xl">&#128073</span>
+        <span class="emoji cursor-pointer text-xl">&#128405</span>
+        <span class="emoji cursor-pointer text-xl">&#9994</span>
+        <span class="emoji cursor-pointer text-xl">&#128070</span>
+        <span class="emoji cursor-pointer text-xl">&#128071</span>
+        <span class="emoji cursor-pointer text-xl">&#128072</span>
+        <span class="emoji cursor-pointer text-xl">&#128073</span>
+        <span class="emoji cursor-pointer text-xl">&#128405</span>
+    </div>
+    <span class="font-bold">People</span>
+    <div class="emoji-category">
+        <span class="emoji cursor-pointer text-xl">&#128512</span>
+        <span class="emoji cursor-pointer text-xl">&#128513</span>
+        <span class="emoji cursor-pointer text-xl">&#128514</span>
+        <span class="emoji cursor-pointer text-xl">&#128515</span>
+        <span class="emoji cursor-pointer text-xl">&#128516</span>
+        <span class="emoji cursor-pointer text-xl">&#128517</span>
+        <span class="emoji cursor-pointer text-xl">&#128518</span>
+        <span class="emoji cursor-pointer text-xl">&#128519</span>
+        <span class="emoji cursor-pointer text-xl">&#128520</span>
+    </div>
+    <span class="font-bold">Office related</span>
+    <div class="emoji-category">
+        <span class="emoji cursor-pointer text-xl">&#128512</span>
+        <span class="emoji cursor-pointer text-xl">&#128513</span>
+        <span class="emoji cursor-pointer text-xl">&#128514</span>
+        <span class="emoji cursor-pointer text-xl">&#128515</span>
+        <span class="emoji cursor-pointer text-xl">&#128516</span>
+        <span class="emoji cursor-pointer text-xl">&#128517</span>
+        <span class="emoji cursor-pointer text-xl">&#128518</span>
+        <span class="emoji cursor-pointer text-xl">&#128519</span>
+        <span class="emoji cursor-pointer text-xl">&#128520</span>
+    </div>
+    <span class="font-bold">Places</span>
+    <div class="emoji-category">
+        <span class="emoji cursor-pointer text-xl">&#128512</span>
+        <span class="emoji cursor-pointer text-xl">&#128513</span>
+        <span class="emoji cursor-pointer text-xl">&#128514</span>
+        <span class="emoji cursor-pointer text-xl">&#128515</span>
+        <span class="emoji cursor-pointer text-xl">&#128516</span>
+        <span class="emoji cursor-pointer text-xl">&#128517</span>
+        <span class="emoji cursor-pointer text-xl">&#128518</span>
+        <span class="emoji cursor-pointer text-xl">&#128519</span>
+        <span class="emoji cursor-pointer text-xl">&#128520</span>
+    </div>
     <!-- Add more emojis as needed -->
 </div>
 {% endblock emoji_picker %}

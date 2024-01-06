@@ -107,16 +107,16 @@ CHANNEL_LAYERS = {
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 #live railway server
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'keralagram_db',
-        'USER': 'keralagram',
-        'PASSWORD': 'Kichu1234*',
-        'HOST': 'postgresql-keralagram.alwaysdata.net',  # Set to the hostname where your database is running, typically 'localhost'.
-        'PORT': '5432',  # Leave empty to use the default PostgreSQL port (5432).
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'keralagram_db',
+#         'USER': 'keralagram',
+#         'PASSWORD': 'Kichu1234*',
+#         'HOST': 'postgresql-keralagram.alwaysdata.net',  # Set to the hostname where your database is running, typically 'localhost'.
+#         'PORT': '5432',  # Leave empty to use the default PostgreSQL port (5432).
+#     }
+# }
 
 # live render server
 # DATABASES = {
@@ -139,16 +139,16 @@ DATABASES = {
 # }
 
 #local db.
-# DATABASES = {
-#    'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'instagram',
-#         'USER': 'postgres',
-#         'PASSWORD': '1234',
-#         'HOST': 'localhost',  # Set to the hostname where your database is running, typically 'localhost'.
-#         'PORT': '5433',  # Leave empty to use the default PostgreSQL port (5432).
-#     }
-# }
+DATABASES = {
+   'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'instagram',
+        'USER': 'postgres',
+        'PASSWORD': '1234',
+        'HOST': 'localhost',  # Set to the hostname where your database is running, typically 'localhost'.
+        'PORT': '5433',  # Leave empty to use the default PostgreSQL port (5432).
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

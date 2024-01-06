@@ -1,4 +1,4 @@
-.main {
+/* .main {
     background-color: rgb(251, 140, 140);
     height: 100vh;
     width: 100vw;
@@ -104,18 +104,6 @@ input:focus {
     position: relative;
     align-items: center;
 }
-#opened-eye {
-    display: block;
-    position: absolute;
-    right: 8px;
-    cursor: pointer;
-}
-#closed-eye {
-    display: none;
-    position: absolute;
-    right: 8px;
-    cursor: pointer;
-}
 #wrong {
     color: rgb(250, 67, 67);
     display: block;
@@ -141,4 +129,4 @@ input:focus {
     input {
         width: auto;
     }
-} */
+} */ */

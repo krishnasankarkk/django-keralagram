@@ -11,13 +11,13 @@
     {% tailwind_css %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="icon" type="image/x-icon" href="{% static '/images/favicon.ico' %}">
+    <link rel="icon" type="image/x-icon" href="{% static '/images/letter-k.png' %}">
     <link rel="stylesheet" type="text/css" href="{% static '/css/base.css' %}">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     {% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.2/emojionearea.min.js" integrity="sha512-hkvXFLlESjeYENO4CNi69z3A1puvONQV5Uh+G4TUDayZxSLyic5Kba9hhuiNLbHqdnKNMk2PxXKm0v7KDnWkYA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> {% endcomment %}
 </head>
-<body>
+<body class="bg-gray-800 text-blue-green">
     <noscript>You need to enable JavaScript to run this app.</noscript>
     {% comment %} {% block header %}
         {% include 'header.html' %}
@@ -28,6 +28,11 @@
         window.addEventListener('load', (event) => {
             loader.style.display = "none";
         });
+        const chatSocket = new WebSocket(
+            'ws://'
+            + window.location.host
+            + '/ws/online/'
+        );
     </script>
 </body>
 </html>

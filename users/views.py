@@ -51,7 +51,7 @@ def register(request):
             new_user_account.phone = phone
             new_user_account.gender = gender
             new_user_account.save()
-            messages.success(request,"User successfully created :)")
+            messages.success(request,"User created successfully :)")
             return redirect("users:login")
             
     
@@ -97,6 +97,7 @@ def user_profile(request, user_id):
 
 def logout(request):
     logout_user(request)
+    messages.success(request, "Logout successfull :)")
     return redirect("users:login")
 
 @login_required(login_url='/user/login')

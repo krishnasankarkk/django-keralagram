@@ -5,7 +5,16 @@
 {% endblock title %}
 {% block main_content %}
         <link rel="stylesheet" type="text/css" href="{% static '/css/home.css' %}">
-        <div class="flex flex-row relative overflow-hidden text-gray-800"> 
+        <div class="flex flex-row relative overflow-hidden"> 
+            <div id="logout-popup" class="hidden flex-col gap-4 w-1/4 h-1/4 items-center justify-between absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-gray-400 text-gray-800 p-6 rounded-2xl">
+                <span class="font-bold">Are you sure?</span>
+                <div class="flex gap-4 w-full">
+                    <span id="cancel-logout" class="font-bold bg-blue-200 rounded-full w-1/2 flex justify-center p-2 cursor-pointer">No</span>
+                    <a href="{% url 'users:logout' %}" class="font-bold bg-red-200 rounded-full w-1/2 flex justify-center p-2 cursor-pointer">
+                        <span id="confirm-logout" >Yes</span>
+                    </a>
+                </div>
+            </div>
             {% include 'navbar.html' %}
             <div class="flex flex-col gap-2 overflow-y-scroll h-auto w-2/4 mt-9">
                 <div class="flex flex-row w-full justify-between mb-6">
@@ -16,72 +25,75 @@
                         <span class="text-lg font-extrabold cursor-pointer text-gray-400">Popular</span>
                     </div>
                 </div>
-                <div class="rounded-2xl bg-green-200 p-5">
+                <form 
+                    class="flex flex-col gap-2 rounded-2xl bg-gradient-to-br from-blue-300 to-violet-300 p-5 text-gray-800" 
+                    action="{% url 'posts:create-post' %}" 
+                    method="post" 
+                    enctype="multipart/form-data"
+                >
+                    {% csrf_token %}
                     <div class="flex flex-row w-full relative">
                         {% if current_user.user.useraccount.profile_pic != '' %}
                             <img class="w-12 h-12 rounded-full absolute" src="media/{{current_user.user.useraccount.profile_pic}}" alt="Avatar">
                         {% else %}
-                            <img class="w-12 h-12 rounded-full absolute" src="{% static '/images/user.png' %}" alt="Avatar">
+                            <img class="w-12 h-12 rounded-full absolute" src="{% static '/images/user-circle.png' %}" alt="Avatar">
                         {% endif %}
-                        <input type="text" class="text w-full h-12 rounded-full border-none focus:outline-none focus:ring-0 pl-16" placeholder="Share something">
-                        <img id="emoji-picker-button" class="cursor-pointer absolute top-2 right-2 w-8 h-8 rounded-full opacity-50" src="{% static '/images/outline_sentiment_satisfied_black_24dp.png' %}" alt="Emoji">
+                        <input
+                            id="caption"
+                            type="text"
+                            name="caption"
+                            class="text w-full h-12 rounded-full 
+                                border-none focus:outline-none 
+                                focus:ring-0 pl-16 bg-gray-700 text-white" 
+                            placeholder="Share something"
+                        />
+                        <img id="emoji-picker-button" class="cursor-pointer absolute top-2 right-2 w-8 h-8 rounded-full transition-transform duration-300 hover:scale-125" src="{% static '/images/smile.png' %}" alt="Emoji">
                         {% include 'emoji.html' %}
                     </div>
-                    <div class="flex flex-row gap-6 items-start w-full mt-10">
+                    <div class="flex">
+                        <img class="w-auto h-50 rounded-lg hidden" id="uploaded-image" src="" alt="">
+                    </div>
+                    <div class="flex flex-row gap-6 items-start w-full mt-2">
                         <div class="cursor-pointer flex items-center gap-1 text-lg font-bold">
-                            <span class="material-symbols-outlined">
-                                upload_file
-                            </span>
-                            <span>File</span>
+                            <img class="w-6 h-6" src="{% static '/images/image.png' %}" alt="">
+                            <input class="hidden" type="file" name="uploaded_image" id="upload-image">
+                            <label class="cursor-pointer" for="upload-image">Image</label>
                         </div>
                         <div class="cursor-pointer flex items-center gap-1 text-lg font-bold">
-                            <span class="material-symbols-outlined">
-                                image
-                            </span>
-                            <span>Image</span>
-                        </div>
-                        <div class="cursor-pointer flex items-center gap-1 text-lg font-bold">
-                            <span class="material-symbols-outlined">
-                                location_on
-                            </span>
+                            <img class="w-6 h-6" src="{% static '/images/pin.png' %}" alt="">
                             <span>Location</span>
                         </div>
                         <div id="public-popup-button" class="font-bold cursor-pointer flex items-center gap-1 text-lg relative">
-                            <span class="material-symbols-outlined">
-                                public
-                            </span>
+                            <img class="w-6 h-6" src="{% static '/images/earth.png' %}" alt="">
                             <span class="flex justify-center items-center">Public
                                 <span class="material-symbols-outlined">
                                     keyboard_arrow_down
                                 </span>
                             </span>
                             <div id="public-popup" class="bg-white absolute top-10 left-6 w-28 rounded-xl hidden">
-                                <span class="public-popup-item cursor-pointer hover:bg-green-400 flex items-center justify-center rounded-xl p-2">Public</span>
-                                <span class="public-popup-item cursor-pointer hover:bg-green-400 flex items-center justify-center rounded-xl p-2">Private</span>
+                                <span class="public-popup-item cursor-pointer hover:bg-violet-300 flex items-center justify-center rounded-xl p-2">Public</span>
+                                <span class="public-popup-item cursor-pointer hover:bg-violet-300 flex items-center justify-center rounded-xl p-2">Private</span>
                             </div>
                         </div>
-                        <div class="post-button mr-0 ml-auto bg-green-400 rounded-full p-2 w-24 flex items-center justify-center cursor-pointer">
-                            <span class="font-bold flex items-center">
-                                {% comment %} <span class="material-symbols-outlined hover:text-green-600">
-                                    send
-                                </span> {% endcomment %}
+                        <div class="post-button mr-0 ml-auto bg-gray-800 rounded-full p-2 w-24 flex items-center justify-center cursor-pointer">
+                            <button class="font-bold text-blue-green text-xl" type="submit">
                                 Post
-                            </span>
+                            </button>
                         </div>
                     </div>
-                </div>
+                </form>
                 {% if all_posts %}
-                    <div class="flex flex-row flex-wrap gap-2">
+                    <div class="flex flex-row flex-wrap gap-2 text-gray-800">
                         {% for post in all_posts %}
-                            <div class="flex flex-col rounded-2xl bg-green-200 items-start w-full h-content">
+                            <div class="flex flex-col rounded-2xl bg-gradient-to-br from-blue-300 to-violet-300 items-start w-full h-content">
                                 <div class="flex flex-row gap-1 items-center rounded-xl p-4 w-full relative">
                                     {% if post.user.useraccount.profile_pic != '' %}
                                         <img class="w-14 h-14 rounded-full" src="media/{{post.user.useraccount.profile_pic}}" alt="Avatar">
                                     {% else %}
-                                        <img class="w-14 h-14 rounded-full" src="{% static '/images/user.png' %}" alt="Avatar">
+                                        <img class="w-14 h-14 rounded-full" src="{% static '/images/user-circle.png' %}" alt="Avatar">
                                     {% endif %}
                                     <div class="flex flex-col gap-1 ml-2">
-                                        <h3 class="text-lg font-bold">{{post.user}} <span class="font-bold text-gray-500">• {{post.time_difference}} ago</span></h3>
+                                        <h3 class="text-lg font-bold">{{post.user.useraccount.full_name}} <span class="font-bold text-gray-600">• {{post.time_difference}} ago</span></h3>
                                     </div>
                                     <img class="w-8 h-8 rounded-full absolute top-2 right-4 cursor-pointer" src="{% static '/images/more.png' %}" alt="Options">
                                 </div>
@@ -114,12 +126,12 @@
                             </div>
                         {% endfor %}
                     </div>
-                    <div class="rounded-2xl bg-green-200 p-5 mb-8 flex flex-col items-center w-full">
+                    <div class="rounded-2xl bg-gradient-to-br from-blue-300 to-violet-300 p-5 mb-8 flex flex-col items-center w-full text-gray-800">
                         <span class="text-lg font-bold mx-auto">That's all for now. Take some rest :)</span>
                     </div>
                     <span class="text-lg font-bold mx-auto">Made with Love🖤</span>
                 {% else %}
-                    <div class="rounded-2xl bg-green-300 p-2 flex flex-col items-center justify-items-center">
+                    <div class="rounded-2xl bg-gradient-to-br from-blue-300 to-violet-300 p-2 flex flex-col items-center justify-items-center">
                         <h2 class="font-bold mx-auto">No posts</h2>
                     </div>
                 {% endif %}
@@ -128,13 +140,13 @@
                 <span class="text-xl font-bold mb-4">Stories</span>
                 <div class="stories h-auto mb-6">
                     <div class="flex flow-row items-center gap-2 w-full">
-                        <div class="previous bg-green-300 rounded-xl p-2 w-1/4 h-40">
+                        <div class="previous bg-gradient-to-br from-blue-300 to-violet-300 rounded-xl p-2 w-1/4 h-40">
                             
                         </div>
-                        <div class="current bg-green-300 rounded-xl p-2 w-2/4 h-52">
+                        <div class="current bg-gradient-to-br from-blue-300 to-violet-300 rounded-xl p-2 w-2/4 h-52">
                             
                         </div>
-                        <div class="next bg-green-300 rounded-xl p-2 w-1/4 h-40">
+                        <div class="next bg-gradient-to-br from-blue-300 to-violet-300 rounded-xl p-2 w-1/4 h-40">
                             
                         </div>
                     </div>
@@ -142,40 +154,42 @@
                 <span class="text-xl font-bold mb-4">Suggestions</span>
                 <div class="suggestions h-auto flex flex-col gap-2 mb-6">
                     {% for user in users %}
-                    <div class="flex flex-row items-center justify-between gap-2 font-bold cursor-pointer">
-                        {% if user.user.useraccount.profile_pic %}
-                            <img class="w-11 h-11 rounded-full" src="media/{{user.user.useraccount.profile_pic}}" alt="Avatar">
-                        {% else %}
-                            <img class="w-11 h-11 rounded-full" src="{% static '/images/user.png' %}" alt="Avatar">
-                        {% endif %}
-                        <span class="">{{user.user.useraccount.full_name}}</span>
-                        <span class="flex items-center bg-green-400 pr-4 pl-4 p-2 rounded-full cursor-pointer">
-                            Follow
-                        </span>
-                    </div>
+                    <a href="{% url 'users:user-profile' user_id=user.user.id %}">
+                        <div class="flex flex-row items-center justify-between gap-2 font-bold cursor-pointer text-blue-green">
+                            {% if user.user.useraccount.profile_pic %}
+                                <img class="w-11 h-11 p-1 bg-gradient-to-r from-blue-300 to-violet-300 rounded-full" src="media/{{user.user.useraccount.profile_pic}}" alt="Avatar">
+                            {% else %}
+                                <img class="w-11 h-11 p-1 border-2 border-violet-300 rounded-full" src="{% static '/images/user-circle.png' %}" alt="Avatar">
+                            {% endif %}
+                            <span class="">{{user.user.useraccount.full_name}}</span>
+                            <span class="flex items-center bg-gradient-to-br from-blue-300 to-violet-300 pr-4 pl-4 p-2 rounded-full cursor-pointer text-gray-800">
+                                Follow
+                            </span>
+                        </div>
+                    </a>
                     {% endfor %}
                 </div>
                 <span class="text-xl font-bold mb-4">Trending</span>
                 <div class="trending h-auto  mb-6">
-                    <div class="flex flex-row gap-2 flex-wrap">
-                        <span class="text-xs border border-solid border-black rounded-2xl p-2 bg-green-100 cursor-pointer font-bold">#keralagram</span>
-                        <span class="text-xs border border-solid border-black rounded-2xl p-2 bg-green-100 cursor-pointer font-bold">#keralagram</span>
-                        <span class="text-xs border border-solid border-black rounded-2xl p-2 bg-green-100 cursor-pointer font-bold">#keralagram</span>
-                        <span class="text-xs border border-solid border-black rounded-2xl p-2 bg-green-100 cursor-pointer font-bold">#keralagram</span>
-                        <span class="text-xs border border-solid border-black rounded-2xl p-2 bg-green-100 cursor-pointer font-bold">#keralagram</span>
-                        <span class="text-xs border border-solid border-black rounded-2xl p-2 bg-green-100 cursor-pointer font-bold">#keralagram</span>
+                    <div class="flex flex-row gap-2 flex-wrap text-gray-900">
+                        <span class="text-xs rounded-lg p-2 bg-gray-700 cursor-pointer font-bold text-blue-green hover:bg-gray-900 hover:text-violet-400">#keralagram</span>
+                        <span class="text-xs rounded-lg p-2 bg-gray-700 cursor-pointer font-bold text-blue-green hover:bg-gray-900 hover:text-violet-400">#keralagram</span>
+                        <span class="text-xs rounded-lg p-2 bg-gray-700 cursor-pointer font-bold text-blue-green hover:bg-gray-900 hover:text-violet-400">#keralagram</span>
+                        <span class="text-xs rounded-lg p-2 bg-gray-700 cursor-pointer font-bold text-blue-green hover:bg-gray-900 hover:text-violet-400">#keralagram</span>
+                        <span class="text-xs rounded-lg p-2 bg-gray-700 cursor-pointer font-bold text-blue-green hover:bg-gray-900 hover:text-violet-400">#keralagram</span>
+                        <span class="text-xs rounded-lg p-2 bg-gray-700 cursor-pointer font-bold text-blue-green hover:bg-gray-900 hover:text-violet-400">#keralagram</span>
                     </div>
                 </div>
             </div>
         </div>
         
-        {% comment %} {% if messages %}
+        {% if messages %}
             {% for message in messages %}
                 <div class="alert alert-{{message.tags}}">
                     <strong>{{message}}</strong>&nbsp;
                 </div>
             {% endfor %}
-        {% endif %} {% endcomment %}
+        {% endif %}
         <script>
             document.addEventListener('contextmenu', (event) => {
                 event.preventDefault();
@@ -190,25 +204,44 @@
             const liked = document.getElementById("liked");
             const comment = document.getElementById("comment");
             const commentHover = document.getElementById("comment-hover");
+            const logout = document.getElementById("logout");
+            const logoutPopup = document.getElementById("logout-popup");
+            const cancelLogout = document.getElementById("cancel-logout");
+            const imageDisplay = document.getElementById("uploaded-image");
+            const imageInput = document.getElementById("upload-image");
+            const emojis = document.querySelectorAll(".emoji");
+            const captionInput = document.getElementById("caption");
 
-            {% comment %} like.addEventListener("mouseenter", () => {
-                like.classList.add("hidden");
-                likeHover.classList.remove("hidden");
-                likeHover.style.transform = "scale(1.2)";
+            emojis.forEach((emoji)=>{
+                emoji.addEventListener("click", ()=>{
+                    captionInput.value += emoji.textContent;
+                })
             })
-            like.addEventListener("mouseleave", () => {
-                likeHover.classList.add("hidden");
-                like.classList.remove("hidden");
+
+            imageInput.addEventListener("change", (event)=>{
+                const selectedFile = event.target.files[0];
+                if (selectedFile && selectedFile.type.startsWith('image/')) {
+                    const reader = new FileReader();
+    
+                    reader.onload = (e)=>{
+                        imageDisplay.src = e.target.result;
+                        imageDisplay.classList.remove('hidden');
+                    };
+    
+                    reader.readAsDataURL(selectedFile);
+                } else {
+                    imageDisplay.classList.add('hidden');
+                }
             })
-            comment.addEventListener("mouseenter", () => {
-                comment.classList.add("hidden");
-                commentHover.classList.remove("hidden");
-                commentHover.style.transform = "scale(1.2)";
+
+            logout.addEventListener("click", ()=>{
+                logoutPopup.classList.remove("hidden");
+                logoutPopup.classList.add("flex");
             })
-            comment.addEventListener("mouseleave", () => {
-                commentHover.classList.add("hidden");
-                comment.classList.remove("hidden");
-            }) {% endcomment %}
+            cancelLogout.addEventListener("click", ()=>{
+                logoutPopup.classList.remove("flex");
+                logoutPopup.classList.add("hidden");
+            })
 
             function togglePopup(popup){
                 popup.classList.toggle('hidden');
@@ -223,7 +256,7 @@
                 if(!publicPopupButton.contains(event.target)){
                     publicPopup.classList.add('hidden');
                 }
-                if(!emojiPickerButton.contains(event.target)){
+                if(!emojiPickerButton.contains(event.target) && !emojiPickerPopup.contains(event.target)){
                     emojiPickerPopup.classList.add('hidden');
                 }
             });

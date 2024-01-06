@@ -1,6 +1,6 @@
-.navbar-item {
+.move-right {
     transition: transform .2s;
 }
-.navbar-item:hover {
+.move-right:hover {
     transform: translateX(1rem);
 }

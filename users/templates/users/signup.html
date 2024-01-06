@@ -6,8 +6,8 @@
 {% block header %}
 {% endblock header %}    
 {% block main_content %}
-    <link rel="stylesheet" href="{% static '/users/css/signup.css' %}">
-    <div class="main">
+    {% comment %} <link rel="stylesheet" href="{% static '/users/css/signup.css' %}"> {% endcomment %}
+    <div class="flex items-center justify-center w-full h-full text-black overflow-hidden">
         {% if messages %}
             {% for message in messages %}
             <div class="alert alert-{{message.tags}}">
@@ -16,29 +16,30 @@
             {% endfor %}
         {% endif %}
         <div>
-            <form id="form" class="signup-section" action="/user/register-user/" method="post">
-                <a class="go-back-section" href="{% url 'users:login' %}">
-                    <img id="go-back" src="{% static 'images/go-back.png' %}" alt="back">
+            <form id="form" class="w-[30em] h-auto bg-gradient-to-r from-blue-300 to-violet-300 p-2 gap-2 rounded-xl flex flex-col items-center justify-center relative" action="/user/register-user/" method="post">
+                <a class="flex flex-row items-center absolute top-2 left-2" href="{% url 'users:login' %}">
+                    <img class="w-6 h-6" src="{% static 'images/left-arrow.png' %}" alt="back">
+                    <span class="text-gray-800 font-bold">login</span>
                 </a>
-                <img id="logo" src="{% static 'images/logo.png' %}" alt="">
-                <h1>Keralagram</h1>
+                <img class="w-20 h-20" src="{% static 'images/letter-k.png' %}" alt="">
+                <span class="font-extrabold text-3xl mb-6">Keralagram</span>
                 {% csrf_token %}
                 {% comment %} {{form.as_p}} {% endcomment %}
-                <input id="username" type="text" name="username" placeholder="User name">
-                <input id="email" type="email" name="email" placeholder="Email">
-                <input id="fullname" type="text" name="fullname" placeholder="Full name">
-                <select name="gender" id="gender" placeholder="Gender">
+                <input class="w-2/3 bg-transparent border-b-4 border-gray-800 focus:ring-0 rounded-full" id="username" type="text" name="username" placeholder="User name">
+                <input class="w-2/3 bg-transparent border-b-4 border-gray-800 focus:ring-0 rounded-full" id="fullname" type="text" name="fullname" placeholder="Full name">
+                <input class="w-2/3 bg-transparent border-b-4 border-gray-800 focus:ring-0 rounded-full" id="email" type="email" name="email" placeholder="Email">
+                <select class="w-2/3 bg-transparent border-b-4 border-gray-800 focus:ring-0 rounded-full" name="gender" id="gender" placeholder="Gender">
                     <option value="" disabled selected>Select a gender</option>
                     {% for key, gender in gender_choices.items %}
                         <option value="{{key}}">{{gender}}</option>
                     {% endfor %}
                 </select>
-                <input id="phone" type="tel" name="phone" placeholder="Phone number" maxlength="10">
-                <input id="password1" type="password" name="password" placeholder="Password">
-                <input id="password2" type="password" name="password" placeholder="Confirm Password">
-                <span id="warning"></span>
-                <p>By signing up, you agree to our Terms , <a style="cursor:pointer;font-size:larger;color:rgb(0, 200, 100);" href="">Privacy Policy and Cookies Policy</a> .</p>
-                <span id="signup-button" class="signup-button">Sign up</span>
+                <input class="w-2/3 bg-transparent border-b-4 border-gray-800 focus:ring-0 rounded-full" id="phone" type="tel" name="phone" placeholder="Phone number" maxlength="10">
+                <input class="w-2/3 bg-transparent border-b-4 border-gray-800 focus:ring-0 rounded-full" id="password1" type="password" name="password" placeholder="Password">
+                <input class="w-2/3 bg-transparent border-b-4 border-gray-800 focus:ring-0 rounded-full" id="password2" type="password" name="password" placeholder="Confirm Password">
+                <span id="warning" class='font-extrabold text-red-600'></span>
+                <span class="w-3/4">By signing up, you agree to our Terms , <a class="font-bold text-blue-green" href="">Privacy Policy and Cookies Policy</a> .</span>
+                <span id="signup-button" class="bg-gray-800 p-3 mt-4 rounded-full w-3/4 text-blue-200 font-extrabold text-xl flex justify-center">Sign up</span>
             </form>
         </div>
         {% comment %} <div class="login-section">
@@ -70,12 +71,12 @@
                 warning.textContent = "Enter user name!";
                 submit = false;
             }
-            else if(!email.value){
-                warning.textContent = "Enter your email ID!";
-                submit = false;
-            }
             else if(!fullname.value){
                 warning.textContent = "Enter your full name!";
+                submit = false;
+            }
+            else if(!email.value){
+                warning.textContent = "Enter your email ID!";
                 submit = false;
             }
             else if(!password1.value){
@@ -86,9 +87,12 @@
                 warning.textContent = "Confirm your password!";
                 submit = false;
             }
-            else{
+            else if(password2.value==password1.value){
                 warning.textContent = "";
                 submit = true;
+            }else{
+                warning.textContent = "Password doesnt match!";
+                submit = false;
             }
             if(submit){
                 form.submit();   

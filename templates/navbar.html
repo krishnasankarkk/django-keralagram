@@ -1,62 +1,56 @@
 {% load static %}
 {% block navbar %}
     <link rel="stylesheet" type="text/css" href="{% static '/css/navbar.css' %}">
-    <div class="flex flex-col h-auto w-1/4 items-center p-2 mt-4">
+    <div class="flex flex-col h-auto w-1/4 items-center p-2 mt-4 text-blue-green text-lg">
                 <div class="flex flex-col items-center cursor-pointer mb-5 sm:hidden md:flex">
-                    <div class="flex flex-row">
-                        {% if current_user.user.useraccount.profile_pic %}
-                            <img class="h-24 w-24 rounded-full" src="media/{{current_user.user.useraccount.profile_pic}}" alt="Profile pic">
-                        {% else %} 
-                            <img class="h-24 w-24 rounded-full" src="{% static '/images/user.png' %}" alt="profile pic"> 
-                        {% endif %} 
-                    </div>
-                    <span class="text-xl font-bold">{{user.first_name}} {{user.last_name}}</span>
+                    <a href="{% url 'users:profile' %}">
+                        <div class="flex flex-row p-2 bg-gradient-to-r from-blue-300 to-violet-300 rounded-full">
+                            {% if current_user.user.useraccount.profile_pic %}
+                                <img class="h-24 w-24 rounded-full" src="media/{{current_user.user.useraccount.profile_pic}}" alt="Profile pic">
+                            {% else %} 
+                                <img class="h-24 w-24 rounded-full" src="{% static '/images/navbar/user.png' %}" alt="profile pic"> 
+                            {% endif %} 
+                        </div>
+                    </a>
+                    <a href="{% url 'users:profile' %}">
+                        <span class="text-2xl font-bold text-blue-green">{{user.useraccount.full_name}}</span>
+                    </a>
                     <span class="font-bold text-gray-400">@{{user}}</span>
                     <span class="font-bold text-green-500 flex items-center gap-1">
                         <b class="text-2xl">•</b> online
                     </span>
                 </div>
-                <div class="navbar-item cursor-pointer h-14 w-full pl-2 bg-green-600 text-white rounded-2xl flex gap-2 items-center justify-items-center">
-                    <span class="material-symbols-outlined">
-                        home
-                    </span>
+                <div class="cursor-pointer h-14 w-full pl-2 bg-gradient-to-r from-blue-300 to-violet-300 text-gray-900 rounded-2xl flex gap-2 items-center justify-items-center">
+                    <img class="h-8 w-8 opacity-80" src="{% static '/images/navbar/home-black.png' %}" alt="Home">
                     <h3 class="font-bold sm:hidden md:block">Home</h3>
                 </div>
-                <div class="navbar-item cursor-pointer h-14 w-full pl-2 flex gap-2 items-center justify-items-center">
-                    <span class="material-symbols-outlined">
-                        search
-                    </span>
+                <div class="move-right cursor-pointer h-14 w-full pl-2 flex gap-2 items-center justify-items-center">
+                    <img class="h-8 w-8" src="{% static '/images/navbar/search.png' %}" alt="Search">
                     <h3 class="font-bold sm:hidden md:block">Search</h3>
                 </div>
-                <div class="navbar-item cursor-pointer h-14 w-full pl-2 flex gap-2 items-center justify-items-center">
-                    <span class="material-symbols-outlined">
-                        explore
-                    </span>
+                <div class="move-right cursor-pointer h-14 w-full pl-2 flex gap-2 items-center justify-items-center">
+                    <img class="h-8 w-8" src="{% static '/images/navbar/explore.png' %}" alt="Explore">
                     <h3 class="font-bold sm:hidden md:block">Explore</h3>
                 </div>
-                <div class="navbar-item cursor-pointer h-14 w-full pl-2 flex gap-2 items-center justify-items-center">
-                    <span class="material-symbols-outlined">
-                        theaters
-                    </span>
+                <div class="move-right cursor-pointer h-14 w-full pl-2 flex gap-2 items-center justify-items-center">
+                    <img class="h-8 w-8" src="{% static '/images/navbar/home.png' %}" alt="Home">
                     <h3 class="font-bold sm:hidden md:block">Reels</h3>
                 </div>
-                <div class="navbar-item cursor-pointer h-14 w-full pl-2 flex gap-2 items-center justify-items-center">
-                    <span class="material-symbols-outlined">
-                        forum
-                    </span>
+                <div class="move-right cursor-pointer h-14 w-full pl-2 flex gap-2 items-center justify-items-center">
+                    <img class="h-8 w-8" src="{% static '/images/navbar/chat.png' %}" alt="Chat">
                     <h3 class="font-bold sm:hidden md:block">Messages</h3>
                 </div>
-                <div class="navbar-item cursor-pointer h-14 w-full pl-2 flex gap-2 items-center justify-items-center">
-                    <span class="material-symbols-outlined">
-                        account_circle
-                    </span>
+                <div class="move-right cursor-pointer h-14 w-full pl-2 flex gap-2 items-center justify-items-center">
+                    <img class="h-8 w-8" src="{% static '/images/navbar/profile-icon.png' %}" alt="Profile">
                     <h3 class="font-bold sm:hidden md:block">Profile</h3>
                 </div>
-                <div class="navbar-item cursor-pointer h-14 w-full pl-2 flex gap-2 items-center justify-items-center">
-                    <span class="material-symbols-outlined">
-                        settings
-                    </span>
+                <div class="move-right cursor-pointer h-14 w-full pl-2 flex gap-2 items-center justify-items-center">
+                    <img class="h-8 w-8" src="{% static '/images/navbar/settings.png' %}" alt="Settings">
                     <h3 class="font-bold sm:hidden md:block">Settings</h3>
+                </div>
+                <div id="logout" class="move-right cursor-pointer h-14 w-full pl-2 flex gap-2 items-center justify-items-center">
+                    <img class="h-8 w-8" src="{% static '/images/navbar/log-out.png' %}" alt="Logout">
+                    <h3 class="font-bold sm:hidden md:block">Log Out</h3>
                 </div>
             </div>
 {% endblock navbar %}
