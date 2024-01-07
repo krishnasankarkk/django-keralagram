@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-lv%9ja!e7+z#alt1sdd#12*zp-z=!4a+43apx=-01df25ef8hg'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['keralagram.vercel.app', '127.0.0.1','.vercel.app', '.now.sh','localhost']
 
@@ -107,16 +107,16 @@ CHANNEL_LAYERS = {
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 #live railway server
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'keralagram_db',
-#         'USER': 'keralagram',
-#         'PASSWORD': 'Kichu1234*',
-#         'HOST': 'postgresql-keralagram.alwaysdata.net',  # Set to the hostname where your database is running, typically 'localhost'.
-#         'PORT': '5432',  # Leave empty to use the default PostgreSQL port (5432).
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'Fbc4cdFGfD2c33-gGA6A-*3G65Ad1fgD',
+        'HOST': 'viaduct.proxy.rlwy.net',  # Set to the hostname where your database is running, typically 'localhost'.
+        'PORT': '5432',  # Leave empty to use the default PostgreSQL port (5432).
+    }
+}
 
 # live render server
 # DATABASES = {
