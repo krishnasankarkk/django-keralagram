@@ -114,7 +114,7 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': 'Fbc4cdFGfD2c33-gGA6A-*3G65Ad1fgD',
         'HOST': 'viaduct.proxy.rlwy.net',  # Set to the hostname where your database is running, typically 'localhost'.
-        'PORT': '5432',  # Leave empty to use the default PostgreSQL port (5432).
+        'PORT': '37014',  # Leave empty to use the default PostgreSQL port (5432).
     }
 }
 
@@ -139,16 +139,16 @@ DATABASES = {
 # }
 
 #local db.
-DATABASES = {
-   'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'instagram',
-        'USER': 'postgres',
-        'PASSWORD': '1234',
-        'HOST': 'localhost',  # Set to the hostname where your database is running, typically 'localhost'.
-        'PORT': '5433',  # Leave empty to use the default PostgreSQL port (5432).
-    }
-}
+# DATABASES = {
+#    'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'instagram',
+#         'USER': 'postgres',
+#         'PASSWORD': '1234',
+#         'HOST': 'localhost',  # Set to the hostname where your database is running, typically 'localhost'.
+#         'PORT': '5433',  # Leave empty to use the default PostgreSQL port (5432).
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
