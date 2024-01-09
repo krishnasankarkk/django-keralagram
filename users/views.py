@@ -4,7 +4,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout as logout_user
 from django.contrib import messages
-from django.db.models import Q
+from django.db.models import Q, F, ExpressionWrapper, DurationField
+import datetime 
 
 from .forms import LoginForm, RegistrationForm
 from .models import UserAccount
@@ -67,12 +68,41 @@ def profile(request):
     followers = len(account.followers) if account.followers is not None else 0
     following = len(account.following) if account.following is not None else 0
     posts = Post.objects.filter(user_id=login_user).order_by('-created_at')
+    current_date = datetime.datetime.now(datetime.timezone.utc)
+    posts = Post.objects.all().order_by('-created_at').annotate(
+        time_difference = ExpressionWrapper(current_date - F('created_at'), output_field=DurationField())
+    )
+    updated_posts = []
+    for post in posts:
+        time_difference = post.time_difference
+        days = time_difference.days
+        hours = time_difference.seconds // 3600
+        minutes = (time_difference.seconds // 60) % 60
+        
+        if days > 0:
+            updated_time_difference = f"{days} day{'s' if days != 1 else ''}"
+        elif hours > 0:
+            updated_time_difference = f"{hours} hour{'s' if hours != 1 else ''}"
+        elif minutes > 0:
+            updated_time_difference = f"{minutes} minute{'s' if minutes != 1 else ''}"
+        else:
+            updated_time_difference = "Few seconds"
+        updated_post = {
+            'id' : post.id,
+            'post_img' : post.post_img,
+            'like' : post.like,
+            'user' : post.user,
+            'caption' : post.caption,
+            'time_difference' : updated_time_difference,
+        }
+        updated_posts.append(updated_post)
     context = {
-        "account_details":account,
-        "posts":posts,
+        "current_user":account,
+        "posts":updated_posts,
         "posts_count":posts.count(),
         "followers":followers,
         "following":following,
+        "location":"profile",
     }
     return render(request, "users/profile.html", context)
 

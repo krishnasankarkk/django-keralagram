@@ -49,6 +49,7 @@ def home(request):
         "users":users,
         "all_posts":updated_posts,
         "following_posts":following_posts,
+        "location":"home",
     }
     return render(request, "home.html", context)
 

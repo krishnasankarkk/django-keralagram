@@ -1,12 +1,12 @@
 {% load static %}
 {% block navbar %}
-    <link rel="stylesheet" type="text/css" href="{% static '/css/navbar.css' %}">
-    <div class="flex flex-col h-auto w-1/4 items-center p-2 mt-4 text-blue-green text-lg">
+    {% comment %} <link rel="stylesheet" type="text/css" href="{% static '/css/navbar.css' %}"> {% endcomment %}
+    <div class="md:flex sm:hidden flex-col h-screen w-1/4 items-center p-2 mt-4 text-blue-green text-lg z-50">
                 <div class="flex flex-col items-center cursor-pointer mb-5 sm:hidden md:flex">
                     <a href="{% url 'users:profile' %}">
                         <div class="flex flex-row p-2 bg-gradient-to-r from-blue-300 to-violet-300 rounded-full">
                             {% if current_user.user.useraccount.profile_pic %}
-                                <img class="h-24 w-24 rounded-full" src="media/{{current_user.user.useraccount.profile_pic}}" alt="Profile pic">
+                                <img class="h-24 w-24 rounded-full" src="/media/{{current_user.user.useraccount.profile_pic}}" alt="Profile pic">
                             {% else %} 
                                 <img class="h-24 w-24 rounded-full" src="{% static '/images/navbar/user.png' %}" alt="profile pic"> 
                             {% endif %} 
@@ -20,10 +20,20 @@
                         <b class="text-2xl">•</b> online
                     </span>
                 </div>
-                <div class="cursor-pointer h-14 w-full pl-2 bg-gradient-to-r from-blue-300 to-violet-300 text-gray-900 rounded-2xl flex gap-2 items-center justify-items-center">
-                    <img class="h-8 w-8 opacity-80" src="{% static '/images/navbar/home-black.png' %}" alt="Home">
+                <a href="{% url 'home' %}" class="cursor-pointer h-14 w-full pl-2 
+                    {% if location == 'home' %}
+                        bg-gradient-to-r from-blue-300 to-violet-300 text-gray-900 rounded-2xl
+                    {% else %}
+                        move-right
+                    {% endif %}
+                    flex gap-2 items-center justify-items-center">
+                    {% if location == 'home' %}
+                        <img class="h-8 w-8 opacity-80" src="{% static '/images/navbar/home-black.png' %}" alt="Home">
+                    {% else %}
+                        <img class="h-8 w-8 opacity-80" src="{% static '/images/navbar/home.png' %}" alt="Home">
+                    {% endif %}
                     <h3 class="font-bold sm:hidden md:block">Home</h3>
-                </div>
+                </a>
                 <div class="move-right cursor-pointer h-14 w-full pl-2 flex gap-2 items-center justify-items-center">
                     <img class="h-8 w-8" src="{% static '/images/navbar/search.png' %}" alt="Search">
                     <h3 class="font-bold sm:hidden md:block">Search</h3>
@@ -33,17 +43,23 @@
                     <h3 class="font-bold sm:hidden md:block">Explore</h3>
                 </div>
                 <div class="move-right cursor-pointer h-14 w-full pl-2 flex gap-2 items-center justify-items-center">
-                    <img class="h-8 w-8" src="{% static '/images/navbar/home.png' %}" alt="Home">
-                    <h3 class="font-bold sm:hidden md:block">Reels</h3>
-                </div>
-                <div class="move-right cursor-pointer h-14 w-full pl-2 flex gap-2 items-center justify-items-center">
                     <img class="h-8 w-8" src="{% static '/images/navbar/chat.png' %}" alt="Chat">
                     <h3 class="font-bold sm:hidden md:block">Messages</h3>
                 </div>
-                <div class="move-right cursor-pointer h-14 w-full pl-2 flex gap-2 items-center justify-items-center">
-                    <img class="h-8 w-8" src="{% static '/images/navbar/profile-icon.png' %}" alt="Profile">
-                    <h3 class="font-bold sm:hidden md:block">Profile</h3>
-                </div>
+                <a href="{% url 'users:profile' %}" class="cursor-pointer h-14 w-full pl-2 
+                    {% if location == 'profile' %}
+                        bg-gradient-to-r from-blue-300 to-violet-300 text-gray-900 rounded-2xl
+                    {% else %}
+                        move-right
+                    {% endif %}
+                    flex gap-2 items-center justify-items-center">
+                    {% if location == 'profile' %}
+                        <img class="h-8 w-8" src="{% static '/images/navbar/profile-black.png' %}" alt="Profile">
+                    {% else %}
+                        <img class="h-8 w-8" src="{% static '/images/navbar/profile-icon.png' %}" alt="Profile">
+                    {% endif %}
+                    <h3 class="font-bold sm:hidden md:block">My Profile</h3>
+                </a>
                 <div class="move-right cursor-pointer h-14 w-full pl-2 flex gap-2 items-center justify-items-center">
                     <img class="h-8 w-8" src="{% static '/images/navbar/settings.png' %}" alt="Settings">
                     <h3 class="font-bold sm:hidden md:block">Settings</h3>
@@ -52,5 +68,27 @@
                     <img class="h-8 w-8" src="{% static '/images/navbar/log-out.png' %}" alt="Logout">
                     <h3 class="font-bold sm:hidden md:block">Log Out</h3>
                 </div>
+                <div id="logout-popup" class="hidden flex-col gap-4 w-1/4 h-1/4 items-center justify-between absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-gray-400 text-gray-800 p-6 rounded-2xl">
+                    <span class="font-bold">Are you sure?</span>
+                    <div class="flex gap-4 w-full">
+                        <span id="cancel-logout" class="font-bold bg-blue-200 rounded-full w-1/2 flex justify-center p-2 cursor-pointer">No</span>
+                        <a href="{% url 'users:logout' %}" class="font-bold bg-red-200 rounded-full w-1/2 flex justify-center p-2 cursor-pointer">
+                            <span id="confirm-logout" >Yes</span>
+                        </a>
+                    </div>
+                </div>
             </div>
+            <script>
+                const logout = document.getElementById("logout");
+                const logoutPopup = document.getElementById("logout-popup");
+                const cancelLogout = document.getElementById("cancel-logout");
+                logout.addEventListener("click", ()=>{
+                    logoutPopup.classList.remove("hidden");
+                    logoutPopup.classList.add("flex");
+                })
+                cancelLogout.addEventListener("click", ()=>{
+                    logoutPopup.classList.remove("flex");
+                    logoutPopup.classList.add("hidden");
+                })
+            </script>
 {% endblock navbar %}

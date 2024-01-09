@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-lv%9ja!e7+z#alt1sdd#12*zp-z=!4a+43apx=-01df25ef8hg'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['keralagram.vercel.app', '127.0.0.1','.vercel.app', '.now.sh','localhost']
 
@@ -112,9 +112,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'railway',
         'USER': 'postgres',
-        'PASSWORD': 'Fbc4cdFGfD2c33-gGA6A-*3G65Ad1fgD',
-        'HOST': 'viaduct.proxy.rlwy.net',  # Set to the hostname where your database is running, typically 'localhost'.
-        'PORT': '37014',  # Leave empty to use the default PostgreSQL port (5432).
+        'PASSWORD': '5*edg*BB21GG52e*54a4E2FAb5Cf*65C',
+        'HOST': 'monorail.proxy.rlwy.net',  # Set to the hostname where your database is running, typically 'localhost'.
+        'PORT': '41251',  # Leave empty to use the default PostgreSQL port (5432).
     }
 }
 

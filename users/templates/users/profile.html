@@ -5,14 +5,209 @@
 {% endblock title %}
 {% block main_content %}
     <link rel="stylesheet" href="{% static '/users/css/profile.css' %}">
-    {% for message in messages %}
-            <div class="alert alert-{{message.tags}}">
-                <strong>{{message}}</strong>&nbsp;
+    <div class='flex flex-row overflow-hidden relative'>
+        <form 
+            class="absolute top-1/2 left-1/2 z-10 -translate-x-1/2 flex hidden flex-col gap-2 rounded-2xl bg-gradient-to-br from-blue-300 to-violet-300 p-5 text-gray-800" 
+            action="{% url 'posts:create-post' %}" 
+            method="post" 
+            enctype="multipart/form-data"
+            id="create-post-popup"
+        >
+            {% csrf_token %}
+            <div class="flex flex-row w-full relative">
+                {% if current_user.user.useraccount.profile_pic != '' %}
+                    <img class="w-12 h-12 rounded-full absolute" src="/media/{{current_user.user.useraccount.profile_pic}}" alt="Avatar">
+                {% else %}
+                    <img class="w-12 h-12 rounded-full absolute" src="{% static '/images/user-circle.png' %}" alt="Avatar">
+                {% endif %}
+                <input
+                    id="caption"
+                    type="text"
+                    name="caption"
+                    class="text w-full h-12 rounded-full 
+                        border-none focus:outline-none 
+                        focus:ring-0 pl-16 bg-gray-700 text-white" 
+                    placeholder="Share something"
+                />
+                <img id="emoji-picker-button" class="cursor-pointer absolute top-2 right-2 w-8 h-8 rounded-full transition-transform duration-300 hover:scale-125" src="{% static '/images/smile.png' %}" alt="Emoji">
+                {% include 'emoji.html' %}
             </div>
-        {% endfor %}
-    <div class='profile-section'>
-        
-        <div class='profile-content'>
+            <div class="flex">
+                <img class="w-auto h-50 rounded-lg hidden" id="uploaded-image" src="" alt="">
+            </div>
+            <div class="flex flex-row gap-6 items-start w-full mt-2">
+                <div class="cursor-pointer flex items-center gap-1 text-lg font-bold">
+                    <img class="w-6 h-6" src="{% static '/images/image.png' %}" alt="">
+                    <input class="hidden" type="file" name="uploaded_image" id="upload-image">
+                    <label class="cursor-pointer" for="upload-image">Image</label>
+                </div>
+                <div class="cursor-pointer flex items-center gap-1 text-lg font-bold">
+                    <img class="w-6 h-6" src="{% static '/images/pin.png' %}" alt="">
+                    <span>Location</span>
+                </div>
+                <div id="public-popup-button" class="font-bold cursor-pointer flex items-center gap-1 text-lg relative">
+                    <img class="w-6 h-6" src="{% static '/images/earth.png' %}" alt="">
+                    <span class="flex justify-center items-center">Public
+                        <span class="material-symbols-outlined">
+                            keyboard_arrow_down
+                        </span>
+                    </span>
+                    <div id="public-popup" class="bg-white absolute top-10 left-6 w-28 rounded-xl hidden">
+                        <span class="public-popup-item cursor-pointer hover:bg-violet-300 flex items-center justify-center rounded-xl p-2">Public</span>
+                        <span class="public-popup-item cursor-pointer hover:bg-violet-300 flex items-center justify-center rounded-xl p-2">Private</span>
+                    </div>
+                </div>
+                <div class="post-button mr-0 ml-auto bg-gray-800 rounded-full p-2 w-24 flex items-center justify-center cursor-pointer">
+                    <button class="font-bold text-blue-green text-xl" type="submit">
+                        Post
+                    </button>
+                </div>
+            </div>
+        </form>
+        {% include 'navbar.html' %}
+        <div class="flex flex-col w-full h-full p-8 overflow-hidden overflow-y-auto">
+            <div class="w-full h-1/3 p-2 flex flex-row justify-center m-2 bg-gradient-to-b from-violet-400 to-blue-400 rounded-tl-3xl rounded-tr-3xl relative">
+                <div class="">
+                    <div class="">
+                        {% if current_user.user.useraccount.profile_pic %}
+                            <img class="h-44 w-44 rounded-full" src="/media/{{current_user.user.useraccount.profile_pic}}" alt="Profile pic">
+                        {% else %} 
+                            <img class="h-44 w-44 rounded-full" src="{% static '/images/user-circle.png' %}" alt="profile pic"> 
+                        {% endif %} 
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col w-full mt-4 items-center justify-center">
+                <span class="text-3xl font-bold">{{current_user.full_name}}</span>
+                <span class="text-xl font-bold text-gray-400">@{{current_user}}</span>
+                <span class="text-xl">{{current_user.bio|linebreaks}}</span>
+            </div>
+            <div class="flex flex-row w-full h-auto gap-4 mt-2">
+                <div class="w-1/3 flex flex-col items-center bg-gray-900 rounded-xl p-2 cursor-pointer">
+                    
+                </div>
+                <div class="w-1/3 flex flex-row gap-4">
+                    <div class="w-1/3 flex flex-col items-center bg-gray-900 rounded-xl p-2 cursor-pointer">
+                        <b class="font-extrabold text-3xl">{{posts_count}}</b>
+                        <span class="text-xl">posts</span>
+                    </div>
+                    <div class="w-1/3 flex flex-col items-center bg-gray-900 rounded-xl p-2 cursor-pointer">
+                        <b class="font-extrabold text-3xl">{{followers}}</b>
+                        <span class="text-xl">followers</span>
+                    </div>
+                    <div class="w-1/3 flex flex-col items-center bg-gray-900 rounded-xl p-2 cursor-pointer">
+                        <b class="font-extrabold text-3xl">{{following}}</b>
+                        <span class="text-xl">following</span>
+                    </div>
+                </div>
+                <div class="w-1/3 flex flex-row items-center justify-center gap-2">
+                    <div class="flex flex-col w-full h-full items-center justify-end bg-gray-900 rounded-xl p-2 gap-2 cursor-pointer">
+                        <img id="edit-profile-button" class="w-8 h-8 mt-2" src="{% static '/images/edit.png' %}" alt="">
+                        <span>
+                            Edit Profile
+                        </span>
+                    </div>
+                    <div id="create-post-button" class="flex flex-col w-full h-full items-center justify-end bg-gray-900 rounded-xl p-2 gap-2 cursor-pointer">
+                        <img class="w-8 h-8 mt-2" src="{% static '/images/plus.png' %}" alt="">
+                        <span>
+                            Create post
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex gap-2 w-full justify-center mt-8">
+                <div id="show-image-posts" class="flex flex-row gap-2 items-center justify-center text-gray-500 w-auto bg-gray-900 rounded-t-xl p-2 cursor-pointer">
+                    <img class="w-6 h-6" src="{% static '/images/image.png' %}" alt="">
+                    <span>Images</span>
+                </div>
+                <div id="show-text-posts" class=" flex flex-row gap-2 items-center justify-center text-gray-500 w-auto bg-gray-900 rounded-t-xl p-2 cursor-pointer">
+                    <img class="w-6 h-6" src="{% static '/images/comment.png' %}" alt="">
+                    <span>Texts</span>
+                </div>
+            </div>
+            <div class="w-full h-auto flex flex-row flex-wrap gap-4 bg-gray-900 rounded-xl p-4">
+                {% for post in posts %}
+                    {% if post.post_img %}
+                    <div class="image-posts flex flex-col rounded-2xl bg-gradient-to-br from-blue-300 to-violet-300 text-gray-800 items-start w-1/2 flex-1 h-fit justify-between">
+                        <div class="flex flex-row gap-1 items-center rounded-xl p-4 w-full relative">
+                            {% if post.user.useraccount.profile_pic != '' %}
+                                <img class="w-8 h-8 rounded-full" src="/media/{{post.user.useraccount.profile_pic}}" alt="ProfilePic">
+                            {% else %}
+                                <img class="w-8 h-8 rounded-full" src="{% static '/images/user-circle.png' %}" alt="Avatar">
+                            {% endif %}
+                            <div class="flex flex-col gap-1 ml-2">
+                                <h3 class="text-sm font-bold">You <span class="font-bold text-gray-600">• {{post.time_difference}} ago</span></h3>
+                            </div>
+                            <img class="w-12 h-12 rounded-full absolute to    p-2 right-4 cursor-pointer" src="{% static '/images/more.png' %}" alt="Options" data-post-id="{{post.id}}" onclick="deletePost(this)">
+                        </div>
+                        <div class="flex flex-col">
+                            <h3 class="font-bold p-4">{{post.caption|linebreaks}}</h3>
+                            <img class="w-full h-auto" src="/media/{{post.post_img}}" alt="Post">
+                        </div>
+                        <div class="reaction flex flex-row justify-between p-4 gap-5 w-full">
+                            <div class="flex flex-col items-center justify-center cursor-pointer gap-2">
+                                {% comment %} <img id="like" class="w-8 h-8 opacity-80 transition-transform duration-200 hover:scale-125" src="{% static '/images/heart.png' %}" alt="Like"> {% endcomment %}
+                                {% comment %} <img id="liked" class="liked w-8 h-8 hidden" src="{% static '/images/liked.png' %}" alt="Like"> {% endcomment %}
+                                <span class="font-bold">Likes</span>
+                            </div>
+                            <div class="flex flex-col items-center justify-center cursor-pointer gap-2">
+                                {% comment %} <img id="comment" class="w-8 h-8 opacity-80 transition-transform duration-200 hover:scale-125" src="{% static '/images/comment.png' %}" alt="Comment"> {% endcomment %}
+                                {% comment %} <img id="comment-hover" class="w-8 h-8 transition-transform hidden opacity-80" src="{% static '/images/comment-hover.png' %}" alt="Comment"> {% endcomment %}
+                                <span class="font-bold">Comments</span>
+                            </div>
+                            <div class="flex flex-col items-center justify-center cursor-pointer gap-2">
+                                {% comment %} <img id="share" class="w-8 h-8 opacity-80 transition-transform duration-200 hover:scale-125" src="{% static '/images/share.png' %}" alt="Share"> {% endcomment %}
+                                <span class="font-bold">Shares</span>
+                            </div>
+                            <div class="flex flex-col items-center justify-center cursor-pointer gap-2 ml-auto mr-0">
+                                {% comment %} <img id="share" class="w-8 h-8 opacity-80 transition-transform duration-200 hover:scale-125" src="{% static '/images/bookmark.png' %}" alt="Share"> {% endcomment %}
+                                <span class="font-bold">Save</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="text-posts flex flex-col rounded-2xl bg-gradient-to-br from-blue-300 to-violet-300 text-gray-800 items-start w-1/2 flex-1 h-fit justify-between">
+                        <div class="flex flex-row gap-1 items-center rounded-xl p-4 w-full relative">
+                            {% if post.user.useraccount.profile_pic != '' %}
+                                <img class="w-8 h-8 rounded-full" src="/media/{{post.user.useraccount.profile_pic}}" alt="ProfilePic">
+                            {% else %}
+                                <img class="w-8 h-8 rounded-full" src="{% static '/images/user-circle.png' %}" alt="Avatar">
+                            {% endif %}
+                            <div class="flex flex-col gap-1 ml-2">
+                                <h3 class="text-sm font-bold">You <span class="font-bold text-gray-600">• {{post.time_difference}} ago</span></h3>
+                            </div>
+                            <img class="w-6 h-6 rounded-full absolute top-2 right-4 cursor-pointer" src="{% static '/images/more.png' %}" alt="Options" data-post-id="{{post.id}}" onclick="deletePost(this)">
+                        </div>
+                        <div class="flex flex-col">
+                            <h3 class="font-bold p-4">{{post.caption|linebreaks}}</h3>
+                            {% comment %} <img class="w-full h-auto" src="/media/{{post.post_img}}" alt="Post" data-post-id="{{post.id}}" onclick="deletePost(this)"> {% endcomment %}
+                        </div>
+                        <div class="reaction flex flex-row justify-between p-4 gap-5 w-full">
+                            <div class="flex flex-col items-center justify-center cursor-pointer gap-2">
+                                {% comment %} <img id="like" class="w-8 h-8 opacity-80 transition-transform duration-200 hover:scale-125" src="{% static '/images/heart.png' %}" alt="Like"> {% endcomment %}
+                                {% comment %} <img id="liked" class="liked w-8 h-8 hidden" src="{% static '/images/liked.png' %}" alt="Like"> {% endcomment %}
+                                <span class="font-bold">Likes</span>
+                            </div>
+                            <div class="flex flex-col items-center justify-center cursor-pointer gap-2">
+                                {% comment %} <img id="comment" class="w-8 h-8 opacity-80 transition-transform duration-200 hover:scale-125" src="{% static '/images/comment.png' %}" alt="Comment"> {% endcomment %}
+                                {% comment %} <img id="comment-hover" class="w-8 h-8 transition-transform hidden opacity-80" src="{% static '/images/comment-hover.png' %}" alt="Comment"> {% endcomment %}
+                                <span class="font-bold">Comments</span>
+                            </div>
+                            <div class="flex flex-col items-center justify-center cursor-pointer gap-2">
+                                {% comment %} <img id="share" class="w-8 h-8 opacity-80 transition-transform duration-200 hover:scale-125" src="{% static '/images/share.png' %}" alt="Share"> {% endcomment %}
+                                <span class="font-bold">Shares</span>
+                            </div>
+                            <div class="flex flex-col items-center justify-center cursor-pointer gap-2 ml-auto mr-0">
+                                {% comment %} <img id="share" class="w-8 h-8 opacity-80 transition-transform duration-200 hover:scale-125" src="{% static '/images/bookmark.png' %}" alt="Share"> {% endcomment %}
+                                <span class="font-bold">Save</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        {% comment %} <div class='profile-content'>
             <div class='profile-pic-section'>
                 {% if account_details %}
                     {% if account_details.gender == 'M' %}
@@ -74,7 +269,7 @@
                                 <label for="upload-input" class='upload-button'>Upload image<i class="fa fa-arrow-up" aria-hidden="true"></i></label>
                             </div>
                             <div class="post-caption">
-                                {% comment %} <h3>Write post</h3> {% endcomment %}
+                                <h3>Write post</h3>
                                 <textarea class="caption" type="text" name="caption" id="caption" placeholder="Write something here..."></textarea>
                             </div>
                             <div>
@@ -106,11 +301,19 @@
                     {% endif %}
                 </div>
             </div>
-        </div>
+        </div> {% endcomment %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{message.tags}}">
+                    <strong>{{message}}</strong>&nbsp;
+                </div>
+            {% endfor %}
+        {% endif %}
     </div>
     <script>
         const createPostPopup = document.getElementById("create-post-popup");
         const createPostButton = document.getElementById("create-post-button");
+        const editProfile = document.getElementById("edit-profile-button");
         const popupCloseButton = document.getElementById("close-button");
         const fileInput = document.getElementById('upload-input');
         const uploadProfilePic = document.getElementById('upload-profile-pic');
@@ -133,32 +336,25 @@
         const profilePicEditPopup = document.getElementById("profile-pic-edit-popup");
         const profilePicEditPopupClose = document.getElementById("close-profile-pic-edit-popup");
         const cantPostWarning = document.getElementById("cant-post");
+        const showImagePosts = document.getElementById("show-image-posts");
+        const showTextPosts = document.getElementById("show-text-posts");
+        const imagePosts = document.querySelectorAll(".image-posts");
+        const textPosts = document.querySelectorAll(".text-posts");
 
-        fullname.addEventListener("click", function(){
-            fullname.style.display = "none";
-            fullnameInputSection.style.display = "flex";
-            fullnameInput.focus();
+        if (imagePosts){
+            imagePosts.forEach((post)=>{post.classList.add("hidden")})
+        }
+        showImagePosts.addEventListener("click", function(){
+            if (textPosts)
+                textPosts.forEach((post)=>{post.classList.add("hidden")})
+            if (imagePosts)
+                imagePosts.forEach((post)=>{post.classList.remove("hidden")})
         })
-        fullnameInput.addEventListener("keydown", function(event){
-            if(event.key=='Enter'){
-                editFullnameForm.submit();
-            }
-        })
-        fullnameSaveIcon.addEventListener("click", function(){
-            fullname.style.display = "block";
-            fullnameInputSection.style.display = "none";
-            editFullnameForm.submit();
-        })
-        postButton.addEventListener("click", function () {
-            if (caption.value){
-                createPostPopup.style.display = "none";
-                form.submit();
-                cantPostWarning.style.display = "none";
-            }
-            else{
-                cantPostWarning.style.display = "block";
-            }
-
+        showTextPosts.addEventListener("click", function(){
+            if (textPosts)
+                textPosts.forEach((post)=>{post.classList.remove("hidden")})
+            if (imagePosts)
+                imagePosts.forEach((post)=>{post.classList.add("hidden")})
         })
         
         function handleImageClick(img){
@@ -181,10 +377,9 @@
               });          
         }
         createPostButton.addEventListener("click", function () {
-            createPostPopup.style.display = "block";
-            profilePicEditPopup.style.display = "none";
+            createPostPopup.classList.remove("hidden");
         })
-        popupCloseButton.addEventListener("click", function () {
+        {% comment %} popupCloseButton.addEventListener("click", function () {
             createPostPopup.style.display = "none";
         })
         fileInput.addEventListener('change', (event) => {
@@ -206,7 +401,7 @@
                 imageClearButton.style.display = 'none';
                 uploadButton.style.display = 'flex';
             }
-        });
+        }); {% endcomment %}
         {% comment %} uploadProfilePicfileInput.addEventListener('change', (event) => {
             const selectedFile = event.target.files[0];
 

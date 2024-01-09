@@ -7,7 +7,7 @@ from django.utils import timezone
 class UserAccount(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=50, blank=True,null=True)
-    bio = models.TextField(blank=True,null=True)
+    bio = models.TextField(blank=True,null=True,max_length=100)
     phone = models.CharField(max_length=10,blank=True,null=True)
     profile_pic = models.ImageField(upload_to="uploads/",blank=True,null=True)
     followers = ArrayField(models.IntegerField(blank=True),blank=True,null=True,default=list)

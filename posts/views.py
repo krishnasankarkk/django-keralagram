@@ -23,8 +23,8 @@ def create_post(request):
             post.post_img = None
         post.caption = request.POST['caption'] if request.POST['caption'] else None
         post.like = 0
-        print(request.POST['caption'])
         post.save()
+        messages.success(request, "Successfully saved post :)")
         previous_url = request.META.get('HTTP_REFERER', None)
         return redirect(previous_url)
     
