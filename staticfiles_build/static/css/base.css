@@ -1,0 +1,88 @@
+/* @import url("https://fonts.googleapis.com/css?family=Sofia"); */
+
+@font-face {
+  font-family: 'Sofia-Regular';
+  src: local('Sofia-Regular'),
+       url('/static/fonts/Sofia-Regular.ttf') format("truetype");
+}
+body {
+    background: #ffffff;
+    font-family: 'Sofia-Regular', sans-serif;
+    color: rgb(0, 0, 0);
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.alert{
+  height: 50px;
+  width: 300px;
+  border-radius: 20px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  animation: hideme 5s forwards;
+}
+.alert-success{
+  background-color: #63ff95;
+  color: rgb(0, 0, 0);
+}
+.alert-warning{
+  background-color: #ff6d63;
+  color: rgb(0, 0, 0);
+}
+
+.header-section {
+  background: aqua;
+  width: 100%;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  position: relative;
+  box-shadow: 0 5px 50px rgba(212, 212, 212, 0.938);
+}
+.header-section span{
+  cursor: pointer;
+  margin: 10px;
+}
+
+.material-symbols-outlined {
+  font-weight: 500;
+  font-size: larger;
+  transition: transform .2s;
+}
+.material-symbols-outlined:hover {
+  transform: scale(1.1);
+}
+
+#user-name, #add-post, #options-icon  {
+  cursor: pointer;
+  margin-left: 10px;
+}
+.header-icons {
+  margin-right: 20px   ;
+  margin-left: auto;
+}
+
+@keyframes hideme {
+  0%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+  }
+}
+
+a{
+  text-decoration: none;
+  color: black;
+}

@@ -1,0 +1,395 @@
+/* main */
+.profile-section {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+
+/* profile content */
+.profile-content {
+    flex: 1;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+}
+.profile-pic-section {
+    width: 30vw;
+    height: auto;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    border: 1px dashed rgb(0, 0, 0);
+    border-radius: 20px;
+    cursor: pointer;
+}
+#profile-pic{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: none;
+    margin-top: 20px;
+    object-fit: cover;
+}
+#phone {
+    -moz-appearance: textfield;
+    -webkit-appearance: none;
+    appearance: none;
+}
+.profile-post-section {
+    width: 69vw;
+    margin-left: 1vw;
+    height: auto;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    /* justify-content: center; */
+    border: 1px dashed rgb(0, 0, 0);
+    border-radius: 20px;
+}
+
+.followers-section{
+    display: flex;
+    flex-direction: row;
+    border: 1px dashed black;
+    border-radius: 20px;
+}
+.post-count,.followers,.following{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    align-items: center;
+    border: 1px dashed black;
+    border-radius: 20px;
+    padding: 10px;
+    font-weight: 900;
+}
+.about-section {
+    font-weight: 900;
+}
+.follow-button {
+    height: auto;
+    width: 100%;
+    background-color: aqua;
+    border-radius: 20px;
+    padding: 10px;
+    margin-bottom: 2vh;
+    font-weight: bold;
+    font-size: large;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform .2s;
+}
+#un-follow-button {
+    display: none;
+    background-color: rgb(207, 99, 99);
+}
+.follow-button:hover {
+    transform: scale(1.1);
+}
+.create-post-section {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+.create-post-button {
+    cursor: pointer;
+    margin: 20px;
+    /* border: 2px dashed black; */
+    border-radius: 10px;
+    padding: 10px;
+    font-weight: bold;
+    background-color: aqua;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    transition: transform .2s;
+}
+.create-post-button:hover {
+    transform: scale(1.1);
+}
+.create-post-button i {
+    margin-left: 10px;
+    border: 2px solid black;
+    padding: 2px;
+    border-radius: 5px;
+}
+.posts {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    flex-wrap: wrap;
+    overflow-x: scroll;
+}
+.post {
+    width: auto;
+    height: auto;
+    cursor: pointer;
+    object-fit: cover;
+    margin: 1vw;
+    padding: 1vh;
+    border: 1px dashed black;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    transition: transform .2s;
+}
+#cant-post{
+    color: red;
+    display: none;
+}
+.post:hover {
+    transform: scale(1.02);
+}
+#fullname {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center ;
+    justify-content: center;
+    cursor: pointer;
+}
+#fullname-input{
+    margin: 10px;
+    border-radius: 10px;
+    height: 20px;
+    width: auto;
+    border: none;
+    padding: 10px;
+}
+#full-name-input-section {
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+#full-name-input-section span {
+    color: aqua;
+    cursor: pointer;
+    font-size: larger;
+}
+#full-name-input-section input {
+    font-family: inherit;
+    font-weight: bold;
+    font-size: large;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+}
+#profile-pic-edit-popup {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.644);
+    height: auto;
+    width: 500px;
+    border-radius: 20px;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed black;
+    z-index: 1;
+    cursor: default;
+}
+#close-profile-pic-edit-popup{
+    background-color: rgb(204, 204, 204);
+    padding: 5px;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform .2s;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+#close-profile-pic-edit-popup:hover {
+    transform: scale(1.5);
+    background-color: rgb(255, 87, 87);
+}
+#upload-profile-pic {
+    background-color: rgb(204, 204, 204);
+    padding: 10px;
+    border-radius: 20px;
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+#upload-profile-pic:hover {
+    background-color: aqua;
+    cursor: pointer;
+}
+#save-profile-pic {
+    background-color: rgb(204, 204, 204);
+    padding: 10px;
+    border-radius: 20px;
+    width: 60%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+#save-profile-pic:hover {
+    background-color: aqua;
+    cursor: pointer;
+}
+.create-post-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.644);
+    height: auto;
+    width: 500px;
+    border-radius: 20px;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed black;
+    z-index: 1;
+}
+.create-post-popup input {
+    display: none;
+}
+.upload-button {
+    background-color: rgb(180, 180, 180);
+    padding: 10px;
+    border-radius: 20px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+.image-section {
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.image-section img{
+    width: 500px;
+    height: 400px;
+    object-fit: cover;
+    display: none;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+#clear-image-button {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    cursor: pointer;
+    display: none;
+    color: aqua;
+    transition: transform .2s;
+}
+#clear-image-button:hover {
+    transform: scale(1.5);
+    color: rgb(255, 84, 84);
+}
+#close-button {
+    background-color: rgb(201, 201, 201);
+    padding: 5px;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform .2s;
+}
+#close-button:hover {
+    transform: scale(1.5);
+    background-color: rgb(255, 87, 87);
+}
+.caption {
+    border: 1px dashed black;
+    border-radius: 10px;
+    margin: 10px;
+    height: auto;
+    width: 90%;
+    padding: 10px;
+    resize: none;
+    font-family: inherit;
+    font-weight: 800;
+}
+#post-button {
+    background-color: aqua;
+    width: auto;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    border-radius: 20px;
+    font-size: large;
+    padding: 10px;
+    cursor: pointer;
+    align-items: center;
+    gap: 10px;
+}
+#upload-profile-pic-input {
+    display: none;
+}
+
+.edit-profile-image-section {
+    width: auto;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.edit-profile-image-section img {
+    display: none;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    contain: content;
+    position: relative;
+    transition: filter .2s;
+}
+.edit-profile-image:hover {
+    filter: blur(2px);
+    cursor: pointer;
+}
+#delete-profile-pic {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    transition: transform .2s;
+    display: none;
+    background-color: rgba(211, 211, 211, 0);
+    border-radius: 50%;
+    padding: 5px;
+    border: 1px dashed black;
+}
+#delete-profile-pic:hover + #edit-profile-image {
+    filter: blur(2px);
+}
+#delete-profile-pic:hover{
+    transform: scale(1.5);
+}

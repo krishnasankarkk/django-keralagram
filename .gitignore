@@ -5,4 +5,3 @@ node_modules
 media
 .my_pgpass
 pg_service.config
-staticfiles_build
