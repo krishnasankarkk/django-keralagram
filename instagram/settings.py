@@ -49,7 +49,6 @@ INSTALLED_APPS = [
     
     'channels',
     'tailwind',
-    'cloudinary',
         
     'users',
     'settings',
