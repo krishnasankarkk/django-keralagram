@@ -12,6 +12,13 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+import cloudinary
+          
+cloudinary.config( 
+  cloud_name = "dinphrbeu", 
+  api_key = "499557373191457", 
+  api_secret = "TF323Kby0hXq3cHv771aWzX7DHk" 
+)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,6 +49,7 @@ INSTALLED_APPS = [
     
     'channels',
     'tailwind',
+    'cloudinary',
         
     'users',
     'settings',
@@ -107,16 +115,16 @@ CHANNEL_LAYERS = {
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 #live railway server
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': '5*edg*BB21GG52e*54a4E2FAb5Cf*65C',
-        'HOST': 'monorail.proxy.rlwy.net',  # Set to the hostname where your database is running, typically 'localhost'.
-        'PORT': '41251',  # Leave empty to use the default PostgreSQL port (5432).
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'railway',
+#         'USER': 'postgres',
+#         'PASSWORD': '5*edg*BB21GG52e*54a4E2FAb5Cf*65C',
+#         'HOST': 'monorail.proxy.rlwy.net',  # Set to the hostname where your database is running, typically 'localhost'.
+#         'PORT': '41251',  # Leave empty to use the default PostgreSQL port (5432).
+#     }
+# }
 
 # live render server
 # DATABASES = {
@@ -139,16 +147,16 @@ DATABASES = {
 # }
 
 #local db.
-# DATABASES = {
-#    'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'instagram',
-#         'USER': 'postgres',
-#         'PASSWORD': '1234',
-#         'HOST': 'localhost',  # Set to the hostname where your database is running, typically 'localhost'.
-#         'PORT': '5433',  # Leave empty to use the default PostgreSQL port (5432).
-#     }
-# }
+DATABASES = {
+   'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'instagram',
+        'USER': 'postgres',
+        'PASSWORD': '1234',
+        'HOST': 'localhost',  # Set to the hostname where your database is running, typically 'localhost'.
+        'PORT': '5433',  # Leave empty to use the default PostgreSQL port (5432).
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

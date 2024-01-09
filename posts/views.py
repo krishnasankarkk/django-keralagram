@@ -5,6 +5,7 @@ import json
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.contrib import messages
+import cloudinary.uploader as uploader
 
 
 from .models import Post
@@ -18,7 +19,8 @@ def create_post(request):
         post = Post()
         post.user = user
         if 'uploaded_image' in request.FILES and request.FILES['uploaded_image']:
-            post.post_img = request.FILES['uploaded_image']
+            img_url = uploader.upload(request.FILES['uploaded_image'])
+            post.post_img = img_url['secure_url']
         else:
             post.post_img = None
         post.caption = request.POST['caption'] if request.POST['caption'] else None

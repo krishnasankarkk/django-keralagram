@@ -25,7 +25,7 @@
                     {% csrf_token %}
                     <div class="flex flex-row w-full relative">
                         {% if current_user.user.useraccount.profile_pic != '' %}
-                            <img class="w-12 h-12 rounded-full absolute" src="/media/{{current_user.user.useraccount.profile_pic}}" alt="Avatar">
+                            <img class="w-12 h-12 rounded-full absolute" src="{{current_user.user.useraccount.profile_pic}}" alt="Avatar">
                         {% else %}
                             <img class="w-12 h-12 rounded-full absolute" src="{% static '/images/user-circle.png' %}" alt="Avatar">
                         {% endif %}
@@ -79,7 +79,7 @@
                             <div class="flex flex-col rounded-2xl bg-gradient-to-br from-blue-300 to-violet-300 items-start w-full h-content">
                                 <div class="flex flex-row gap-1 items-center rounded-xl p-4 w-full relative">
                                     {% if post.user.useraccount.profile_pic != '' %}
-                                        <img class="w-14 h-14 rounded-full" src="/media/{{post.user.useraccount.profile_pic}}" alt="Avatar">
+                                        <img class="w-14 h-14 rounded-full" src="{{post.user.useraccount.profile_pic}}" alt="Avatar">
                                     {% else %}
                                         <img class="w-14 h-14 rounded-full" src="{% static '/images/user-circle.png' %}" alt="Avatar">
                                     {% endif %}
@@ -95,7 +95,7 @@
                                 <div class="flex flex-col">
                                     <h3 class="font-bold p-4">{{post.caption|linebreaks}}</h3>
                                     {% if post.post_img %}
-                                        <img class="w-full h-auto" src="/media/{{post.post_img}}" alt="Post">
+                                        <img class="w-full h-auto" src="{{post.post_img}}" alt="Post">
                                     {% endif %}
                                 </div>
                                 <div class="reaction flex flex-row justify-between p-4 gap-5 w-full">
@@ -152,7 +152,7 @@
                     <a href="{% url 'users:user-profile' user_id=user.user.id %}">
                         <div class="flex flex-row items-center justify-between gap-2 font-bold cursor-pointer text-blue-green">
                             {% if user.user.useraccount.profile_pic %}
-                                <img class="w-11 h-11 p-1 bg-gradient-to-r from-blue-300 to-violet-300 rounded-full" src="/media/{{user.user.useraccount.profile_pic}}" alt="Avatar">
+                                <img class="w-11 h-11 p-1 bg-gradient-to-r from-blue-300 to-violet-300 rounded-full" src="{{user.user.useraccount.profile_pic}}" alt="Avatar">
                             {% else %}
                                 <img class="w-11 h-11 p-1 border-2 border-violet-300 rounded-full" src="{% static '/images/user-circle.png' %}" alt="Avatar">
                             {% endif %}
