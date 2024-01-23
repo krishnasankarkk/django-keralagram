@@ -5,6 +5,30 @@
 {% endblock title %}
 {% block main_content %}
     <link rel="stylesheet" href="{% static '/users/css/profile.css' %}">
+    <div id="edit-profile-popup" class="hidden rounded-2xl w-1/2 h-auto overflow-hidden flex flex-col items-center justify-start p-2 bg-gray-950 absolute z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        <form id="form" class="flex flex-col items-center justify-center w-2/3 h-auto" action="/user/register-user/" method="post">
+            {% if current_user.user.useraccount.profile_pic != '' %}
+                    <img class="w-20 h-20 rounded-full" src="/media/{{current_user.user.useraccount.profile_pic}}" alt="Avatar">
+                {% else %}
+                    <img class="w-20 h-20 rounded-full" src="{% static '/images/user-circle.png' %}" alt="Avatar">
+                {% endif %}
+            <span class="text-xl font-bold">Edit Profile</span>
+            {% csrf_token %}
+            <label for="fullname" class="mr-auto">Name</label>
+            <input id="fullname" type="text" class="w-full bg-transparent rounded-tr-xl rounded-bl-xl rounded-br-xl">
+            <label for="username" class="mr-auto">Username</label>
+            <input id="username" type="text" class="w-full bg-transparent rounded-tr-xl rounded-bl-xl rounded-br-xl">
+            <label for="bio" class="mr-auto">Bio</label>
+            <input id="bio" type="text" class="w-full bg-transparent rounded-tr-xl rounded-bl-xl rounded-br-xl">
+            <label for="gender" class="mr-auto">Gender</label>
+            <input id="gender" type="text" class="w-full bg-transparent rounded-tr-xl rounded-bl-xl rounded-br-xl">
+            <label for="email" class="mr-auto">Email-ID</label>
+            <input id="email" type="text" class="w-full bg-transparent rounded-tr-xl rounded-bl-xl rounded-br-xl">
+            <label for="phone" class="mr-auto">Phone</label>
+            <input id="phone" type="text" class="w-full bg-transparent rounded-tr-xl rounded-bl-xl rounded-br-xl">
+            <span id="save-profile" class="bg-gray-800 p-3 mt-4 rounded-full w-full text-blue-200 font-extrabold text-xl flex justify-center">Save Profile</span>
+        </form>
+    </div>
     <div class='flex flex-row overflow-hidden relative'>
         <form 
             class="absolute top-1/2 left-1/2 z-10 -translate-x-1/2 flex hidden flex-col gap-2 rounded-2xl bg-gradient-to-br from-blue-300 to-violet-300 p-5 text-gray-800" 
@@ -80,38 +104,39 @@
             <div class="flex flex-col w-full mt-4 items-center justify-center">
                 <span class="text-3xl font-bold">{{current_user.full_name}}</span>
                 <span class="text-xl font-bold text-gray-400">@{{current_user}}</span>
-                <span class="text-xl">{{current_user.bio|linebreaks}}</span>
+                {% if current_user.bio %}
+                    <span class="text-xl">{{current_user.bio|linebreaks}}</span>
+                {% endif %}
             </div>
             <div class="flex flex-row w-full h-auto gap-4 mt-2">
                 <div class="w-1/3 flex flex-col items-center bg-gray-900 rounded-xl p-2 cursor-pointer">
-                    
+                    <div id="create-post-button" class="font-bold text-2xl flex flex-row w-full h-full items-center justify-center bg-gray-900 rounded-xl p-2 gap-2 cursor-pointer">
+                        <span>
+                            Create post
+                        </span>
+                        <img class="w-6 h-6" src="{% static '/images/plus.png' %}" alt="">
+                    </div>
                 </div>
                 <div class="w-1/3 flex flex-row gap-4">
-                    <div class="w-1/3 flex flex-col items-center bg-gray-900 rounded-xl p-2 cursor-pointer">
+                    <div class="w-1/3 flex flex-col items-center justify-center bg-gray-900 rounded-xl p-2 cursor-pointer">
                         <b class="font-extrabold text-3xl">{{posts_count}}</b>
                         <span class="text-xl">posts</span>
                     </div>
-                    <div class="w-1/3 flex flex-col items-center bg-gray-900 rounded-xl p-2 cursor-pointer">
+                    <div class="w-1/3 flex flex-col items-center justify-center bg-gray-900 rounded-xl p-2 cursor-pointer">
                         <b class="font-extrabold text-3xl">{{followers}}</b>
                         <span class="text-xl">followers</span>
                     </div>
-                    <div class="w-1/3 flex flex-col items-center bg-gray-900 rounded-xl p-2 cursor-pointer">
+                    <div class="w-1/3 flex flex-col items-center justify-center bg-gray-900 rounded-xl p-2 cursor-pointer">
                         <b class="font-extrabold text-3xl">{{following}}</b>
                         <span class="text-xl">following</span>
                     </div>
                 </div>
                 <div class="w-1/3 flex flex-row items-center justify-center gap-2">
-                    <div class="flex flex-col w-full h-full items-center justify-end bg-gray-900 rounded-xl p-2 gap-2 cursor-pointer">
-                        <img id="edit-profile-button" class="w-8 h-8 mt-2" src="{% static '/images/edit.png' %}" alt="">
+                    <div id="edit-profile-button" class="font-bold text-2xl flex flex-row w-full h-full items-center justify-center bg-gray-900 rounded-xl p-2 gap-2 cursor-pointer">
                         <span>
                             Edit Profile
                         </span>
-                    </div>
-                    <div id="create-post-button" class="flex flex-col w-full h-full items-center justify-end bg-gray-900 rounded-xl p-2 gap-2 cursor-pointer">
-                        <img class="w-8 h-8 mt-2" src="{% static '/images/plus.png' %}" alt="">
-                        <span>
-                            Create post
-                        </span>
+                        <img class="w-6 h-6" src="{% static '/images/edit.png' %}" alt="">
                     </div>
                 </div>
             </div>
@@ -141,8 +166,10 @@
                             <img class="w-12 h-12 rounded-full absolute to    p-2 right-4 cursor-pointer" src="{% static '/images/more.png' %}" alt="Options" data-post-id="{{post.id}}" onclick="deletePost(this)">
                         </div>
                         <div class="flex flex-col">
-                            <h3 class="font-bold p-4">{{post.caption|linebreaks}}</h3>
-                            <img class="w-full h-auto" src="/media/{{post.post_img}}" alt="Post">
+                            {% if post.caption %}
+                                <h3 class="font-bold p-4">{{post.caption|linebreaks}}</h3>
+                            {% endif %}
+                            <img class="w-full h-auto" src="{{post.post_img}}" alt="Post">
                         </div>
                         <div class="reaction flex flex-row justify-between p-4 gap-5 w-full">
                             <div class="flex flex-col items-center justify-center cursor-pointer gap-2">
@@ -314,6 +341,7 @@
         const createPostPopup = document.getElementById("create-post-popup");
         const createPostButton = document.getElementById("create-post-button");
         const editProfile = document.getElementById("edit-profile-button");
+        const editProfilePopup = document.getElementById("edit-profile-popup");
         const popupCloseButton = document.getElementById("close-button");
         const fileInput = document.getElementById('upload-input');
         const uploadProfilePic = document.getElementById('upload-profile-pic');
@@ -437,5 +465,13 @@
             profilePicEditPopup.style.display = "none";
         }); {% endcomment %}
 
+        editProfile.addEventListener("click", () => {
+            editProfilePopup.classList.toggle("hidden");
+        })
+        window.addEventListener('click', (event) => {
+            if(!editProfile.contains(event.target) && !editProfilePopup.contains(event.target)){
+                editProfilePopup.classList.add('hidden');
+            }
+        });
     </script>
 {% endblock main_content %}

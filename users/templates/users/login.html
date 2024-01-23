@@ -14,11 +14,48 @@
             </div>
         {% endfor %}
     {% endif %}
-    <div class="flex items-center justify-center w-full h-full text-black">
-        {% comment %} <div class="image-section">
-            <img id="image" src="{% static '/images/image.png' %}" alt="Logo">
-        </div> {% endcomment %}
-        <div class="w-[30em] h-[30em] bg-gradient-to-r from-blue-300 to-violet-300 p-4 gap-4 rounded-xl flex flex-col items-center justify-center">
+    <div class="flex items-center justify-center w-full h-full  bg-gray-900 text-black overflow-hidden">
+        <div class="w-full flex flex-row flex-wrap gap-2 justify-between absolute top-10">
+            <img class="" src="{% static '/images/emojis/happy-face.png' %}" alt="">
+            <img class="" src="{% static '/images/emojis/angry.png' %}" alt="">
+            <img class="" src="{% static '/images/emojis/cool.png' %}" alt="">
+            <img class="" src="{% static '/images/emojis/happiness.png' %}" alt="">
+            <img class="" src="{% static '/images/emojis/heart-eyes.png' %}" alt="">
+            <img class="" src="{% static '/images/emojis/sleeping.png' %}" alt="">
+            <img class="" src="{% static '/images/emojis/confused.png' %}" alt="">
+            <img class="" src="{% static '/images/emojis/happy-face2.png' %}" alt="">
+            <img class="" src="{% static '/images/emojis/no-mouth.png' %}" alt="">
+            <img class="" src="{% static '/images/emojis/smileys.png' %}" alt="">
+            <img class="" src="{% static '/images/emojis/winking.png' %}" alt="">
+            <img class="" src="{% static '/images/emojis/angel.png' %}" alt="">
+        </div>
+        <div class="w-1/3 flex flex-row flex-wrap gap-2 justify-between absolute top-1/2 left-0">
+            <img class="" src="{% static '/images/emojis/happy-face.png' %}" alt="">
+            <img class="" src="{% static '/images/emojis/angry.png' %}" alt="">
+            <img class="" src="{% static '/images/emojis/cool.png' %}" alt="">
+            <img class="" src="{% static '/images/emojis/happiness.png' %}" alt="">
+        </div>
+        <div class="w-1/3 flex flex-row flex-wrap gap-2 justify-between absolute top-1/2 right-0">
+            <img class="" src="{% static '/images/emojis/heart-eyes.png' %}" alt="">
+            <img class="" src="{% static '/images/emojis/sleeping.png' %}" alt="">
+            <img class="" src="{% static '/images/emojis/confused.png' %}" alt="">
+            <img class="" src="{% static '/images/emojis/happy-face2.png' %}" alt="">
+        </div>
+        <div class="w-full flex flex-row flex-wrap gap-2 justify-between absolute bottom-10">
+            <img class="" src="{% static '/images/emojis/happy-face.png' %}" alt="">
+            <img class="" src="{% static '/images/emojis/angry.png' %}" alt="">
+            <img class="" src="{% static '/images/emojis/cool.png' %}" alt="">
+            <img class="" src="{% static '/images/emojis/happiness.png' %}" alt="">
+            <img class="" src="{% static '/images/emojis/heart-eyes.png' %}" alt="">
+            <img class="" src="{% static '/images/emojis/sleeping.png' %}" alt="">
+            <img class="" src="{% static '/images/emojis/confused.png' %}" alt="">
+            <img class="" src="{% static '/images/emojis/happy-face2.png' %}" alt="">
+            <img class="" src="{% static '/images/emojis/no-mouth.png' %}" alt="">
+            <img class="" src="{% static '/images/emojis/smileys.png' %}" alt="">
+            <img class="" src="{% static '/images/emojis/winking.png' %}" alt="">
+            <img class="" src="{% static '/images/emojis/angel.png' %}" alt="">
+        </div>
+        <div class="overflow-hidden w-[30em] h-[30em] bg-gradient-to-r from-blue-300 to-violet-300 p-4 gap-4 rounded-xl flex flex-col items-center justify-center">
             <form class="flex flex-col items-center justify-center gap-4 w-full" action="/login/" method="POST">
                 {% csrf_token %}
                 <img class="w-20 h-20" id="logo" src="{% static 'images/letter-k.png' %}" alt="">
@@ -31,7 +68,7 @@
                     {% comment %} <i class="opened-eye fa fa-eye absolute top-50 right-4 hidden cursor-pointer" aria-hidden="true"></i>
                     <i class="closed-eye fa fa-eye-slash absolute top-50 right-4 hidden cursor-pointer" aria-hidden="true"></i> {% endcomment %}
                 </div>
-                <button type="submit" class="bg-gray-800 p-3 mt-4 rounded-full w-3/4 text-blue-200 font-extrabold text-xl flex justify-center">Login</button>
+                <button type="submit" class="bg-gray-900 p-3 mt-4 rounded-full w-3/4 text-blue-200 font-extrabold text-xl flex justify-center">Login</button>
             </form>
             <div>
                 {% comment %} <input class="user-name" type="text" name="user" placeholder="Phone number/user name/email">
@@ -43,11 +80,48 @@
             </div>
         </div>
     </div>
+    <style>
+        {% comment %}  {
+            animation: floatAnimation 10s infinite;
+        }
+
+        @keyframes floatAnimation {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(100vw, 20vh);
+            }
+        } {% endcomment %}
+    </style>
     <script>
         const openedEye = document.querySelector(".opened-eye");
         const closedEye = document.querySelector(".closed-eye");
         const password = document.getElementById("password");
 
+        document.addEventListener("DOMContentLoaded", function() {
+            const floatingImage = document.getElementById('floatingImage');
+    
+            // Reset position to bottom left when animation completes
+            floatingImage.addEventListener('animationiteration', () => {
+                resetPosition();
+            });
+    
+            // Initial reset
+            resetPosition();
+    
+            function resetPosition() {
+                const screenHeight = window.innerHeight;
+                const screenWidth = window.innerWidth;
+    
+                const randomTop = Math.floor(Math.random() * screenHeight);
+                const randomLeft = Math.floor(Math.random() * screenWidth);
+    
+                floatingImage.style.top = `${randomTop}px`;
+                floatingImage.style.left = `${-floatingImage.clientWidth}px`;
+            }
+        });
+    
         openedEye.addEventListener("click", function () {
             openedEye.classList.add("hidden");
             closedEye.classList.remove("hidden");

@@ -4,7 +4,7 @@
     <title>Profile</title>
 {% endblock title %}
 {% block main_content %}
-    <link rel="stylesheet" href="{% static '/users/css/profile.css' %}">
+    {% comment %} <link rel="stylesheet" href="{% static '/users/css/profile.css' %}">
     <div class='profile-section'>
         <div class='profile-content'>
             <div class='profile-pic-section'>
@@ -17,7 +17,7 @@
                         <div class="full-name-section">
                             <h1 style="display:flex;align-items:center;justify-content:center;">{{account_details.full_name}}</h1>
                             <div class="full-name-buttons">
-                                <a href="{% url 'users:follow' user_id=account_details.user_id %}">
+                                <a class="bg-black p-2 rounded-full" href="{% url 'users:follow' user_id=account_details.user_id %}">
                                     <span id="follow-button" class='follow-button'>
                                         Follow
                                         <span class="material-symbols-outlined">
@@ -25,7 +25,7 @@
                                         </span>
                                     </span>
                                 </a>
-                                <a href="{% url 'users:unfollow' user_id=account_details.user_id %}">
+                                <a class="bg-black p-2 rounded-full" href="{% url 'users:unfollow' user_id=account_details.user_id %}">
                                     <span id="un-follow-button" class='follow-button'>
                                         Unfollow
                                         <span class="material-symbols-outlined">
@@ -70,7 +70,7 @@
                     </div>
                     {% if posts %}
                         {% for post in posts %}
-                            {% comment %} <img class="post" src="/media/{{post.post_img}}" alt="post"> {% endcomment %}
+                            <img class="post" src="/media/{{post.post_img}}" alt="post">
                             <div class="post">
                                 <h2>{{post.caption}}</h2>
                                 <i class="fa fa-upload" aria-hidden="true"></i>
@@ -79,6 +79,164 @@
                         {% endfor %}
                     {% endif %}
                 </div>
+            </div>
+        </div>
+    </div> {% endcomment %}
+    <div class="flex flex-row overflow-hidden relative">
+        {% include 'navbar.html' %}
+        <div class="flex flex-col w-full h-full p-8 overflow-hidden overflow-y-auto">
+            <div class="w-full h-1/3 p-2 flex flex-row justify-center m-2 bg-gradient-to-b from-violet-400 to-blue-400 rounded-tl-3xl rounded-tr-3xl relative">
+                <div class="">
+                    <div class="">
+                        {% if account_details.user.useraccount.profile_pic %}
+                            <img class="h-44 w-44 rounded-full" src="/media/{{account_details.user.useraccount.profile_pic}}" alt="Profile pic">
+                        {% else %} 
+                            <img class="h-44 w-44 rounded-full" src="{% static '/images/user-circle.png' %}" alt="profile pic"> 
+                        {% endif %} 
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col w-full mt-4 items-center justify-center">
+                <span class="text-3xl font-bold">{{account_details.full_name}}</span>
+                <span class="text-xl font-bold text-gray-400">@{{account_details}}</span>
+                {% if account_details.bio %}
+                    <span class="text-xl">{{account_details.bio|linebreaks}}</span>
+                {% endif %}
+            </div>
+            <div class="flex flex-row w-full h-auto gap-4 mt-2">
+                <div class="w-1/3 flex flex-col items-center justify-center bg-gray-900 rounded-xl p-2 cursor-pointer">
+                    <a id="follow-button" class="font-bold flex items-center justify-center gap-2" href="{% url 'users:follow' user_id=account_details.user_id %}">
+                        <span class="text-2xl">
+                            Add friend
+                        </span>
+                        <img class="w-6 h-6" src="{% static '/images/add-user.png' %}" alt="">
+                    </a>
+                    <a id="un-follow-button" class="font-bold flex items-center justify-center gap-2" href="{% url 'users:unfollow' user_id=account_details.user_id %}">
+                        <span class="text-2xl">
+                            Friends
+                        </span>
+                        <img class="w-6 h-6" src="{% static '/images/check.png' %}" alt="">
+                    </a>
+                </div>
+                <div class="w-1/3 flex flex-row gap-4">
+                    <div class="w-1/3 flex flex-col items-center justify-center bg-gray-900 rounded-xl p-2 cursor-pointer">
+                        <b class="font-extrabold text-3xl">{{posts_count}}</b>
+                        <span class="text-xl">posts</span>
+                    </div>
+                    <div class="w-1/3 flex flex-col items-center justify-center bg-gray-900 rounded-xl p-2 cursor-pointer">
+                        <b class="font-extrabold text-3xl">{{followers}}</b>
+                        <span class="text-xl">followers</span>
+                    </div>
+                    <div class="w-1/3 flex flex-col items-center justify-center bg-gray-900 rounded-xl p-2 cursor-pointer">
+                        <b class="font-extrabold text-3xl">{{following}}</b>
+                        <span class="text-xl">following</span>
+                    </div>
+                </div>
+                <div class="w-1/3 flex flex-row items-center justify-center gap-2">
+                    <div class="flex flex-col w-full h-full items-center justify-end bg-gray-900 rounded-xl p-2 gap-2 cursor-pointer">
+                        <img id="edit-profile-button" class="w-8 h-8 mt-2" src="{% static '/images/edit.png' %}" alt="">
+                        <span>
+                            Edit Profile
+                        </span>
+                    </div>
+                    {% comment %} <div id="create-post-button" class="flex flex-col w-full h-full items-center justify-end bg-gray-900 rounded-xl p-2 gap-2 cursor-pointer">
+                        <img class="w-8 h-8 mt-2" src="{% static '/images/plus.png' %}" alt="">
+                        <span>
+                            Create post
+                        </span>
+                    </div> {% endcomment %}
+                </div>
+            </div>
+            <div class="flex gap-2 w-full justify-center mt-8">
+                <div id="show-image-posts" class="flex flex-row gap-2 items-center justify-center text-gray-500 w-auto bg-gray-900 rounded-t-xl p-2 cursor-pointer">
+                    <img class="w-6 h-6" src="{% static '/images/image.png' %}" alt="">
+                    <span>Images</span>
+                </div>
+                <div id="show-text-posts" class=" flex flex-row gap-2 items-center justify-center text-gray-500 w-auto bg-gray-900 rounded-t-xl p-2 cursor-pointer">
+                    <img class="w-6 h-6" src="{% static '/images/comment.png' %}" alt="">
+                    <span>Texts</span>
+                </div>
+            </div>
+            <div class="w-full h-auto flex flex-row flex-wrap gap-4 bg-gray-900 rounded-xl p-4">
+                {% for post in posts %}
+                    {% if post.post_img %}
+                    <div class="image-posts flex flex-col rounded-2xl bg-gradient-to-br from-blue-300 to-violet-300 text-gray-800 items-start w-1/2 flex-1 h-fit justify-between">
+                        <div class="flex flex-row gap-1 items-center rounded-xl p-4 w-full relative">
+                            {% if post.user.useraccount.profile_pic != '' %}
+                                <img class="w-8 h-8 rounded-full" src="/media/{{post.user.useraccount.profile_pic}}" alt="ProfilePic">
+                            {% else %}
+                                <img class="w-8 h-8 rounded-full" src="{% static '/images/user-circle.png' %}" alt="Avatar">
+                            {% endif %}
+                            <div class="flex flex-col gap-1 ml-2">
+                                <h3 class="text-sm font-bold">You <span class="font-bold text-gray-600">• {{post.time_difference}} ago</span></h3>
+                            </div>
+                            <img class="w-12 h-12 rounded-full absolute to    p-2 right-4 cursor-pointer" src="{% static '/images/more.png' %}" alt="Options" data-post-id="{{post.id}}" onclick="deletePost(this)">
+                        </div>
+                        <div class="flex flex-col">
+                            <h3 class="font-bold p-4">{{post.caption|linebreaks}}</h3>
+                            <img class="w-full h-auto" src="/media/{{post.post_img}}" alt="Post">
+                        </div>
+                        <div class="reaction flex flex-row justify-between p-4 gap-5 w-full">
+                            <div class="flex flex-col items-center justify-center cursor-pointer gap-2">
+                                {% comment %} <img id="like" class="w-8 h-8 opacity-80 transition-transform duration-200 hover:scale-125" src="{% static '/images/heart.png' %}" alt="Like"> {% endcomment %}
+                                {% comment %} <img id="liked" class="liked w-8 h-8 hidden" src="{% static '/images/liked.png' %}" alt="Like"> {% endcomment %}
+                                <span class="font-bold text-gray-700">Likes</span>
+                            </div>
+                            <div class="flex flex-col items-center justify-center cursor-pointer gap-2">
+                                {% comment %} <img id="comment" class="w-8 h-8 opacity-80 transition-transform duration-200 hover:scale-125" src="{% static '/images/comment.png' %}" alt="Comment"> {% endcomment %}
+                                {% comment %} <img id="comment-hover" class="w-8 h-8 transition-transform hidden opacity-80" src="{% static '/images/comment-hover.png' %}" alt="Comment"> {% endcomment %}
+                                <span class="font-bold">Comments</span>
+                            </div>
+                            <div class="flex flex-col items-center justify-center cursor-pointer gap-2">
+                                {% comment %} <img id="share" class="w-8 h-8 opacity-80 transition-transform duration-200 hover:scale-125" src="{% static '/images/share.png' %}" alt="Share"> {% endcomment %}
+                                <span class="font-bold">Shares</span>
+                            </div>
+                            <div class="flex flex-col items-center justify-center cursor-pointer gap-2 ml-auto mr-0">
+                                {% comment %} <img id="share" class="w-8 h-8 opacity-80 transition-transform duration-200 hover:scale-125" src="{% static '/images/bookmark.png' %}" alt="Share"> {% endcomment %}
+                                <span class="font-bold">Save</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="text-posts flex flex-col rounded-2xl bg-gradient-to-br from-blue-300 to-violet-300 text-gray-800 items-start w-1/2 flex-1 h-fit justify-between">
+                        <div class="flex flex-row gap-1 items-center rounded-xl p-4 w-full relative">
+                            {% if post.user.useraccount.profile_pic != '' %}
+                                <img class="w-8 h-8 rounded-full" src="/media/{{post.user.useraccount.profile_pic}}" alt="ProfilePic">
+                            {% else %}
+                                <img class="w-8 h-8 rounded-full" src="{% static '/images/user-circle.png' %}" alt="Avatar">
+                            {% endif %}
+                            <div class="flex flex-col gap-1 ml-2">
+                                <h3 class="text-sm font-bold">You <span class="font-bold text-gray-600">• {{post.time_difference}} ago</span></h3>
+                            </div>
+                            <img class="w-6 h-6 rounded-full absolute top-2 right-4 cursor-pointer" src="{% static '/images/more.png' %}" alt="Options" data-post-id="{{post.id}}" onclick="deletePost(this)">
+                        </div>
+                        <div class="flex flex-col">
+                            <h3 class="font-bold p-4">{{post.caption|linebreaks}}</h3>
+                            {% comment %} <img class="w-full h-auto" src="/media/{{post.post_img}}" alt="Post" data-post-id="{{post.id}}" onclick="deletePost(this)"> {% endcomment %}
+                        </div>
+                        <div class="reaction flex flex-row justify-between p-4 gap-5 w-full">
+                            <div class="flex flex-col items-center justify-center cursor-pointer gap-2">
+                                {% comment %} <img id="like" class="w-8 h-8 opacity-80 transition-transform duration-200 hover:scale-125" src="{% static '/images/heart.png' %}" alt="Like"> {% endcomment %}
+                                {% comment %} <img id="liked" class="liked w-8 h-8 hidden" src="{% static '/images/liked.png' %}" alt="Like"> {% endcomment %}
+                                <span class="font-bold">Likes</span>
+                            </div>
+                            <div class="flex flex-col items-center justify-center cursor-pointer gap-2">
+                                {% comment %} <img id="comment" class="w-8 h-8 opacity-80 transition-transform duration-200 hover:scale-125" src="{% static '/images/comment.png' %}" alt="Comment"> {% endcomment %}
+                                {% comment %} <img id="comment-hover" class="w-8 h-8 transition-transform hidden opacity-80" src="{% static '/images/comment-hover.png' %}" alt="Comment"> {% endcomment %}
+                                <span class="font-bold">Comments</span>
+                            </div>
+                            <div class="flex flex-col items-center justify-center cursor-pointer gap-2">
+                                {% comment %} <img id="share" class="w-8 h-8 opacity-80 transition-transform duration-200 hover:scale-125" src="{% static '/images/share.png' %}" alt="Share"> {% endcomment %}
+                                <span class="font-bold">Shares</span>
+                            </div>
+                            <div class="flex flex-col items-center justify-center cursor-pointer gap-2 ml-auto mr-0">
+                                {% comment %} <img id="share" class="w-8 h-8 opacity-80 transition-transform duration-200 hover:scale-125" src="{% static '/images/bookmark.png' %}" alt="Share"> {% endcomment %}
+                                <span class="font-bold">Save</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
     </div>

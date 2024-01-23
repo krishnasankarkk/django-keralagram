@@ -63,13 +63,11 @@ def register(request):
 
 @login_required(login_url='/user/login')
 def profile(request):
-    login_user = request.user.id
-    account = UserAccount.objects.get(user_id=login_user)
+    account = UserAccount.objects.get(user_id=request.user.id)
     followers = len(account.followers) if account.followers is not None else 0
     following = len(account.following) if account.following is not None else 0
-    posts = Post.objects.filter(user_id=login_user).order_by('-created_at')
     current_date = datetime.datetime.now(datetime.timezone.utc)
-    posts = Post.objects.all().order_by('-created_at').annotate(
+    posts = Post.objects.filter(user_id=request.user.id).order_by('-created_at').annotate(
         time_difference = ExpressionWrapper(current_date - F('created_at'), output_field=DurationField())
     )
     updated_posts = []
@@ -108,16 +106,45 @@ def profile(request):
 
 def user_profile(request, user_id):
     user_account = UserAccount.objects.get(user_id=user_id)
+    account = UserAccount.objects.get(user_id=request.user.id)
     followers = len(user_account.followers) if user_account.followers is not None else 0
     following = len(user_account.following) if user_account.following is not None else 0
     if user_account.followers is not None and request.user.id in user_account.followers: 
         followed = True
     else:
         followed = False
-    posts = Post.objects.filter(user_id=user_id).order_by('-created_at')
+    current_date = datetime.datetime.now(datetime.timezone.utc)
+    posts = Post.objects.filter(user_id=user_id).order_by('-created_at').annotate(
+        time_difference = ExpressionWrapper(current_date - F('created_at'), output_field=DurationField())
+    )
+    updated_posts = []
+    for post in posts:
+        time_difference = post.time_difference
+        days = time_difference.days
+        hours = time_difference.seconds // 3600
+        minutes = (time_difference.seconds // 60) % 60
+        
+        if days > 0:
+            updated_time_difference = f"{days} day{'s' if days != 1 else ''}"
+        elif hours > 0:
+            updated_time_difference = f"{hours} hour{'s' if hours != 1 else ''}"
+        elif minutes > 0:
+            updated_time_difference = f"{minutes} minute{'s' if minutes != 1 else ''}"
+        else:
+            updated_time_difference = "Few seconds"
+        updated_post = {
+            'id' : post.id,
+            'post_img' : post.post_img,
+            'like' : post.like,
+            'user' : post.user,
+            'caption' : post.caption,
+            'time_difference' : updated_time_difference,
+        }
+        updated_posts.append(updated_post)
     context = {
+        "current_user":account,
         "account_details":user_account,
-        "posts":posts,
+        "posts":updated_posts,
         "posts_count":posts.count(),
         "followed":followed,
         "followers":followers,

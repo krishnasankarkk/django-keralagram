@@ -1,7 +1,7 @@
 {% load static %}
 {% block navbar %}
     {% comment %} <link rel="stylesheet" type="text/css" href="{% static '/css/navbar.css' %}"> {% endcomment %}
-    <div class="md:flex sm:hidden flex-col h-screen w-1/4 items-center p-2 mt-4 text-blue-green text-lg z-50">
+    <div class="md:flex sm:hidden flex-col h-screen w-1/4 items-center p-2 mt-4 text-blue-green text-lg z-10">
                 <div class="flex flex-col items-center cursor-pointer mb-5 sm:hidden md:flex">
                     <a href="{% url 'users:profile' %}">
                         <div class="flex flex-row p-2 bg-gradient-to-r from-blue-300 to-violet-300 rounded-full">
@@ -68,9 +68,9 @@
                     <img class="h-8 w-8" src="{% static '/images/navbar/log-out.png' %}" alt="Logout">
                     <h3 class="font-bold sm:hidden md:block">Log Out</h3>
                 </div>
-                <div id="logout-popup" class="hidden flex-col gap-4 w-1/4 h-1/4 items-center justify-between absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-gray-400 text-gray-800 p-6 rounded-2xl">
+                <div id="logout-popup" class="hidden flex-col gap-4 w-1/4 h-1/4 items-center justify-between absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-gray-900 text-gray-400 p-6 rounded-2xl">
                     <span class="font-bold">Are you sure?</span>
-                    <div class="flex gap-4 w-full">
+                    <div class="flex gap-4 w-full text-gray-800">
                         <span id="cancel-logout" class="font-bold bg-blue-200 rounded-full w-1/2 flex justify-center p-2 cursor-pointer">No</span>
                         <a href="{% url 'users:logout' %}" class="font-bold bg-red-200 rounded-full w-1/2 flex justify-center p-2 cursor-pointer">
                             <span id="confirm-logout" >Yes</span>
