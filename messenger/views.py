@@ -7,7 +7,18 @@ from django.db.models import Q
 from users.models import UserAccount 
 from .models import Message 
 
-# Create your views here.
+def messenger(request):
+    messages = Message.objects.filter(Q(from_user=request.user.id) | Q(to_user=request.user.id)).order_by('created_at')
+    account = UserAccount.objects.get(user_id=request.user.id)
+    user = UserAccount.objects.all()
+    context = {
+        "current_user":account,
+        "users": user,
+        "all_messages": messages,
+        "location":"messenger",
+    }
+    return render(request, "messenger/messenger.html", context)
+
 def chat_user(request, user_id):
     user = UserAccount.objects.get(user_id=user_id)
     messages = Message.objects.filter(Q(from_user=request.user.id) & Q(to_user=user_id) | Q(from_user=user_id) & Q(to_user=request.user.id)).order_by('created_at')

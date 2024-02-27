@@ -7,13 +7,15 @@ from django.urls import reverse
 from django.contrib import messages
 import cloudinary.uploader as uploader
 
-
 from .models import Post
+from notifications.models import Notification
+from users.models import UserAccount
 
 def create_post(request):
     if request.method == 'POST':
         try:
             user = User.objects.get(id=request.user.id)
+            userAccount = UserAccount.objects.get(user_id=request.user.id)
         except user.DoesNotExist:
             raise Http404("User doesnt exists!")
         post = Post()
@@ -27,6 +29,12 @@ def create_post(request):
         post.caption = request.POST['caption'] if request.POST['caption'] else None
         post.like = 0
         post.save()
+        notification = Notification()
+        notification.type = 'p'
+        notification.sender = userAccount
+        notification.receiver = userAccount
+        notification.content = f'{userAccount} posted new content!'
+        notification.save()
         messages.success(request, "Successfully saved post :)")
         previous_url = request.META.get('HTTP_REFERER', None)
         return redirect(previous_url)

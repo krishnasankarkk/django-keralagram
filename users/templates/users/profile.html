@@ -5,7 +5,7 @@
 {% endblock title %}
 {% block main_content %}
     <link rel="stylesheet" href="{% static '/users/css/profile.css' %}">
-    <div id="edit-profile-popup" class="hidden rounded-2xl w-1/2 h-auto overflow-hidden flex flex-col items-center justify-start p-2 bg-gray-950 absolute z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+    <div id="edit-profile-popup" class="hidden rounded-2xl w-1/2 h-auto overflow-hidden flex flex-col items-center justify-start p-2 bg-gray-800 absolute z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
         <form id="form" class="flex flex-col items-center justify-center w-2/3 h-auto" action="/user/register-user/" method="post">
             {% if current_user.user.useraccount.profile_pic != '' %}
                     <img class="w-20 h-20 rounded-full" src="/media/{{current_user.user.useraccount.profile_pic}}" alt="Avatar">
@@ -89,7 +89,7 @@
             </div>
         </form>
         {% include 'navbar.html' %}
-        <div class="flex flex-col w-full h-full p-8 overflow-hidden overflow-y-auto">
+        <div class="flex flex-col w-full h-full p-8 overflow-hidden overflow-y-auto bg-gray-900">
             <div class="w-full h-1/3 p-2 flex flex-row justify-center m-2 bg-gradient-to-b from-violet-400 to-blue-400 rounded-tl-3xl rounded-tr-3xl relative">
                 <div class="">
                     <div class="">
@@ -109,8 +109,8 @@
                 {% endif %}
             </div>
             <div class="flex flex-row w-full h-auto gap-4 mt-2">
-                <div class="w-1/3 flex flex-col items-center bg-gray-900 rounded-xl p-2 cursor-pointer">
-                    <div id="create-post-button" class="font-bold text-2xl flex flex-row w-full h-full items-center justify-center bg-gray-900 rounded-xl p-2 gap-2 cursor-pointer">
+                <div class="w-1/3 flex flex-col items-center bg-gray-800 rounded-xl p-2 cursor-pointer">
+                    <div id="create-post-button" class="font-bold text-2xl flex flex-row w-full h-full items-center justify-center bg-gray-800 rounded-xl p-2 gap-2 cursor-pointer">
                         <span>
                             Create post
                         </span>
@@ -118,21 +118,21 @@
                     </div>
                 </div>
                 <div class="w-1/3 flex flex-row gap-4">
-                    <div class="w-1/3 flex flex-col items-center justify-center bg-gray-900 rounded-xl p-2 cursor-pointer">
+                    <div class="w-1/3 flex flex-col items-center justify-center bg-gray-800 rounded-xl p-2 cursor-pointer">
                         <b class="font-extrabold text-3xl">{{posts_count}}</b>
                         <span class="text-xl">posts</span>
                     </div>
-                    <div class="w-1/3 flex flex-col items-center justify-center bg-gray-900 rounded-xl p-2 cursor-pointer">
+                    <div class="w-1/3 flex flex-col items-center justify-center bg-gray-800 rounded-xl p-2 cursor-pointer">
                         <b class="font-extrabold text-3xl">{{followers}}</b>
                         <span class="text-xl">followers</span>
                     </div>
-                    <div class="w-1/3 flex flex-col items-center justify-center bg-gray-900 rounded-xl p-2 cursor-pointer">
+                    <div class="w-1/3 flex flex-col items-center justify-center bg-gray-800 rounded-xl p-2 cursor-pointer">
                         <b class="font-extrabold text-3xl">{{following}}</b>
                         <span class="text-xl">following</span>
                     </div>
                 </div>
                 <div class="w-1/3 flex flex-row items-center justify-center gap-2">
-                    <div id="edit-profile-button" class="font-bold text-2xl flex flex-row w-full h-full items-center justify-center bg-gray-900 rounded-xl p-2 gap-2 cursor-pointer">
+                    <div id="edit-profile-button" class="font-bold text-2xl flex flex-row w-full h-full items-center justify-center bg-gray-800 rounded-xl p-2 gap-2 cursor-pointer">
                         <span>
                             Edit Profile
                         </span>
@@ -140,17 +140,17 @@
                     </div>
                 </div>
             </div>
-            <div class="flex gap-2 w-full justify-center mt-8">
-                <div id="show-image-posts" class="flex flex-row gap-2 items-center justify-center text-gray-500 w-auto bg-gray-900 rounded-t-xl p-2 cursor-pointer">
+            <div class="flex gap-2 w-full justify-start mt-8">
+                <div id="show-image-posts" class="flex flex-row gap-2 items-center justify-center text-gray-500 w-auto rounded-t-xl p-2 cursor-pointer">
                     <img class="w-6 h-6" src="{% static '/images/image.png' %}" alt="">
                     <span>Images</span>
                 </div>
-                <div id="show-text-posts" class=" flex flex-row gap-2 items-center justify-center text-gray-500 w-auto bg-gray-900 rounded-t-xl p-2 cursor-pointer">
+                <div id="show-text-posts" class=" flex flex-row gap-2 items-center justify-center text-gray-500 w-auto bg-gray-800 rounded-t-xl p-2 cursor-pointer">
                     <img class="w-6 h-6" src="{% static '/images/comment.png' %}" alt="">
                     <span>Texts</span>
                 </div>
             </div>
-            <div class="w-full h-auto flex flex-row flex-wrap gap-4 bg-gray-900 rounded-xl p-4">
+            <div class="w-full h-auto flex flex-row flex-wrap gap-4 bg-gray-800 rounded-tl-none rounded-tr-xl rounded-br-xl rounded-bl-xl p-4">
                 {% for post in posts %}
                     {% if post.post_img %}
                     <div class="image-posts flex flex-col rounded-2xl bg-gradient-to-br from-blue-300 to-violet-300 text-gray-800 items-start w-1/2 flex-1 h-fit justify-between">
@@ -234,101 +234,6 @@
                 {% endfor %}
             </div>
         </div>
-        {% comment %} <div class='profile-content'>
-            <div class='profile-pic-section'>
-                {% if account_details %}
-                    {% if account_details.gender == 'M' %}
-                        <img id="profile-pic" src="{% static '/images/profile2.png' %}" alt="profile pic">
-                    {% else %}
-                        <img id="profile-pic" src="{% static '/images/girl.png' %}" alt="profile pic">
-                    {% endif %}
-                <div class="full-name-section">
-                    <div id="fullname">
-                        {% if account_details.full_name %}
-                            <h1>{{account_details.full_name}}</h1>    
-                        {% else %}
-                            <h1>Add name</h1>
-                        {% endif %}
-                    </div>
-                    <form id="full-name-input-section" action="{% url 'users:update-fullname' %}" method='POST'>
-                        {% csrf_token %}
-                        <input id="fullname-input" name="fullname" type="text" value="{{account_details.full_name}}">
-                        <span id="fullname-input-save" class="material-symbols-outlined">
-                            task_alt
-                        </span>
-                    </form>
-                </div>
-                <div class="followers-section">
-                    <div class="post-count">
-                        <b>{{posts_count}}</b>
-                        <span>Posts</span>
-                    </div>
-                    <div class="followers">
-                        <b>{{followers}}</b>
-                        <span>Followers</span>
-                    </div>
-                    <div class="following">
-                        <b>{{following}}</b>
-                        <span>Following</span>
-                    </div>
-                </div>
-                <div class='about-section'>
-                    <h2>About</h2>
-                    <span>{{account_details.bio}}</span>
-                </div>
-                {% endif %}
-            </div>
-            <div class='profile-post-section'>
-                <div class="create-post-section">
-                    <span class='create-post-button' id='create-post-button'>Create post<i class="fa fa-plus" aria-hidden="true"></i></span>
-                    <div class="create-post-popup" id="create-post-popup">
-                        <form id="form" action="{% url 'posts:create-post' %}" method="POST" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <span id="close-button"><i class="fa fa-times" aria-hidden="true"></i></span>
-                            <h2>Create new post</h2>
-                            <h3 id="cant-post">Write something to post idiot . . .</h3>
-                            <div class="image-section">
-                                <span id="clear-image-button"><i class="fa fa-times" aria-hidden="true"></i></span>
-                                <img id="uploaded-image" src="" alt="">
-                            </div>
-                            <div id="upload-button">
-                                <input type="file" id="upload-input" name="uploaded_image" value="">
-                                <label for="upload-input" class='upload-button'>Upload image<i class="fa fa-arrow-up" aria-hidden="true"></i></label>
-                            </div>
-                            <div class="post-caption">
-                                <h3>Write post</h3>
-                                <textarea class="caption" type="text" name="caption" id="caption" placeholder="Write something here..."></textarea>
-                            </div>
-                            <div>
-                                <span id="post-button">Post<i class="fa fa-upload" aria-hidden="true"></i></span>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="joined">
-                    <h3>Joined on {{user.date_joined}}</h3>
-                </div>  
-                <div class="posts">
-                    
-                    {% if posts %}
-                        {% for post in posts %}
-                            <div class="post">
-                                <img class="post-image" src="/media/{{post.post_img}}" alt="post" data-post-id="{{post.id}}" onclick=handleImageClick(this)>
-                                <h2>{{post.caption}}</h2>
-                                <i class="fa fa-upload" aria-hidden="true"></i>
-                                <span style="font-weight:bold;">{{post.created_at}}</span>
-                                <span class="delete-post material-symbols-outlined" data-post-id="{{post.id}}" onclick="deletePost(this)">
-                                    delete
-                                </span>
-                            </div>
-                        {% endfor %}
-                        <div id="post-detail-popup">
-
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
-        </div> {% endcomment %}
         {% if messages %}
             {% for message in messages %}
                 <div class="alert alert-{{message.tags}}">
@@ -373,16 +278,28 @@
             imagePosts.forEach((post)=>{post.classList.add("hidden")})
         }
         showImagePosts.addEventListener("click", function(){
+            showImagePosts.classList.add("bg-gray-800")
+            showTextPosts.classList.remove("bg-gray-800")
             if (textPosts)
-                textPosts.forEach((post)=>{post.classList.add("hidden")})
+                textPosts.forEach((post)=>{
+                    post.classList.add("hidden")
+                })
             if (imagePosts)
-                imagePosts.forEach((post)=>{post.classList.remove("hidden")})
+                imagePosts.forEach((post)=>{
+                    post.classList.remove("hidden")
+                })
         })
         showTextPosts.addEventListener("click", function(){
+            showTextPosts.classList.add("bg-gray-800")
+            showImagePosts.classList.remove("bg-gray-800")
             if (textPosts)
-                textPosts.forEach((post)=>{post.classList.remove("hidden")})
+                textPosts.forEach((post)=>{
+                    post.classList.remove("hidden")
+                })
             if (imagePosts)
-                imagePosts.forEach((post)=>{post.classList.add("hidden")})
+                imagePosts.forEach((post)=>{
+                    post.classList.add("hidden")
+                })
         })
         
         function handleImageClick(img){

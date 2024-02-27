@@ -9,12 +9,12 @@
     <link rel="stylesheet" href="{% static 'messenger/css/chat.css' %}">
     <div class="chat-section">
         {% if chat_user %}
-            {% if chat_user.user.useraccount.gender == 'M' %}
-                <img src="{% static 'images/profile2.png' %}" alt="avatar">
-            {% else %}
-                <img src="{% static 'images/girl.png' %}" alt="avatar">
-            {% endif %}
-            <h1>{{chat_user.user.username}}</h1>
+            {% if chat_user.user.useraccount.profile_pic %}
+            <img class="h-44 w-44 rounded-full" src="/media/{{chat_user.user.useraccount.profile_pic}}" alt="Profile pic">
+        {% else %} 
+            <img class="h-44 w-44 rounded-full" src="{% static '/images/user-circle.png' %}" alt="profile pic"> 
+        {% endif %} 
+            <span class="font-bold text-xl">{{chat_user.user.username}}</span>
             <a href="{% url 'users:user-profile' user_id=chat_user.user_id %}">
                 <span class="view-profile">
                     View Profile

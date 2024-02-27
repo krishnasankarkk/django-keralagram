@@ -4,3 +4,9 @@
 <div id="loader" class="loader-container">
     <img class="loader" src="{% static '/images/waiting.png' %}" alt="loader">
 </div>
+<script>
+    const loader = document.getElementById("loader");
+        window.addEventListener('load', (event) => {
+            loader.style.display = "none";
+        });
+</script>

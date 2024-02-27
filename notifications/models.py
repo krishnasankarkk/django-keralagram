@@ -13,7 +13,11 @@ class Notification(models.Model):
         ('c', 'Comment'),
     ]
     type = models.CharField(choices=notification_types, default=None)
-    sender = models.IntegerField(default=None, null=True, blank=True)
-    receiver = models.IntegerField(default=None, null=True, blank=True)
+    sender = models.ForeignKey(UserAccount, on_delete=models.CASCADE, related_name="sender")
+    receiver = models.ForeignKey(UserAccount, on_delete=models.CASCADE, related_name="receiver")
     content = models.CharField()
     created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.content
+    
